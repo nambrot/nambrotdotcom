@@ -1,0 +1,308 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require foundation_and_overrides
+ *= require mediaelement_rails
+
+ */
+
+@import "bourbon";
+@import "_globals.css.scss";
+
+// Global stuff
+
+#global-nav {
+  position:fixed;
+  height: 100%;
+  width: 300px;
+  
+  padding-top: 5%;
+  text-align: center;
+  box-shadow: 0px 4px 30px;
+  
+  background-color: rgb(23, 17, 66);
+
+  h2, h5 {
+    font-family: HelveticaNeue-Light;
+    font-weight: 200;
+    margin-bottom: 0px;
+    color: rgb(120, 199, 236);
+  }
+
+  header {
+    margin-bottom: 20px;
+  }
+
+  nav {
+    text-align: left;
+
+    a {
+      color: white;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    li {
+      padding: 5px 20px;
+    }
+  }
+
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height:100%;
+}
+
+body {
+  @include clearfix;
+
+}
+
+#container {
+  @include clearfix;
+  // perspective: 10;
+  padding-left: 330px;
+  width: 100%;
+
+  height: auto !important; /* ie6 ignores !important, so this will be overridden below */
+  min-height: 100%; /* ie6 ignores min-height completely */
+  height: 100%;
+    
+
+  max-width: 100%;
+  background: #ffffff; /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover,  #ffffff 0%, #f4f4f4 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffffff), color-stop(100%,#f4f4f4)); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover,  #ffffff 0%,#f4f4f4 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover,  #ffffff 0%,#f4f4f4 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover,  #ffffff 0%,#f4f4f4 100%); /* IE10+ */
+  background: radial-gradient(ellipse at center,  #ffffff 0%,#f4f4f4 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f4f4f4',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+
+}
+
+// Blog
+.blog_post {
+
+  width: 80%;
+  max-width: 800px;
+
+  color: #525252;
+  background-color: white;
+  padding: 2% 5% 5px 5%;
+  margin: 2% 0 5px 0;
+  border: 1px solid #d8d8d8;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #fff;
+  border-bottom-width: 2px;
+
+  p {
+    line-height: 2em;
+  }
+  h2,h3,h4,h5,h6 {
+    color: #252525;
+    font-weight: 200;
+  }
+}
+
+.blog_post_header {
+  margin-bottom: 20px;
+
+  h1 {
+    font-weight: 200;
+    margin-bottom: 5px;
+  }
+  h6 {
+    text-align: right;
+  }
+}
+
+#disqus_thread {
+  width: 80%;
+  max-width: 800px;
+}
+
+// Functional stuff
+
+.centered {
+  text-align: center;
+  margin: 0 auto;
+}
+
+#container-overlay {
+  position:fixed;
+  width: 100%;
+  top: 0px;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 10;
+}
+
+.margin-5 {
+  margin: 5%;
+}
+
+// About Page
+
+#about-page {
+  @include clearfix;
+  h1 {
+    font-weight: 200;
+    font-color: #525252;
+  }
+
+  nav {
+    ul {
+      list-style: none;
+      background-color: white;
+
+      a {
+        color: #525252;
+        font-size: 1.5em;
+        font-weight: 200;
+        font-family: HelveticaNeue-Light;
+      }
+
+      li {
+        display: inline-block;
+        padding: 6px 10px;
+      }
+    }
+  }
+}
+
+#about-timeline {
+  @include clearfix;
+  list-style: none;
+  position: relative;
+}
+
+.about-timeline-entry {
+  @include clearfix;
+
+  z-index: 1;
+  vertical-align: top;
+  width: 300px;
+  margin: 10px;
+  display: inline-block;
+  position: absolute;
+  opacity: 1;
+
+  @include transform-style (preserve-3d);
+  @include transition (all 0.35s ease-in-out);
+
+  &.flip {
+    z-index: 31;
+  }
+
+  &.flippable {
+    .about-timeline-entry-card {
+      cursor: pointer;
+    }
+  }
+
+  &.hide {
+    left: -1000px;
+    top: 0px;
+    z-index: 0;
+    opacity: 0;
+  }
+
+}
+
+.about-timeline-entry-card {
+  background-color: #fff;
+  position: absolute;
+
+  border: 1px solid #d8d8d8;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #fff;
+  border-bottom-width: 2px;
+
+  @include backface-visibility(hidden);
+  width: 100%;
+  
+
+  h5 {
+    font-weight: 200;
+    color: #525252;
+    margin: 2% 3% 4% 3%;
+    font-size: 1.9em;
+  }
+
+  p {
+    margin: 1% 3%;
+    font-size: 0.8em;
+  }
+
+  footer {
+    padding: 3%;
+    div {
+      font-size: 0.8em;
+      color: #AAA;
+    }
+
+    .timeline-entry-tags {
+      float: right;
+      text-align: right;
+    }
+  }
+}
+
+.about-timeline-entry-detail {
+  background-color: #fff;
+
+  display: none;
+
+  @include backface-visibility(hidden);
+  @include transform-origin(top left);
+  @include transform(scale(0.5) rotateY(180deg) );
+
+  box-shadow: 2px 3px 20px rgba(0,0,0,0.7);
+  border: 1px solid #d8d8d8;
+  -webkit-border-radius: 3px;
+  width: 300%;
+  max-width: 960px;
+  border-radius: 3px;
+  background-color: #fff;
+  border-bottom-width: 2px;
+
+  h2 {
+    font-weight: 200;
+    color: #525252;
+    margin: 2% 3% 4% 3%;
+    font-size: 3.9em;
+  }
+
+  h5 {
+    font-weight: 200;
+    color: #525252;
+    margin: 5% 3% 4% 3%;
+    font-size: 3.2em;
+  }
+
+  p {
+    margin: 2% 3%;
+    font-size: 1.6em;
+  }
+
+  .video {
+    -webkit-transform: scale(2);
+    margin: 20% 0;
+  }
+
+}
