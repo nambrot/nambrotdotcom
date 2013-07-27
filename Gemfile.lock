@@ -53,6 +53,7 @@ GEM
       posix-spawn (>= 0.3.6)
     arel (4.0.0)
     atomic (1.1.9)
+    awesome_print (1.1.0)
     bcrypt-ruby (3.0.1)
     better_errors (0.8.0)
       coderay (>= 1.0.0)
@@ -227,6 +228,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   better_errors
   binding_of_caller
   blogit!

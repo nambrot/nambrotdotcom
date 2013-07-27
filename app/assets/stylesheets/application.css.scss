@@ -198,7 +198,7 @@ body {
   width: 300px;
   margin: 10px;
   display: inline-block;
-  position: absolute;
+  // position: absolute;
   opacity: 1;
 
   @include transform-style (preserve-3d);
@@ -211,6 +211,10 @@ body {
   &.flippable {
     .about-timeline-entry-card {
       cursor: pointer;
+
+      &:hover {
+        box-shadow: 2px 2px 20px rgba(0,0,0,0.7);
+      }
     }
   }
 
@@ -225,7 +229,7 @@ body {
 
 .about-timeline-entry-card {
   background-color: #fff;
-  position: absolute;
+  // position: absolute;
 
   border: 1px solid #d8d8d8;
   -webkit-border-radius: 3px;
@@ -234,6 +238,8 @@ body {
   border-bottom-width: 2px;
 
   @include backface-visibility(hidden);
+  -moz-backface-visibility: hidden;
+  
   width: 100%;
   
 
@@ -270,7 +276,7 @@ body {
 
   @include backface-visibility(hidden);
   @include transform-origin(top left);
-  @include transform(scale(0.5) rotateY(180deg) );
+  @include transform(scale(0.5) rotateY(180deg) translateZ(10px) );
 
   box-shadow: 2px 3px 20px rgba(0,0,0,0.7);
   border: 1px solid #d8d8d8;

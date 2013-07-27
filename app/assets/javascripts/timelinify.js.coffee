@@ -9,11 +9,15 @@ class TimelineEntry
     
     @settings = settings
 
-    @categories = $.map @$element.find(@settings.timeline_entry_tag_selector).text().split(' '), (hashtag) ->
-      hashtag.slice(1, hashtag.length - 1)
+    @categories = $.map @$element.find(@settings.timeline_entry_tag_selector).text().replace(/^\s+|\s+$/g,'').split(' '), (hashtag) ->
+      hashtag.slice(1, hashtag.length)
+      
     @importance = parseInt(@$element.data('importance'))
 
     @hidden = @$element.hasClass 'hidden'
+
+    @$element.find(@settings.timeline_entry_card_selector).css
+      position: 'absolute'
     this
 
   card_height: ->
@@ -29,7 +33,7 @@ class TimelineEntry
 
     # calculate position
 
-    scrolltop = $('body').scrollTop()
+    scrolltop = $(window).scrollTop()
     offset = @$element.offset()
 
     if $(window).height() > @$element.find('.about-timeline-entry-detail').height()/2
@@ -38,6 +42,7 @@ class TimelineEntry
     else
       # lightbox is too big, position it at the viewport top
       verticaloffset = scrolltop - offset.top + 10
+      console.log scrolltop, offset.top, verticaloffset
     
     horizontaloffset = $(window).width()/2 - offset.left - 225
    
@@ -87,8 +92,9 @@ class TimelineEntry
           'opacity': '0'
   show: ->
     @$element.css
-              'opacity': '1'
-              'z-index': ''
+      'position': 'absolute'
+      'opacity': '1'
+      'z-index': ''
 
 class TimelineEntryManager
   column_mapping: [],
@@ -101,7 +107,7 @@ class TimelineEntryManager
     @settings = settings
 
     # Observe clicks on entries
-    $(@settings.timeline_selector).on 'click', @settings.timeline_entry_selector, null , (evt) =>
+    $(@settings.timeline_selector).on 'click', "#{@settings.timeline_entry_selector}.flippable", null , (evt) =>
       @timeline_entries[@entries_dom_elements.index(evt.currentTarget)].click(evt)
 
     # Observe category picker
@@ -129,11 +135,13 @@ class TimelineEntryManager
     # thresholds
     acceptable_categories = $(@settings.category_picker_form + ' input:checked').map (index, value) ->
       value.value
+    
     importance_threshold = parseInt($(@settings.importance_slider).val())
 
     # filter entries
     entries_to_show = []
     for entry in @timeline_entries
+      
       if intersection(entry.categories, acceptable_categories).length > 0 and entry.importance <= importance_threshold
         # show
         entry.show()

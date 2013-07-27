@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 group :development do
+  gem 'awesome_print'
   gem 'flay'
   gem 'binding_of_caller'
   gem 'better_errors'
