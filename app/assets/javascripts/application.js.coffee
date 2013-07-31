@@ -17,12 +17,13 @@
 # = require simple_slider
 # = require timelinify
 
-# = require mediaelement_rails
 # = require about
 
 # = require_tree .
 
 $(document).on 'ready page:load', ->
+  console.log 'trigger load'
+  debugger
   $(document).foundation();
 
 
