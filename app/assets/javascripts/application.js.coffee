@@ -22,8 +22,6 @@
 # = require_tree .
 
 $(document).on 'ready page:load', ->
-  console.log 'trigger load'
-  debugger
   $(document).foundation();
 
 
