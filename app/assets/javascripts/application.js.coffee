@@ -14,7 +14,9 @@
 # = require jquery_ujs
 # = require foundation
 # = require turbolinks
+# = require simple_slider
 # = require timelinify
+
 # = require mediaelement_rails
 # = require about
 
@@ -22,4 +24,5 @@
 
 $(document).on 'ready page:load', ->
   $(document).foundation();
+
 

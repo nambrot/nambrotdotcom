@@ -1,31 +1,85 @@
 <div id="about-page">
-  <h1>The Life of Nam</h1>
-  <p>
-    Detaillevel (slider)
-    <select id="importance-slider">
-      <option value="1">German Privacy Advocate</option>
-      <option value="2">Acquintance</option>
-      <option value="3">Close Friend</option>
-      <option value="4" selected>Stalker</option>
-    </select>
-  </p>
-  <p>
-    Info Category
+  <header>
+    <img src="http://lorempixel.com/120/180/people" alt="" style='float: left; margin-right: 12px;'>
+    <h1>Nam Chu Hoai</h1>
+    <p>This is an experiment with an about page. It is designed to get to know me as a person, how I have developed and what I have experienced in a more engaging way (apart from very personal stuff). It also reflects the multiple facets of our personality. It draws from a professional CV, an online portfolio and autobiography.</p>
+  </header>
+  <div id="importance-slider-box">
+    <h5 id="importance-slider-label">
+      Detaillevel
+    </h5>
+    <p>How much detail you want to see</p>
+    <div id="importance-slider-left-border">
+      German Privacy Advocate
+    </div>
+    <div id="importance-slider-container">
+      <input type="text" id="importance-slider" data-slider="true" data-slider-range="2,4" data-slider-snap="true" data-slider-step="1" value='3'>
+    </div>
+    <div id="importance-slider-right-border">
+      NSA
+    </div>
+  </div>
+  <div id="category-picker-box">
+    <h5>Aspects</h5>
+    <p>Choose which aspects of my personality you want to learn more about</p>
     <form action="" id="category-picker">
-      <label for="checkbox1"><input type="checkbox" name="category picker" value='nerd' checked> Nerd  </input> </label>
-      <label for="checkbox2"><input type="checkbox" name="category picker" value='traveler' checked> Traveler </input> </label>
-      <label for="checkbox3"><input type="checkbox" name="category picker" value='worker' CHECKED> Worker </input> </label>
-      <label for="checkbox3"><input type="checkbox" name="category picker" value='creative' CHECKED> Creative </input> </label>
-    </form>
-    
+      <label id='checkbox1'>
+        <input type="checkbox" name="category picker" value='geek'>
+        <div>
+          <span class="image"></span>
+          <span class='text'>Geek</span>
+        </div>
+      </label>
       
-  </p>
+      <label id='checkbox2'>
+        <input type="checkbox" name="category picker" value='coder'>
+        <div>
+          <span class="image"></span>
+          <span class='text'>Coder</span>
+        </div>
+      </label>
+
+      <label id='checkbox3'>
+        <input type="checkbox" name="category picker" value='traveler'>
+        <div>
+          <span class="image"></span>
+          <span class='text'>Traveler</span>
+        </div>
+      </label>
+
+      <label id='checkbox4'>
+        <input type="checkbox" name="category picker" value='worker' checked>
+        <div>
+          <span class="image"></span>
+          <span class='text'>Worker</span>
+        </div>
+      </label>
+
+      <label id='checkbox5'>
+        <input type="checkbox" name="category picker" value='student' checked>
+        <div>
+          <span class="image"></span>
+          <span class='text'>Student</span>
+        </div>
+      </label>
+      
+      <label id='checkbox6'>
+        <input type="checkbox" name="category picker" value='creative'>
+        <div>
+          <span class="image"></span>
+          <span class='text'>Creative</span>
+        </div>
+      </label>
+    </form>
+  </div>
+  
+    
   <ul id="about-timeline">
     
     <!-- Spring2013 No.2 -->
     <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
-        <img src="http://www.lorempixel.com/300/150/nature" style='height:150px;' alt="">
+        <img src="<%= image_path 'alhambra.jpg' %>" style='height:150px;' alt="">
         <h5>#SpringTrip2013 No.2</h5>
         <p>
           3-week tour with stops at the Boston Marathon, Madrid, Granada, Sevilla, Palma de Mallorca, Milan and Venice.
@@ -47,7 +101,7 @@
     <!-- Spring2013 Roadtrip -->
     <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
-        <img src="http://www.lorempixel.com/300/151/nature" style='height:150px;' alt="">
+        <img src="<%= image_path 'canyon.jpg' %>" style='height:150px;' alt="">
         <h5>#SpringTrip2013 Roadtrip</h5>
         <p>
           Roadtrip with Danielle and Wilken from San Antonio, TX to Las Vegas, NV. This time around I was 21 and made $500 at the poker tables in the Bellagio. At the shooting range in Alburquerque.
@@ -69,10 +123,10 @@
     <!-- SXSW -->
     <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
-        <img src="http://www.lorempixel.com/300/152/nature" style='height:150px;' alt="">
+        <img src="<%= image_path 'sxsw.jpg' %>" style='height:150px;' alt="">
         <h5>SXSW</h5>
         <p>
-          The world's largest tech and music festival. Sponsored by the Berlin Senate and hung with the <a href="http://interactatx.com/">InteractATX</a> Crew
+          Attended the world's largest tech and music festival. Sponsored by the Berlin Senate and hung with the <a href="http://interactatx.com/">InteractATX</a> Crew
         </p>
         <footer>
           <div class="location">
@@ -82,16 +136,16 @@
             March 2013
           </span>
           <div class="timeline-entry-tags">
-            #traveler #nerd
+            #traveler #geek
           </span>
         </footer>
       </div>
     </li>
     
     <!-- Credport -->
-    <li class="about-timeline-entry flippable" data-importance='1'>
+    <li class="about-timeline-entry flippable" data-importance='2'>
       <div class="about-timeline-entry-card">
-        <img src="http://www.lorempixel.com/301/151/nature" style='height:150px;' alt="">
+        <img src="<%= image_path 'credport.png' %>" style='height:150px;' alt="">
         <h5>Credport</h5>
         <p>Co-Founded my first company with Connor, my roommate from college. Rollercoaster would be an understatement.</p>
         <footer>
@@ -102,7 +156,7 @@
             Since 2012
           </span>
           <div class="timeline-entry-tags">
-            #nerd #worker
+            #geek #worker #coder
           </span>
         </footer>
       </div>
@@ -122,7 +176,7 @@
     <!-- Las Vegas No.1 -->
     <li class="about-timeline-entry" data-importance='4'>
       <div class="about-timeline-entry-card">
-        <img src="http://www.lorempixel.com/302/151/nature" style='height:150px;' alt="">
+        <img src="<%= image_path 'vegas.jpg' %>" style='height:150px;' alt="">
         <h5>Las Vegas No. 1</h5>
         <p>TechStars Seattle Interviews (unfortunately not 21 at the time)</p>
         <footer>
@@ -133,7 +187,7 @@
             Summer 2012
           </span>
           <div class="timeline-entry-tags">
-            #traveler #nerd
+            #traveler #geek
           </span>
         </footer>
       </div>
@@ -142,7 +196,7 @@
     <!-- Rome -->
     <li class="about-timeline-entry" data-importance='4'>
       <div class="about-timeline-entry-card">
-        <img src="http://www.lorempixel.com/303/151/nature" style='height:150px;' alt="">
+        <img src="<%= image_path 'rome.jpg' %>" style='height:150px;' alt="">
         <h5>Rome</h5>
         <p>City Trip with the family to the ancient city of Rome</p>
         <footer>
@@ -162,9 +216,9 @@
     <!-- Savannah 2012 -->
     <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
-        <img src="http://www.lorempixel.com/303/152/nature" style='height:150px;' alt="">
+        <img src="<%= image_path 'savannah.jpg' %>" style='height:150px;' alt="">
         <h5>#Savannah2012</h5>
-        <p>Roadtrip in a van with 5 friends from Pittsburgh, PA to Savannah, GA</p>
+        <p>Roadtrip in a van from Pittsburgh, PA to Savannah, GA</p>
         <footer>
           <div class="location">
             Pittsburgh, PA and Savannah, GA
@@ -180,9 +234,9 @@
     </li>
     
     <!-- Apture -->
-    <li class="about-timeline-entry flippable" data-importance='1'>
+    <li class="about-timeline-entry flippable" data-importance='2'>
       <div class="about-timeline-entry-card">
-        <img src="http://www.lorempixel.com/311/151/nature" style='height:150px;' alt="">
+        <img src="<%= image_path 'apture.jpg' %>" style='height:150px;' alt="">
         <h5>Apture</h5>
         <p>Interned at the semantic-web, contextual search company Apture (acquired by Google in 2011). My first real job.</p>
         <footer>
@@ -193,7 +247,7 @@
             Summer 2011
           </span>
           <div class="timeline-entry-tags">
-            #nerd #worker
+            #geek #worker #coder
           </span>
         </footer>
       </div>
@@ -226,9 +280,9 @@
     </li>
     
     <!-- Thiel Finalist -->
-    <li class="about-timeline-entry flippable" data-importance='2'>
+    <li class="about-timeline-entry flippable" data-importance='3'>
       <div class="about-timeline-entry-card">
-        <img src="http://www.lorempixel.com/310/151/nature" style='height:150px;' alt="">
+        <img src="<%= image_path 'thiel.jpg' %>" style='height:150px;' alt="">
         <h5>Thiel Finalist</h5>
         <p>Was a finalist for the controversial Thiel Fellowship, a $100,000 grant for people under 20 to forgo higher education. </p>
         <footer>
@@ -239,7 +293,7 @@
             Spring 2011
           </span>
           <div class="timeline-entry-tags">
-            #nerd #worker
+            #geek #worker
           </span>
         </footer>
       </div>
@@ -248,16 +302,16 @@
         <div class="margin-5">
           <h2>Thiel Finalist</h2>
           <p>
-            After randomly applying to the <a href="http://www.thielfellowship.org/">Thiel Fellowship</a> last minute, I surprisingly reached the final round that included meeting the man himself, but especially the ultimate fellows. While I eventually did not receive the fellowship, I made valuable connections and the fundamental insight, that anything is possible.
+            After randomly applying to the <a href="http://www.thielfellowship.org/">Thiel Fellowship</a> last minute, I surprisingly reached the final round that included meeting the man himself, but especially the ultimate fellows. While I eventually did not receive the fellowship, I made valuable connections and the fundamental insight, that anything is possible. In many ways, the Thiel Fellowship paved the way for my current career path.
           </p>
         </div>
       </div>
     </li>
     
     <!-- BU -->
-    <li class="about-timeline-entry flippable" data-importance='1'>
+    <li class="about-timeline-entry flippable" data-importance='2'>
       <div class="about-timeline-entry-card">
-        <img src="http://www.lorempixel.com/309/151/nature" style='height:150px;' alt="">
+        <img src="<%= image_path 'bu.jpg' %>" style='height:150px;' alt="">
         <h5>Boston University</h5>
         <p>
           Attended college in the great city of Boston while pursuing a B.A in Computer Science.
@@ -270,7 +324,7 @@
             Since 2010
           </span>
           <div class="timeline-entry-tags">
-            #nerd #worker
+            #student
           </span>
         </footer>
       </div>
@@ -302,7 +356,7 @@
     <!-- HHG -->
     <li class="about-timeline-entry flippable" data-importance='3'>
       <div class="about-timeline-entry-card">
-        <img src="http://www.lorempixel.com/308/151/nature" style='height:150px;' alt="">
+        <img src="<%= image_path 'hhgym.jpg' %>" style='height:150px;' alt="">
         <h5>Heinrich-Hertz-Gymnasium</h5>
         <p>
           Attended the science-oriented high school and graduated with the Abitur with a GPA of 1.3
@@ -315,7 +369,7 @@
             2003 - 2010
           </span>
           <div class="timeline-entry-tags">
-            #nerd
+            #student
           </span>
         </footer>
       </div>
@@ -335,7 +389,7 @@
     <!-- Event Photography -->
     <li class="about-timeline-entry flippable" data-importance='3'>
       <div class="about-timeline-entry-card">
-        <img src="http://www.lorempixel.com/300/157/nature" style='height:150px;' alt="">
+        <img src="<%= image_path 'event.jpg' %>" style='height:150px;' alt="">
         <h5>Event Photography</h5>
         <p>
           Getting semi-serious with my photography hobby
@@ -348,7 +402,7 @@
             2009 - 2010
           </span>
           <div class="timeline-entry-tags">
-            #nerd #creative #worker
+            #geek #creative #worker
           </span>
         </footer>
       </div>
@@ -372,7 +426,7 @@
     <!-- Neuerdings -->
     <li class="about-timeline-entry flippable" data-importance='4'>
       <div class="about-timeline-entry-card">
-        <img src="http://www.lorempixel.com/300/156/nature" style='height:150px;' alt="">
+        <img src="<%= image_path 'neuerdings.png' %>" style='height:150px;' alt="">
         <h5>Tech Blogger</h5>
         <p>A quick writing stunt at tech-blog Neuerdings.com</p>
         <footer>
@@ -383,7 +437,7 @@
             2009
           </span>
           <div class="timeline-entry-tags">
-            #nerd #worker
+            #geek #worker
           </span>
         </footer>
       </div>
@@ -401,7 +455,7 @@
     <!-- Nams Remote -->
     <li class="about-timeline-entry flippable" data-importance='2'>
       <div class="about-timeline-entry-card">
-        <img src="http://www.lorempixel.com/300/155/nature" style='height:150px;' alt="">
+        <img src="<%= image_path 'namsremote.jpg' %>" style='height:150px;' alt="">
         <h5>Nam's Remote</h5>
         <p>First money-making side-project</p>
         <footer>
@@ -412,7 +466,7 @@
             Spring 2009
           </span>
           <div class="timeline-entry-tags">
-            #nerd #worker
+            #coder #geek #worker
           </span>
         </footer>
       </div>
@@ -446,9 +500,9 @@
     </li>
     
     <!-- Maps Offline -->
-    <li class="about-timeline-entry flippable" data-importance='2'>
+    <li class="about-timeline-entry flippable" data-importance='3'>
       <div class="about-timeline-entry-card">
-        <img src="http://www.lorempixel.com/300/161/nature" style='height:150px;' alt="">
+        <img src="<%= image_path 'maps.jpg' %>" style='height:150px;' alt="">
         <h5>Maps Offline</h5>
         <p>My first public side project ever.</p>
         <footer>
@@ -459,7 +513,7 @@
             Summer 2008
           </span>
           <div class="timeline-entry-tags">
-            #nerd
+            #coder
           </span>
         </footer>
       </div>
@@ -489,7 +543,7 @@
     <!-- START -->
     <li class="about-timeline-entry flippable" data-importance='3'>
       <div class="about-timeline-entry-card">
-        <img src="http://www.lorempixel.com/300/141/nature" style='height:150px;' alt="">
+        <img src="<%= image_path 'start.jpg' %>" style='height:150px;' alt="">
         <h5>START Scholarship</h5>
         <p>Support that I will be eternally grateful for</p>
         <footer>
@@ -500,7 +554,7 @@
             2007 - 2010
           </span>
           <div class="timeline-entry-tags">
-            #worker #nerd
+            #student
           </span>
         </footer>
       </div>
@@ -519,3 +573,5 @@
     </li>
   </ul>
 </div>
+
+<footer style="font-size:0.5em;">Images from Lemon Liu, Eric Milet, Kris Khoury from The Noun Project</footer>

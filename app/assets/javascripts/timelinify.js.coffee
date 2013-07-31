@@ -62,6 +62,9 @@ class TimelineEntry
       $(document).on 'click.timelinify', (evt) =>
         if !$.contains(@element, evt.target)
           @flipback()
+      $(document).on 'keyup.timelinify', (evt) =>
+        if evt.keyCode == 27
+          @flipback()
       @$element.find('.about-timeline-entry-detail').on 'click.timelinify', (evt) ->
         console.log 'click'
         evt.stopPropagation();
@@ -71,6 +74,7 @@ class TimelineEntry
     @overlay.fadeOut 300, =>
       @overlay.remove()
     $(document).off 'click.timelinify'
+    $(document).off 'keyup.timelinify'
     @$element.find('.about-timeline-entry-detail').off 'click.timelinify'
     @$element.removeClass 'flip'
     $(@$element).css({
@@ -115,7 +119,12 @@ class TimelineEntryManager
       @reflow()
 
     # Observe importance slider
-    $(@settings.importance_slider).on 'change', =>
+    console.log "initialize"
+    console.log $(@settings.importance_slider)
+    $(@settings.importance_slider).simpleSlider()
+    $(@settings.importance_slider).on 'change slider:changed', =>
+      console.log 'change'
+    $(@settings.importance_slider).on 'change slider:changed', =>
       @reflow()
     this
   reflow: ->
@@ -228,6 +237,9 @@ $.fn.extend
 
     # _Insert magic here._
     return @each ()->
+      if $(this).data('timelinified')
+        return
+      $(this).data('timelinified', 'true')
       entries_dom_elements = $(settings.timeline_selector + ' ' + settings.timeline_entry_selector)
 
       timeline_entry_manager = (new TimelineEntryManager()).initialize_from_DOM_elements entries_dom_elements, settings
