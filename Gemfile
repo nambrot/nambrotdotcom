@@ -19,6 +19,7 @@ group :development do
   gem 'guard-livereload'
 end
 
+gem 'cloudinary'
 gem 'devise', :github => 'plataformatec/devise', :branch => 'rails4'
 gem 'blogit', :path => '../blogit', :branch => 'rails4'
 gem 'high_voltage'
