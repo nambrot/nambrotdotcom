@@ -3,6 +3,8 @@ ruby "1.9.3"
 
 group :production do
   gem 'pg'
+  gem 'rails_12factor'
+  gem 'rails_serve_static_assets'
 end
 
 group :development do
@@ -26,6 +28,7 @@ group :development do
   gem 'sqlite3'
 end
 
+gem 'unicorn'
 gem 'acts_as_taggable'
 gem 'cloudinary'
 gem 'devise', :github => 'plataformatec/devise', :branch => 'rails4'
