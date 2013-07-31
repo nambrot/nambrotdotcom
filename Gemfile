@@ -21,7 +21,7 @@ end
 
 gem 'cloudinary'
 gem 'devise', :github => 'plataformatec/devise', :branch => 'rails4'
-gem 'blogit', :path => '../blogit', :branch => 'rails4'
+gem 'blogit', :github => 'nambrot/blogit', :branch => 'rails4'
 gem 'high_voltage'
 gem 'bourbon'
 gem 'zurb-foundation', '~> 4.0.0'
