@@ -26,6 +26,7 @@ group :development do
   gem 'sqlite3'
 end
 
+gem 'acts_as_taggable'
 gem 'cloudinary'
 gem 'devise', :github => 'plataformatec/devise', :branch => 'rails4'
 gem 'blogit', :github => 'nambrot/blogit', :branch => 'rails4'

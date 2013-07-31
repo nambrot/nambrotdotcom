@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/nambrot/blogit.git
-  revision: e7191a956bf1d16be7628ad4e3efd46d31ceddf7
+  revision: 3afd908100d69044c275447a6feaca6581b8e6ea
   branch: rails4
   specs:
     blogit (0.7.0)
@@ -51,6 +51,7 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    acts_as_taggable (2.0.2)
     albino (1.3.3)
       posix-spawn (>= 0.3.6)
     arel (4.0.0)
@@ -150,7 +151,7 @@ GEM
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     orm_adapter (0.4.0)
-    pg (0.14.1)
+    pg (0.16.0)
     pingr (0.0.3)
     polyglot (0.3.3)
     posix-spawn (0.3.6)
@@ -238,6 +239,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_taggable
   awesome_print
   better_errors
   binding_of_caller
