@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 ruby "1.9.3"
+
+group :production do
+  gem 'pg'
+end
+
 group :development do
   gem 'awesome_print'
   gem 'flay'
@@ -17,6 +22,8 @@ group :development do
   gem 'guard'
   gem 'rack-livereload'
   gem 'guard-livereload'
+
+  gem 'sqlite3'
 end
 
 gem 'cloudinary'
@@ -31,7 +38,8 @@ gem 'mediaelement_rails'
 gem 'rails', '4.0.0.rc1'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+
+
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0.rc1'
