@@ -237,9 +237,12 @@ $.fn.extend
 
     # _Insert magic here._
     return @each ()->
+      console.log this
+      console.log $(this).data('timelinified')
       if $(this).data('timelinified')
         return
       $(this).data('timelinified', 'true')
+      console.log $(this).data('timelinified')
       entries_dom_elements = $(settings.timeline_selector + ' ' + settings.timeline_entry_selector)
 
       timeline_entry_manager = (new TimelineEntryManager()).initialize_from_DOM_elements entries_dom_elements, settings
