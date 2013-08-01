@@ -1,5 +1,8 @@
 $(document).on 'ready page:load', ->
-  debugger
-  console.log 'trigger'
+  if $('#about-page').hasClass('timelinified')
+    return
+  console.log 'ready'
+  console.log $('#about-page').hasClass('timelinified')
   $('#about-page').timelinify
     debug:true
+  $('#about-page').addClass('timelinified')

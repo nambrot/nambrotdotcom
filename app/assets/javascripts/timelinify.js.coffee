@@ -119,11 +119,8 @@ class TimelineEntryManager
       @reflow()
 
     # Observe importance slider
-    console.log "initialize"
-    console.log $(@settings.importance_slider)
+
     $(@settings.importance_slider).simpleSlider()
-    $(@settings.importance_slider).on 'change slider:changed', =>
-      console.log 'change'
     $(@settings.importance_slider).on 'change slider:changed', =>
       @reflow()
     this
@@ -237,12 +234,8 @@ $.fn.extend
 
     # _Insert magic here._
     return @each ()->
-      console.log this
-      console.log $(this).data('timelinified')
       if $(this).data('timelinified')
         return
-      $(this).data('timelinified', 'true')
-      console.log $(this).data('timelinified')
       entries_dom_elements = $(settings.timeline_selector + ' ' + settings.timeline_entry_selector)
 
       timeline_entry_manager = (new TimelineEntryManager()).initialize_from_DOM_elements entries_dom_elements, settings
