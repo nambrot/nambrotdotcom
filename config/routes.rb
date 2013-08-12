@@ -2,6 +2,7 @@ Nambrotdotcom::Application.routes.draw do
 
   devise_for :users, :skip => [:registration], :sign_out_via => [ :get ]
   mount Blogit::Engine => "/"
+  mount Gallery::Engine => "gallery"
   get 'about' => 'high_voltage/pages#show', :id => 'about'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

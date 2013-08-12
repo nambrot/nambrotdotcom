@@ -44,4 +44,12 @@
   background-size: cover;
 }
 
+
+
 $mobile-width: 950px;
+
+.hide-on-mobile {
+  @media (max-width: $mobile-width) {
+    display: none !important;
+  }
+}

@@ -1,0 +1,6 @@
+google_oauth2:
+  - <%= ENV['GOOGLE_CLIENT_ID'] %>
+  - <%= ENV['GOOGLE_SECRET'] %>
+  -
+    approval_prompt: auto
+    scope: https://picasaweb.google.com/data/,userinfo.profile,userinfo.email

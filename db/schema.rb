@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130522144032) do
+ActiveRecord::Schema.define(version: 20130807113659) do
 
   create_table "blog_comments", force: true do |t|
     t.string   "name",       null: false
@@ -38,6 +38,45 @@ ActiveRecord::Schema.define(version: 20130522144032) do
   end
 
   add_index "blog_posts", ["blogger_type", "blogger_id"], name: "index_blog_posts_on_blogger_type_and_blogger_id"
+
+  create_table "gallery_albums", force: true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.text     "description"
+    t.string   "provider"
+    t.string   "uid"
+    t.integer  "identity_id"
+    t.integer  "photos_count"
+    t.string   "cover_source"
+    t.float    "cover_aspect_ratio"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "public",             default: false
+  end
+
+  create_table "gallery_identities", force: true do |t|
+    t.string   "uid"
+    t.string   "provider"
+    t.string   "name"
+    t.string   "link"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "token"
+  end
+
+  create_table "gallery_photos", force: true do |t|
+    t.integer  "album_id"
+    t.string   "source"
+    t.string   "name"
+    t.string   "url"
+    t.string   "uid"
+    t.string   "provider"
+    t.float    "aspect_ratio"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "public",       default: true
+    t.string   "thumbnail"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name",                   default: "", null: false

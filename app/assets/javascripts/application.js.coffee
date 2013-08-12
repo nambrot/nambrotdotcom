@@ -15,12 +15,13 @@
 # = require foundation
 # = require simple_slider
 # = require timelinify
-
+# = require gallery/gallery
 # = require about
 
 # = require_tree .
 
 $(document).on 'ready page:load', ->
   $(document).foundation();
+  $('.gallery-album').gallery()
 
 
