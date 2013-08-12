@@ -38,7 +38,7 @@ gem 'high_voltage'
 gem 'bourbon'
 gem 'zurb-foundation', '~> 4.0.0'
 
-gem 'gallery', github: "nambrot/gallery", :branch => 'master'
+gem 'gallery', '~> 0.0.2', github: "nambrot/gallery", :branch => 'master'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0.rc1'
