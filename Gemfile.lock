@@ -14,10 +14,10 @@ GIT
 
 GIT
   remote: git://github.com/nambrot/gallery.git
-  revision: e3febce9ea64e48bc878d55af5bd4a6285671f43
+  revision: c6d52bfdb82c45b9aa23b7a8629366402d100f17
   branch: master
   specs:
-    gallery (0.0.1)
+    gallery (0.0.2)
       bourbon
       coffee-rails
       omniauth
@@ -302,7 +302,7 @@ DEPENDENCIES
   debugger
   devise!
   flay
-  gallery!
+  gallery (~> 0.0.2)!
   guard
   guard-livereload
   high_voltage
