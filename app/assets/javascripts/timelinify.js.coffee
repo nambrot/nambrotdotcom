@@ -66,7 +66,6 @@ class TimelineEntry
         if evt.keyCode == 27
           @flipback()
       @$element.find('.about-timeline-entry-detail').on 'click.timelinify', (evt) ->
-        console.log 'click'
         evt.stopPropagation();
       
       ),100
