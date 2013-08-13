@@ -111,6 +111,7 @@ class TimelineEntryManager
 
     # Observe clicks on entries
     $(@settings.timeline_selector).on 'click', "#{@settings.timeline_entry_selector}.flippable", null , (evt) =>
+      console.log 'click timeline entry'
       @timeline_entries[@entries_dom_elements.index(evt.currentTarget)].click(evt)
 
     # Observe category picker
