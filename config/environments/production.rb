@@ -1,3 +1,10 @@
+class NoCompression
+  def compress(string)
+    # do nothing
+    string
+  end
+end
+
 Nambrotdotcom::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
