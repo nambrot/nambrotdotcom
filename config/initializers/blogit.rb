@@ -25,7 +25,7 @@ Blogit.configure do |config|
   config.datetime_format = :long
 
   # Should the controllers cache the blog pages as HTML?
-  # config.cache_pages = false
+  config.cache_pages = false
 
   # No. of posts to show per page
   config.posts_per_page = 10
