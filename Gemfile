@@ -37,8 +37,10 @@ gem 'blogit', :github => 'nambrot/blogit', :branch => 'rails4'
 gem 'high_voltage'
 gem 'bourbon'
 gem 'zurb-foundation', '~> 4.0.0'
-gem 'gallery', '~> 0.0.6', github: "nambrot/gallery", :branch => 'master'
-
+gem 'gallery', '~> 0.0.7', github: "nambrot/gallery", :branch => 'master'
+gem 'actionpack-action_caching'
+gem 'memcachier'
+gem 'dalli'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0.rc1'
 

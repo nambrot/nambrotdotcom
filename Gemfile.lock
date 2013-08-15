@@ -14,10 +14,11 @@ GIT
 
 GIT
   remote: git://github.com/nambrot/gallery.git
-  revision: 5d81b190c76a29962794ad155be5ae528b10ccf4
+  revision: 433361fc9f201fb025dc9f9ef95da7470726d18a
   branch: master
   specs:
-    gallery (0.0.6)
+    gallery (0.0.7)
+      actionpack-action_caching
       bourbon
       coffee-rails
       omniauth
@@ -50,6 +51,8 @@ GEM
       erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
+    actionpack-action_caching (1.0.0)
+      actionpack (>= 4.0.0.beta, < 5.0)
     activemodel (4.0.0.rc1)
       activesupport (= 4.0.0.rc1)
       builder (~> 3.1.0)
@@ -95,6 +98,7 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     columnize (0.3.6)
+    dalli (2.6.0)
     debug_inspector (0.0.2)
     debugger (1.2.3)
       columnize (>= 0.3.1)
@@ -162,6 +166,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcachier (0.0.2)
     meta_request (0.2.7)
       callsite
       rack-contrib
@@ -291,6 +296,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionpack-action_caching
   acts_as_taggable
   awesome_print
   better_errors
@@ -299,10 +305,11 @@ DEPENDENCIES
   bourbon
   cloudinary
   coffee-rails (~> 4.0.0)
+  dalli
   debugger
   devise!
   flay
-  gallery (~> 0.0.6)!
+  gallery (~> 0.0.7)!
   guard
   guard-livereload
   high_voltage
@@ -311,6 +318,7 @@ DEPENDENCIES
   jquery-rails
   localtunnel
   lol_dba
+  memcachier
   meta_request
   pg
   quiet_assets
