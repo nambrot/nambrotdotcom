@@ -6,6 +6,7 @@ Nambrotdotcom::Application.routes.draw do
   get 'about' => 'high_voltage/pages#show', :id => 'about'
   get 'blog' => "blogit/posts#index"
   get 'blog/:id' => 'blogit/posts#show'
+  get 'clear_cache' => 'admin#clear_cache'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
