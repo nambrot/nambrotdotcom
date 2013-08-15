@@ -3,5 +3,10 @@ $(document).on 'ready page:load', ->
     return
   $('#about-page').timelinify
     debug:true
-  $('#about-page').find("img[data-gallery-decorate=true]").decorate_gallery()
+    
+  # give the page sometime to load
+  setTimeout (->
+      $('#about-page').find("img[data-gallery-decorate=true]").decorate_gallery()
+    ),5000 
+  
   $('#about-page').addClass('timelinified')
