@@ -1,0 +1,1 @@
+HighVoltage.action_caching = true
