@@ -312,7 +312,7 @@ DEPENDENCIES
   gallery (~> 0.0.7)!
   guard
   guard-livereload
-  high_voltage
+  high_voltage (>= 1.2.4)
   hirb
   jbuilder (~> 1.0.1)
   jquery-rails
