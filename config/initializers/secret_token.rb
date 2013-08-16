@@ -9,4 +9,8 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Nambrotdotcom::Application.config.secret_key_base = '859ac92b3fbefac7b2a53f48b1d87bf0041325c99637846cc555d64719af600978091a9a290808e9b7a92fceb15c7c69533d366273c936e2c5963067d8936157'
+MyApp::Application.config.secret_token = if Rails.env.development? or Rails.env.test?
+  ('x' * 30) # meets minimum requirement of 30 chars long
+else
+  ENV['SECRET_TOKEN']
+end
