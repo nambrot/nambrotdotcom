@@ -14,7 +14,8 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   	<title><%= content_for?(:title) ? yield(:title) : "Nambrot.com" %></title>
-
+    <meta name="description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : 'Nam Chu Hoai doing things that you can read about and stuff' %>">
+    
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
     <%= csrf_meta_tags %>
