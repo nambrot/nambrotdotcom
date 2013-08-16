@@ -1,9 +1,9 @@
 GIT
   remote: git://github.com/nambrot/blogit.git
-  revision: 40165def88feae8f149ad6158a930339edda60f1
+  revision: 2a48a314add8dcffb097eb59bf1922e4b1df809d
   branch: rails4
   specs:
-    blogit (0.7.3)
+    blogit (0.7.4)
       RedCloth (>= 4.2.9)
       albino (>= 1.3.3)
       jquery-rails
@@ -301,7 +301,7 @@ DEPENDENCIES
   awesome_print
   better_errors
   binding_of_caller
-  blogit (~> 0.7.3)!
+  blogit (~> 0.7.4)!
   bourbon
   cloudinary
   coffee-rails (~> 4.0.0)
