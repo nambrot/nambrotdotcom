@@ -212,8 +212,12 @@ body {
   margin: 2% auto;
 
   @media (min-width: $mobile-width) {
-    width: 80%;
+    width: 100%;
     max-width: 800px;
+    &.longer {
+      width: 100%;
+      max-width: 1800px;
+    }
     margin: 2% 0 5px 0;
   }
 
@@ -221,7 +225,9 @@ body {
   color: #525252;
   background-color: white;
   padding: 2% 5% 5px 5%;
-  
+  &.no_padding {
+    padding: 0;
+  }
   border: 1px solid #d8d8d8;
   -webkit-border-radius: 3px;
   border-radius: 3px;

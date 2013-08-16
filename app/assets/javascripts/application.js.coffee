@@ -24,7 +24,7 @@
 $(document).on 'ready page:load', ->
   $(document).foundation();
   $('.gallery-album').gallery()
-
+  $('.gallery-album-decorate').decorate_gallery()
   m = $.offCanvasMenu
     direction: 'left'
     coverage: '300px',
