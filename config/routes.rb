@@ -1,9 +1,11 @@
 Nambrotdotcom::Application.routes.draw do
 
   devise_for :users, :skip => [:registration], :sign_out_via => [ :get ]
-  mount Blogit::Engine => "/"
+  mount Blogit::Engine => "/", :as => :blog
   mount Gallery::Engine => "gallery"
   get 'about' => 'high_voltage/pages#show', :id => 'about'
+  get 'namsremote' => 'high_voltage/pages#show', :id => 'namsremote'
+  get 'mapsoffline' => 'high_voltage/pages#show', :id => 'mapsoffline'
   get 'blog' => "blogit/posts#index"
   get 'blog/:id' => 'blogit/posts#show'
   get 'clear_cache' => 'admin#clear_cache'
