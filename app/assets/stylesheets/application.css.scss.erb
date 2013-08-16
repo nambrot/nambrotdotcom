@@ -355,6 +355,18 @@ body {
         @include transform( translateY(-10px));
       }
     }
+
+    .about-timeline-entry-card:after {
+      content: '';
+      position: absolute;
+      border-width: 10px;
+      top: 0px;
+      right: 0px;
+      border-color: $primary_color $primary_color transparent transparent;
+      border-style: solid;
+      @include backface-visibility(hidden);
+      -moz-backface-visibility: hidden;
+    }
   }
 
   &.hide {
