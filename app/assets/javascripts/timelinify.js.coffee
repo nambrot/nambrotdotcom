@@ -42,7 +42,6 @@ class TimelineEntry
     else
       # lightbox is too big, position it at the viewport top
       verticaloffset = scrolltop - offset.top + 10
-      console.log scrolltop, offset.top, verticaloffset
     
     horizontaloffset = $(window).width()/2 - offset.left - 225
    
