@@ -16,6 +16,7 @@
 # = require simple_slider
 # = require timelinify
 # = require gallery/gallery
+# = require offCanvasMenu
 # = require about
 
 # = require_tree .
@@ -24,4 +25,12 @@ $(document).on 'ready page:load', ->
   $(document).foundation();
   $('.gallery-album').gallery()
 
+  m = $.offCanvasMenu
+    direction: 'left'
+    coverage: '300px',
+    trigger: '#menu-trigger'
+    menu: '#global-nav'
+    duration: 250
+
+  m.on()
 

@@ -18,10 +18,34 @@
 @import "foundation_and_overrides";
 
 // Global stuff
-#global-nav {
+#global-nav-mobile {
+  @media (min-width: $mobile-width) {
+    display: none;
+  }
+  height: 40px;
+  line-height: 40px;
+  background-color: #56089E;
 
+  a {
+    color: white;
+    line-height: 40px;
+    padding: 0px 10px;
+
+  }
+}
+#global-nav {
+  overflow: scroll;
   background-color: #56089E;
   color: rgb(120, 199, 236);
+
+  background: url(<%= image_path 'IMG_4771.jpg' %>) 100% 100% no-repeat;
+  padding-top: 5%;
+  text-align: center;
+  box-shadow: 0px 4px 30px $primary_color;
+  position:fixed;
+  height: 100%;
+  width: 300px;
+  background-size: cover;
 
   nav {
     text-align: left;
@@ -38,72 +62,38 @@
     }
   }
 
-  @media (min-width: $mobile-width) {
-    position:fixed;
-    height: 100%;
-    width: 300px;
-    
-    padding-top: 5%;
-    text-align: center;
-    box-shadow: 0px 4px 30px $primary_color;
-    
-    background: url(<%= image_path 'IMG_4771.jpg' %>) 100% 100% no-repeat;
-    background-size: cover;
-    h2, h5 {
-      font-family: HelveticaNeue-Light;
-      font-weight: 200;
-      margin-bottom: 0px;
-      color: white;
-      // color: rgb(120, 199, 236);
-    }
-
-    h5 {
-      text-align: left;
-      font-size: 0.9em;
-      padding: 0px 12px;
-    }
-
-    nav {
-      background: rgba(0,0,0,0.6);
-    }
-    header {
-      background: rgba(0,0,0,0.6);
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-    }
-
+  h2, h5 {
+    font-family: HelveticaNeue-Light;
+    font-weight: 200;
+    margin-bottom: 0px;
+    color: white;
+    // color: rgb(120, 199, 236);
   }
-  @media (max-width: $mobile-width) {
-    height: 60px;
-    line-height: 60px;
-    h5 {
-      
-      display: none;
-    }
-    h2 {
-      height: 60px;
-      line-height: 60px;
-      margin: 0px 0px;
-      margin-left: 10px;
-      float: left;
-      color: white;
-    }
-    nav {
-      ul {
-        height: 60px;
-        line-height: 60px;
 
-        text-align: right;
-        float: right;
-        margin-bottom: 0px;
-        display: inline-block;
-        right: 0px;
-      }
-      li {
-        padding: 0px 20px;
-        display: inline-block;
-      }
-    }
+  h5 {
+    text-align: left;
+    font-size: 0.9em;
+    padding: 0px 12px;
+  }
+
+  nav ul {
+    background: rgba(0,0,0,0.6);
+  }
+  header {
+    background: rgba(0,0,0,0.6);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+  }
+
+  @media (max-width: $mobile-width) {
+    display : block;
+    left    : -300px;
+    margin  : 0;
+    overflow: hidden;
+    position: absolute;
+    top     : 0;
+    width   : 300px;
+    max-height: 1000px;
   }
   
 
