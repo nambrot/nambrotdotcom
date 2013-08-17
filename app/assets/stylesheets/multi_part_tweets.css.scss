@@ -1,0 +1,83 @@
+// Place all the styles related to the multi_part_tweets controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bourbon";
+@import "_globals.css.scss";
+#container {
+  padding-top: 12px;
+}
+#twitter-compose {
+  vertical-align: top;
+  display: inline-block;
+  border: 1px solid #CCC;
+  width: 250px;
+  border-radius: 10px;
+  background-color: white;
+
+  header {
+    padding: 10px 6px;
+    h2 {
+      font-size: 1.1em;
+      font-weight: 700;
+    }
+
+    p {
+      color: #525252;
+      font-size: 0.8em;
+      line-height: 1.3em;
+    }
+  }
+}
+
+#twitter-timeline {
+  border: 1px solid #CCC;
+  width: 522px;
+  display: inline-block;
+  border-radius: 10px;
+  background-color: white;
+
+  & > header {
+    padding: 6px 12px;
+    border-bottom: 1px solid #CCC;
+  }
+}
+
+#twitter-timeline-tweets {
+  list-style: none;
+}
+
+.twitter-timeline-tweet {
+  @include clearfix;
+
+  border-bottom: 1px solid #CCC;
+  padding: 6px;
+
+  img {
+    float: left;
+    margin: 6px 10px;
+    border-radius: 4px;
+  }
+
+  .tweet_body {
+    margin-top: 2px;
+    margin-left: 70px;
+
+    .name {
+      font-weight: bold;
+      font-size: 0.9em;
+      line-height: 0.9em;
+      margin-right: 6px;
+    }
+
+    .nick {
+      // font-weight: 400;
+      font-size: 0.8em;
+      line-height: 0.8em;
+      color: #AAA;
+    }
+
+    .tweet_text {
+      font-size: 0.9em;
+    }
+  }
+}

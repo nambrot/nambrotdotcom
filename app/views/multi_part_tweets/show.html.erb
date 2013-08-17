@@ -1,0 +1,52 @@
+<% content_for :header do %>
+  <%= stylesheet_link_tag "multi_part_tweets", media: "all" %>
+<% end %>
+
+<% content_for :body_bottom do %>
+  <%= javascript_include_tag "multi_part_tweets", "data-turbolinks-track" => true %>
+<% end %>
+
+<div id="twitter-compose">
+  <header>
+    <h2>Multi-part-Tweets</h2>
+    <p>Always wanted to send multipart tweets? well here you go. Just time in some stuff</p>
+  </header>
+  <textarea placeholder='Type Something' name="" id="twitter-compose-input" cols="30" rows="10"></textarea>
+  <a class="button" id='twitter-compose-button'> Tweet </a>
+</div>
+<div id="twitter-timeline">
+  <header id="twitter-timeline-header">
+    <h3>Tweets</h3>
+  </header>
+  <ul id="twitter-timeline-tweets">
+    <!-- li*4>img[src='http://lorempixel.com/40/40/people/']+div.tweet_body>(header>span.name+span.nick)+div.tweet_text -->
+    <li class='twitter-timeline-tweet'>
+      <img src="https://si0.twimg.com/profile_images/1269909602/mv_carnet_normal.jpg" alt="">
+      <div class="tweet_body">
+        <header><span class="name">Martin Vasavsky</span><span class="nick">@martinvars</span></header>
+        <div class="tweet_text">Has somebody built the Tesla equivalent in a motor boat?</div>
+      </div>
+    </li>
+    <li class='twitter-timeline-tweet'>
+      <img src="http://lorempixel.com/40/40/people/" alt="">
+      <div class="tweet_body">
+        <header><span class="name">Nam</span><span class="nick">@nambrot</span></header>
+        <div class="tweet_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint eum sunt voluptates eos repudiandae illum magnam explicabo animi dolor ut hic excepturi magni dignissimos ipsum eaque cupiditate facere. Illum ratione.</div>
+      </div>
+    </li>
+    <li class='twitter-timeline-tweet'>
+      <img src="http://lorempixel.com/40/40/people/" alt="">
+      <div class="tweet_body">
+        <header><span class="name">Nam</span><span class="nick">@nambrot</span></header>
+        <div class="tweet_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi fuga delectus est amet! Maiores repellat labore quae minima temporibus odio pariatur officiis ab quisquam dolorem dolore deleniti iure culpa voluptatem.</div>
+      </div>
+    </li>
+    <li class='twitter-timeline-tweet'>
+      <img src="http://lorempixel.com/40/40/people/" alt="">
+      <div class="tweet_body">
+        <header><span class="name">Nam</span><span class="nick">@nambrot</span></header>
+        <div class="tweet_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est similique dolores vero ipsa. Labore esse at voluptas natus sunt magnam reiciendis ea necessitatibus illo in voluptatum enim impedit sequi? Quod!</div>
+      </div>
+    </li>
+  </ul>
+</div>

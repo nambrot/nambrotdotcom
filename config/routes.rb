@@ -9,6 +9,7 @@ Nambrotdotcom::Application.routes.draw do
   get 'blog' => "blogit/posts#index"
   get 'blog/:id' => 'blogit/posts#show'
   get 'clear_cache' => 'admin#clear_cache'
+  get 'multi_part_tweets' => 'multi_part_tweets#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
