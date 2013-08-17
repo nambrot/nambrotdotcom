@@ -5,13 +5,16 @@
 @import "_globals.css.scss";
 #container {
   padding-top: 12px;
+  min-width: 1200px;
 }
 #twitter-compose {
   vertical-align: top;
   display: inline-block;
   border: 1px solid #CCC;
   width: 250px;
+  margin-right: 12px;
   border-radius: 10px;
+
   background-color: white;
 
   header {
@@ -24,8 +27,25 @@
     p {
       color: #525252;
       font-size: 0.8em;
-      line-height: 1.3em;
+      line-height: 1.4em;
     }
+  }
+
+  #twitter-compose-input {
+    min-height: 200px;
+  }
+
+  #twitter-compose-charactercount {
+    text-align: right;
+    margin-right: 6px;
+    font-size: 0.9em;
+    color: #AAA;
+  }
+
+  #twitter-compose-button {
+    text-align: center;
+    margin: 0 auto;
+    display: inline-block;
   }
 }
 

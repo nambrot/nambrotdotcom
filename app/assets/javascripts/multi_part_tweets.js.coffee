@@ -1,11 +1,11 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+# = require textareaAutoExpand
 
 # TODO:
 # fetch username and nick from twitter
 # post automatically
-# link shortening
 # hashtag
 # indexing
 
@@ -32,6 +32,7 @@ $.fn.extend
             @set_curreny_tweet_body $(this).val()
           $(settings.tweet_button).click =>
             @tweet()
+          $(this).textareaAutoExpand()
         set_curreny_tweet_body: (text) ->
           @current_tweet_body = text
           @display_tweet()
