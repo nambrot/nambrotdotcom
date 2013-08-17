@@ -20,6 +20,6 @@ module Nambrotdotcom
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.assets.precompile += ['multi_part_tweets.js', 'multi_part_tweets.css']
+    config.assets.precompile += ['multi_part_tweets.js', 'multi_part_tweets.css', 'basic.css', 'basic.js']
   end
 end
