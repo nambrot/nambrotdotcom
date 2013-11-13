@@ -36,7 +36,10 @@
 }
 
 #global-nav {
-  overflow: scroll;
+  @media (max-height: 530px) {
+    overflow: scroll;
+  }
+  
   background-color: #56089E;
   color: rgb(120, 199, 236);
 

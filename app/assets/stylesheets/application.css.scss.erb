@@ -111,22 +111,60 @@
     border: 1px solid #d8d8d8;
     -webkit-border-radius: 3px;
     border-radius: 3px;
-    background-color: #fff;
+    background-color: #000;
+    color: white;
     border-bottom-width: 2px;
-    padding: 2%;
+    // padding: 2%;
 
     margin: 10px 0px;
     max-width: $mobile-width;
+    #cover-photo {
+      height: 320px;
+      background-image: url(<%= image_path 'cover.jpg' %>);
+      overflow: hidden;
+      background-size: cover;
+
+      #cover-photo-gradient{
+        height: 100%;
+        background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(0,0,0,0.4) 50%, #000 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255,255,255,0)), color-stop(100%, #000));
+        background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(0,0,0,0.4) 80%, #000 100%);
+        background: -o-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(0,0,0,0.4) 50%, #000 100%);
+        background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(0,0,0,0.4) 50%, #000 100%);
+        background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(0,0,0,0.4) 50%, #000 100%);
+      }
+      
+    }
+    .header-body {
+      margin-top: -100px;
+      z-index: 10;
+     
+    }
+
+    .profile-picture {
+      float: left; 
+      margin: 12px; 
+      width: 160px;
+      border: 3px white solid;
+      border-radius: 1px;
+    }
 
     p {
+      margin-left: 185px;
+      margin-right: 12px;
       font-size: 0.9em;
+    }
+
+    a {
+      color: blue;
     }
   }
 
   @include clearfix;
   h1 {
     font-weight: 200;
-    font-color: #525252;
+    color: white;
+    margin-bottom: 10px;
   }
 
   nav {
