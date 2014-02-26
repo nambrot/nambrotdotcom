@@ -92,11 +92,13 @@ class TimelineEntry
           'left': '-1000px'
           'z-index': '0'
           'opacity': '0'
+          'visibility': 'hidden'
   show: ->
     @$element.css
       'position': 'absolute'
       'opacity': '1'
       'z-index': ''
+      'visibility': 'visible'
     setTimeout (=>
         @$element.find("img[data-gallery-decorate=true]").decorate_gallery()
       ),1000 

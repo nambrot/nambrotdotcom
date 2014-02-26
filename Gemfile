@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "1.9.3"
+ruby "2.1.1"
 
 group :production do
   gem 'pg'
@@ -26,7 +26,7 @@ group :development do
   gem 'guard-livereload'
 
   gem 'sqlite3'
-  gem 'debugger'
+  # gem 'debugger'
 end
 
 gem 'unicorn'
