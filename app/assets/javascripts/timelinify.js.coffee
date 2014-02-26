@@ -97,6 +97,9 @@ class TimelineEntry
       'position': 'absolute'
       'opacity': '1'
       'z-index': ''
+    setTimeout (=>
+        @$element.find("img[data-gallery-decorate=true]").decorate_gallery()
+      ),1000 
 
 class TimelineEntryManager
   column_mapping: [],
