@@ -12,7 +12,7 @@
 
 # = require jquery
 # = require jquery_ujs
-# = require foundation
+# = require foundation/foundation
 # = require simple_slider
 # = require timelinify
 # = require gallery/gallery
