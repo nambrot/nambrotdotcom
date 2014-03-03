@@ -196,9 +196,14 @@ class TimelineEntryManager
       else
         top = minimum_height + @settings.columnMargin
 
+      if number_of_columns != 1
+        left = minimal_column * (@settings.columnWidth + @settings.columnMargin)
+      else
+        left = ($(@settings.timeline_selector).width() - @settings.columnWidth - 2 * @settings.columnMargin) / 2
+
       entry.$element.css
         top: top
-        left: minimal_column * (@settings.columnWidth + @settings.columnMargin)
+        left: left
 
       entry.cached_top_position = top
       
