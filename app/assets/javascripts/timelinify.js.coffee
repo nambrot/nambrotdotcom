@@ -1,3 +1,4 @@
+#= require foundation/foundation.reveal
 # Reference jQuery
 $ = jQuery
 
@@ -24,6 +25,10 @@ class TimelineEntry
     @$card_height ?= @$element.find(@settings.timeline_entry_card_selector).height()
 
   click: (evt) ->
+    if $(window).width() < 500
+      detail_view = $('<div class="reveal-modal xlarge"></div>').append @$element.find('.about-timeline-entry-detail').children().clone()
+      detail_view.appendTo('body').foundation('reveal', 'open')
+      return
     # flip it like its real good
     
     # add overlay
