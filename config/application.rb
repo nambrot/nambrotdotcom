@@ -21,5 +21,6 @@ module Nambrotdotcom
     # config.i18n.default_locale = :de
 
     config.assets.precompile += ['multi_part_tweets.js', 'multi_part_tweets.css', 'basic.css', 'basic.js']
+    config.action_controller.default_url_options = { :trailing_slash => true }
   end
 end

@@ -1,5 +1,7 @@
 Nambrotdotcom::Application.routes.draw do
-
+  get "madagascar$", to: redirect("madagascar/")
+  get "madagascar/" => "madagascar#index"
+  get "madagascar/:anything" => "madagascar#index"
   devise_for :users, :skip => [:registration], :sign_out_via => [ :get ]
   mount Blogit::Engine => "/", :as => :blog
   mount Gallery::Engine => "gallery"
@@ -10,6 +12,7 @@ Nambrotdotcom::Application.routes.draw do
   get 'blog/:id' => 'blogit/posts#show'
   get 'clear_cache' => 'admin#clear_cache'
   get 'multi_part_tweets' => 'multi_part_tweets#show'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
