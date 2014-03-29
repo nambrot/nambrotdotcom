@@ -18,7 +18,7 @@ group :development do
   # gem 'mailcatcher'
   gem 'meta_request'
   gem 'quiet_assets'
-  gem 'rack-mini-profiler'
+  # gem 'rack-mini-profiler'
   gem 'request-log-analyzer'
 
   gem 'guard'

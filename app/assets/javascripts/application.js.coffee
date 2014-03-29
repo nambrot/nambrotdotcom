@@ -19,10 +19,11 @@
 # = require about
 # = require basic
 
-# = require_tree .
+
 
 $(document).on 'ready page:load', ->
   $(document).foundation();
   $('.gallery-album').gallery()
   $('.gallery-album-decorate').decorate_gallery()
+
 

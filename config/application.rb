@@ -20,7 +20,7 @@ module Nambrotdotcom
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.assets.precompile += ['multi_part_tweets.js', 'multi_part_tweets.css', 'basic.css', 'basic.js']
+    config.assets.precompile += ['multi_part_tweets.js', 'multi_part_tweets.css', 'basic.css', 'basic.js', 'madagascar.css', 'madagascar.js']
     config.action_controller.default_url_options = { :trailing_slash => true }
   end
 end
