@@ -199,7 +199,7 @@ class TimelineEntryManager
       if number_of_columns != 1
         left = minimal_column * (@settings.columnWidth + @settings.columnMargin)
       else
-        left = ($(@settings.timeline_selector).width() - @settings.columnWidth - @settings.columnMargin) / 2
+        left = ($(@settings.timeline_selector).width() - @settings.columnWidth - 2 * @settings.columnMargin) / 2
 
       entry.$element.css
         top: top
