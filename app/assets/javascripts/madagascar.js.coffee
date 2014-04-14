@@ -31,7 +31,7 @@ class App extends Backbone.Router
     
   # routes
   index: ->
-    @content_view.go_to_id 'introduction', true
+    @content_view.go_to_id 'humanrights', true
   go_to_section: (section) ->
     @content_view.go_to_id section, true
 
@@ -50,6 +50,8 @@ class NavView extends Backbone.View
     Foundation.libs.dropdown.closeall()
     return false
   mouseover: (evt) ->
+    evt.preventDefault()
+    evt.stopPropagation()
     id = evt.currentTarget.href.split('/')[evt.currentTarget.href.split('/').length-1]
     window.app.content_view.go_to_id id
 
@@ -58,22 +60,21 @@ class GeoLink
 class MapView extends Backbone.View
   initialize: (app) ->
     @app = app
-    @map = L.map('map').setView([-18.5, 52.8], 5)
+    @map = L.map('map').setView([-18.5, 47.1], 6)
     # L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         # attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     # }).addTo(@map);
     googleLayer = new L.Google('HYBRID')
     @map.addLayer(googleLayer)
-
     # fetch all geo_links to find in the sections
     for section in @app.content_view.sections
-      section.geo_links = $(section).find('[data-madagascar-geolink-lat]')
+      section.geo_links = $(section).find('.geolink')
       for link in section.geo_links
         marker = L.marker([$(link).data().madagascarGeolinkLat, $(link).data().madagascarGeolinkLng])
         marker.bindPopup $(link).find('.geolink-popup-content').html()
         $(link).data
           marker: marker
-        marker.addTo(@map)    
+        marker.addTo @map    
   
   pan_to_link: (link) ->
     @map.setView $(link).data('marker').getLatLng(), $(link).data().madagascarGeolinkZoom, animate: true
@@ -115,7 +116,7 @@ class ContentView extends Backbone.View
           'display': 'block'
           'z-index': "#{30 - index}"
   events:
-    'click [data-madagascar-geolink-lat]': 'triggerGeoLink'
+    'click .geolink': 'triggerGeoLink'
 
   triggerGeoLink: (evt) ->
     app.map_view.pan_to_link evt.currentTarget
@@ -136,7 +137,7 @@ class ContentView extends Backbone.View
         # move them in the foreground
         transform_string = "rotateX(-30deg) translateZ(#{2000 - i * 100}px) translateY(#{400 - 60*i}px)"
       else
-        transform_string = "rotateX(-30deg) translateZ(#{-300 - (i - @current_section) * 150}px) translateY(#{600 - 60*i}px)"
+        transform_string = "rotateX(-30deg) translateZ(#{-300 - (i - @current_section) * 150}px) translateY(#{600 - 30*i}px)"
       $(@sections[i]).css
         '-webkit-transform': transform_string
         '-moz-transform': transform_string
@@ -167,8 +168,8 @@ class ContentView extends Backbone.View
               @set_collapsing_offsets()
               setTimeout (=>
                   @uncollapse()
-                ), 300
-            ),200
+                ), 500
+            ),500
       
     else
       # just hover around
@@ -186,7 +187,6 @@ class ContentView extends Backbone.View
       'transform': 'none'
     # set z-indecies
     for section, index in @sections
-      console.log index, @current_section
       if index is @current_section
         $(@sections[index]).css
           'display': 'block'

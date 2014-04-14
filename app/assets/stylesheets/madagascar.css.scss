@@ -40,8 +40,8 @@
         top: 0px;
         right: 0px;
         width: 100%;
-        height: 100%;
-        @include linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.3));
+        height: 300%;
+        @include linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.4));
       }
       
     }
@@ -80,6 +80,14 @@
       display: none;
       position: absolute;
     }
+
+    footer {
+      ol {
+        li {
+          font-size: 0.7em;
+        }
+      }
+    }
   }
 }
 
@@ -111,6 +119,12 @@
     font-size: 1.3em;
     display: block;
     margin-bottom: 0.5em;
+  }
+
+  .paragraph {
+    display: block;
+    margin: 5px 0px;
+
   }
 }
 
