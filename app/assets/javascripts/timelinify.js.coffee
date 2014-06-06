@@ -26,7 +26,9 @@ class TimelineEntry
 
   click: (evt) ->
     if $(window).width() < 500
-      detail_view = $('<div class="reveal-modal xlarge"></div>').append @$element.find('.about-timeline-entry-detail').children().clone()
+      detail_view = $('<div class="reveal-modal" data-reveal><a class="close-reveal-modal">&#215;</a></div>').append @$element.find('.about-timeline-entry-detail').children().clone()
+      detail_view.find('.close-reveal-modal').click ->  
+        detail_view.foundation('reveal', 'close')
       detail_view.appendTo('body').foundation('reveal', 'open')
       return
     # flip it like its real good
