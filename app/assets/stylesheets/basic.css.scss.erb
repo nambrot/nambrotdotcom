@@ -48,10 +48,12 @@
   text-align: center;
   box-shadow: 0px 4px 30px $primary_color;
   position:fixed;
+  box-sixing: content-box;
   height: 100%;
   width: 300px;
   background-size: cover;
 
+  @include transform(none);
   nav {
     text-align: left;
 
@@ -99,13 +101,13 @@
   }
 
   @media (max-width: $mobile-width) {
+    @include transform(translate3d(-100%, 0, 0));
     display : block;
-    left    : -300px;
     margin  : 0;
     overflow: hidden;
     position: absolute;
+    width: 250px;
     top     : 0;
-    width   : 300px;
     max-height: 1000px;
   }
 }

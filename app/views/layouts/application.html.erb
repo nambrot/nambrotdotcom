@@ -23,34 +23,39 @@
   </head>
 
   <body>
-    <aside id="global-nav-mobile">
-      <a href="#" id="menu-trigger">nambrot.com</a>
-    </aside>
-    <aside id='global-nav'>
-      <header>
-        <h2><%= link_to 'nambrot.com' , '/'  %></h2>
-        <h5>Nam Chu Hoai doing things that you can read about and stuff</h5>
-      </header>
-      <nav>
-        <ul>
-          <li><%= link_to 'Blog' , '/'  %></li>
-          <li><a href="/about">About</a></li>
-          <li><%= link_to "Gallery", gallery.gallery_root_path %>
-        </ul>
-        <ul>
-          <li class=''><a href="https://www.facebook.com/namchuhoai" class='fc-webicon facebook' rel="me"><span class="facebook-icon small"></span> /namchuhoai</a></li>
-          <li class=''><a href="https://www.twitter.com/nambrot" rel="me"><span class="twitter-icon small"></span>@nambrot</a></li>
-          <li class=''><a href="http://www.linkedin.com/in/namchuhoai/en" rel="me"><span class="linkedin-icon small"></span>/namchuhoai</a></li>
-          <li class=''><a href="https://github.com/nambrot" rel="me"><span class="github-icon small"></span>/nambrot</a></li>
-          <li><a href="mailto:nam@nambrot.com"><span class="email-icon small"></span>nam@nambrot.com</a></li>
-        </ul>
-      </nav>
+    <div class="off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+        <aside id="global-nav-mobile">
+          <a href="#" class="left-off-canvas-toggle" id="menu-trigger">nambrot.com</a>
+        </aside>
+        <aside id='global-nav' class='left-off-canvas-menu'>
+          <header>
+            <h2><%= link_to 'nambrot.com' , '/'  %></h2>
+            <h5>Nam Chu Hoai doing things that you can read about and stuff</h5>
+          </header>
+          <nav>
+            <ul>
+              <li><%= link_to 'Blog' , '/'  %></li>
+              <li><a href="/about">About</a></li>
+              <li><%= link_to "Gallery", gallery.gallery_root_path %>
+            </ul>
+            <ul>
+              <li class=''><a href="https://www.facebook.com/namchuhoai" class='fc-webicon facebook' rel="me"><span class="facebook-icon small"></span> /namchuhoai</a></li>
+              <li class=''><a href="https://www.twitter.com/nambrot" rel="me"><span class="twitter-icon small"></span>@nambrot</a></li>
+              <li class=''><a href="http://www.linkedin.com/in/namchuhoai/en" rel="me"><span class="linkedin-icon small"></span>/namchuhoai</a></li>
+              <li class=''><a href="https://github.com/nambrot" rel="me"><span class="github-icon small"></span>/nambrot</a></li>
+              <li><a href="mailto:nam@nambrot.com"><span class="email-icon small"></span>nam@nambrot.com</a></li>
+            </ul>
+          </nav>
+        </aside>
+        <div id="container" class='row'>
+          <%= yield %>
+        </div>
+        <a class="exit-off-canvas"></a>
+      </div>
       
-      
-    </aside>
-    <div id="container" class='row'>
-      <%= yield %>
     </div>
+
     <footer></footer>
     
 
