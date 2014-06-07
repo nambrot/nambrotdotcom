@@ -1,75 +1,111 @@
-<div id="about-page">  
-  <section id="filter-box">
-    <div id="category-picker-box">
-      <h5>Aspects</h5>
-      <p>Choose which aspects of my personality you want to learn more about</p>
-      <form action="" id="category-picker">
-        <label id='checkbox1'>
-          <input type="checkbox" name="category picker" value='geek'>
-          <div>
-            <span class="image"></span>
-            <span class='text'>Geek</span>
-          </div>
-        </label>
-        
-        <label id='checkbox2'>
-          <input type="checkbox" name="category picker" value='coder'>
-          <div>
-            <span class="image"></span>
-            <span class='text'>Coder</span>
-          </div>
-        </label>
+<div id="about-page">
+  <div class="sticky">
+      <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name has-dropdown">
+          <h1><a href="#">&#160;</a></h1>
+        </li>
+         <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar"><a href="#"><span>About Nam Chu Hoai - Menu</span></a></li>
+      </ul>
 
-        <label id='checkbox3'>
-          <input type="checkbox" name="category picker" value='traveler'>
-          <div>
-            <span class="image"></span>
-            <span class='text'>Traveler</span>
-          </div>
-        </label>
+      <section class="top-bar-section">
+        <ul class="left">
+          <li class="has-dropdown">
+            <a href="#">How to Use This About Page</a>
+            <ul class="dropdown">
+              <div id="about-page-explainer">
+                <p>This is an experiment with an about page. It is designed to get to know me as a person, how I have developed and what I have experienced in a more engaging way (apart from very personal stuff). It also reflects the multiple facets of our personality. It draws from a professional CV, an online portfolio and autobiography. On the right, you can change the filters for the cards. You can read about its conception <a href="http://www.nambrot.com/posts/4-anatomy-of-an-about-page-redesign">here</a>.</p>
+              </div>
+              
+            </ul>
+          </li>
+        </ul>
+        <ul class="right">
+            <li><a href="#"><b>Filters:</b></a></li>
+            <li class='has-dropdown'>
+              <a href="#">Dimensions</a>
+              <ul class="dropdown">
+                <div id="category-picker-box">
+                  <h5>Dimensions</h5>
+                  <p>Choose which aspects of my personality you want to learn more about</p>
+                  <form action="" id="category-picker">
+                    <label id='checkbox1'>
+                      <input type="checkbox" name="category picker" value='geek'>
+                      <div>
+                        <span class="image"></span>
+                        <span class='text'>Geek</span>
+                      </div>
+                    </label>
+                    
+                    <label id='checkbox2'>
+                      <input type="checkbox" name="category picker" value='coder'>
+                      <div>
+                        <span class="image"></span>
+                        <span class='text'>Coder</span>
+                      </div>
+                    </label>
 
-        <label id='checkbox4'>
-          <input type="checkbox" name="category picker" value='worker' checked>
-          <div>
-            <span class="image"></span>
-            <span class='text'>Worker</span>
-          </div>
-        </label>
+                    <label id='checkbox3'>
+                      <input type="checkbox" name="category picker" value='traveler'>
+                      <div>
+                        <span class="image"></span>
+                        <span class='text'>Traveler</span>
+                      </div>
+                    </label>
 
-        <label id='checkbox5'>
-          <input type="checkbox" name="category picker" value='student' checked>
-          <div>
-            <span class="image"></span>
-            <span class='text'>Student</span>
-          </div>
-        </label>
-        
-        <label id='checkbox6'>
-          <input type="checkbox" name="category picker" value='creative'>
-          <div>
-            <span class="image"></span>
-            <span class='text'>Creative</span>
-          </div>
-        </label>
-      </form>
-    </div>
-    
-    <div id="importance-slider-box">
-      <h5 id="importance-slider-label">
-        Detaillevel
-      </h5>
-      <p>How much detail you want to see</p>
-      <div id="importance-slider-left-border">
-        German Privacy Advocate
-      </div>
-      <div id="importance-slider-container">
-        <input type="text" id="importance-slider" data-slider="true" data-slider-range="2,4" data-slider-snap="true" data-slider-step="1" value='3'>
-      </div>
-      <div id="importance-slider-right-border">
-        NSA
-      </div>
-    </div>
-  </section>
+                    <label id='checkbox4'>
+                      <input type="checkbox" name="category picker" value='worker' checked>
+                      <div>
+                        <span class="image"></span>
+                        <span class='text'>Worker</span>
+                      </div>
+                    </label>
+
+                    <label id='checkbox5'>
+                      <input type="checkbox" name="category picker" value='student' checked>
+                      <div>
+                        <span class="image"></span>
+                        <span class='text'>Student</span>
+                      </div>
+                    </label>
+                    
+                    <label id='checkbox6'>
+                      <input type="checkbox" name="category picker" value='creative'>
+                      <div>
+                        <span class="image"></span>
+                        <span class='text'>Creative</span>
+                      </div>
+                    </label>
+                  </form>
+                </div>
+              </ul>
+            </li>
+            <li class='has-dropdown'>
+              <a href="#">Detail</a>
+              <ul class="dropdown">
+                <div id="importance-slider-box">
+                  <h5 id="importance-slider-label">
+                    Detail
+                  </h5>
+                  <p>How much detail you want to see</p>
+                  <div id="importance-slider-left-border">
+                    German Privacy Advocate
+                  </div>
+                  <div id="importance-slider-container">
+                    <input type="text" id="importance-slider" data-slider="true" data-slider-range="2,4" data-slider-snap="true" data-slider-step="1" value='3'>
+                  </div>
+                  <div id="importance-slider-right-border">
+                    NSA
+                  </div>
+                </div>
+              </ul>
+            </li>
+          </ul>
+      </section>
+    </nav>
+  </div>
+  
 
     
   <ul id="about-timeline">

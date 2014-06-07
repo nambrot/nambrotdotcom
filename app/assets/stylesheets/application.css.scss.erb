@@ -175,29 +175,6 @@
     margin-bottom: 10px;
   }
 
-  nav {
-    ul {
-      list-style: none;
-      background-color: white;
-
-      a {
-        color: #525252;
-        font-size: 1.5em;
-        font-weight: 200;
-        font-family: HelveticaNeue-Light;
-      }
-
-      li {
-        display: inline-block;
-        padding: 6px 10px;
-      }
-    }
-  }
-
-  #filter-box {
-    margin: 0 auto;
-
-  }
 }
 
 #about-timeline {
@@ -433,14 +410,13 @@
 #importance-slider-box {
   margin-right: 6px;
   margin-bottom: 12px;
+  width: 430px;
+  max-width: 100%;
 }
 #category-picker-box {
   margin-bottom: 18px;
 }
 
-#category-picker-box, #importance-slider-box {
-  min-height: 150px;
-}
 #category-picker-box, #importance-slider-box, .mobile-header {
   display: inline-block;
   vertical-align: top;
@@ -472,11 +448,9 @@
   label {
     color: #AAA;
     margin: 0px 8px;
+    width: 70px;
   }
 
-  label:first-child {
-    margin-left: 0px;
-  }
 
   .image, .text {
     display: block;
@@ -594,6 +568,35 @@
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC2ElEQVRYR72XjXHaQBCFLTcQXEHkCoIrCKkgggZiKnBcQXAFsSswaQDkCkIqsFKBSQU2DUC+d3PSLOJOgFCiGQ36u31v3+69O5KzFkeWZb0kST4ytLfZbH7leb5sEcYNSY4d6MGfIZBqLATeOMeQyI+N1YrAcDicAv7FgonEfD6/+F8EFl7+Lbz1en2FCMVoNJrw4pt9OZvNdpRGyT7fLKMl4IPB+fn5Ddn1ASwAeABggQI595/r2ZYgIQLEuPYl63Odci3wM2J+ChIgyDXvHwOSjhlUQGzBu3fm/RgCU92HCMRKEyTQAO7iMOgrP0+QEEndL6RMCXISgX3gJpMpwHfqBc4Bsg74zVHhNkSAb9WgfUi7EuhaZeB5VpXgCPCYoisI9BRHNbcfMUMGsUGOwCHgBP3BmZOFam3rv9JzzqktRQyw/jw5FJwsXFaaPsinrl76+hc2aMgn+O4y5pYJA14J1osxVuYl+CFZReLdUp770HgpsOkKPKYmSRQkcXUUgWMzV/CYSfnp6pwy1AM7CrQB1yJFg74agDuu5RmuYYn5gAq63zqCJQh59776I7+Cfy+/U+PRW5Ny4YLAEgKX/4wA8muJdh6vPYLmPqpkqDI3pIb1ZbsTBcBJAXox2dm1Ycnz957YzozqhADZ35P9jcn0gkzffGNW7/zmRZ7g3unoisCL2SFtZSnjQp3nkDqdEPD7hp9NdUahAoIffBme6I+sMwVq1vuHGZTWOz00Q0prPqkEfoMq+Z2Vx+Z6oEkraz6JQN16y31hyDOsS1prPolALehvaut8IHTEyLYm0CRriIC3annCljW3JtDUWDEVbMOW1tyaQM16t6ZWjEDImlsR2GcuMQJ6jnIqQ2XNIiBbrPZ4SNPYTD7IhN/y38+K7k+tvTYRsLYta97ZExJsZ8WqB7RSxuZ+QxmqhUurptsVe0kHgGu1lER7D2/BafmPaO8A84HBm/4Fw1k3Z9RInuEAAAAASUVORK5CYII=)
   }
 
+}
+
+#about-page-explainer {
+  display: inline-block;
+  vertical-align: top;
+
+  border: 1px solid #d8d8d8;
+  box-shadow: 2px 3px 3px #AAA;
+  background-color: #fff;
+  border-bottom-width: 2px;
+  padding: 10px;
+  width: 400%;
+  max-width: 300px;
+
+  p {
+    margin: 4px 4px;
+    font-size: 13px;
+    a {
+      padding: 0;
+      background-color: white;
+      line-height: 13px;
+    }
+  }
+}
+
+.sticky.fixed .top-bar {
+  @media (min-width: $mobile-width) {
+    margin-left: 330px;
+  }
 }
 
 .reveal-modal {
