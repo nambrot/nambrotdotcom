@@ -22,26 +22,36 @@
         <h3>Woo You Hired me</h3>
       </header>
       <p>You are awesome</p>
-      <form id="hire-form">
-        <label for="">Name:
-        <input type="text" placeholder="Mark Zuckerberg">
-        </label>
-        
-        <label for="">Email:
-        <input type="text" placeholder="zuckdog@fb.com">
-        </label>
-        
-        <label for="">Budget (optional): <span id="budget"></span>
-        <div class="range-slider round" data-slider>
-          <span class="range-slider-handle"></span>
-          <span class="range-slider-active-segment"></span>
-          <input type="hidden">
+      <form id="hire-form" data-abide="ajax">
+        <div class="large-12 columns">
+          <label for="">Name:
+          <input type="text" name="Name" placeholder="Mark Zuckerberg" required pattern="[a-zA-Z]+">
+          </label>
+          <small class="error">But who are you?</small>
         </div>
-        </label>
+       
+        <div class="large-12 columns">
+          <label for="">Email:
+          <input type="email" name="Email" placeholder="zuckdog@fb.com" required>
+          </label>
+          <small class="error">I can't quite read your mind yet.</small>
+        </div>
         
-        <label for="">Message:</label>
-        <textarea rows=7>
-        </textarea>
+        <div class="large-12 columns">
+          <label for="">Budget (optional): <span id="budget"></span>
+          <div class="range-slider round" data-slider>
+            <span class="range-slider-handle"></span>
+            <span class="range-slider-active-segment"></span>
+            <input type="hidden">
+          </div>
+          </label>
+        </div>
+        
+        <div class="large-12 columns">
+          <label for="">Message:</label>
+          <textarea name="Message" rows=7 required></textarea>
+          <small class="error">You are a quiet one, aren't you?</small>
+        </div>
         
         <button type="submit" class="button round">Submit</button>
       </form>
@@ -86,6 +96,12 @@
   setTimeout(function(){
     $(function(){
 
+      $(document).foundation({
+        abide: {
+          live_validate: false
+        }
+      })
+
       $.get("http://ipinfo.io", function(response) {
           var mylat = 42.3529523,
               mylong = -71.1259286;
@@ -115,6 +131,15 @@
         $('#budget').text("$" + Math.round($('#hire-form .range-slider').attr('data-slider') / 10) * 1000)
         if($('#hire-form .range-slider').attr('data-slider') == 100)
           $('#budget').text("$10000+")
+      })
+
+      $('#hire-form').on('valid', function(evt){
+        $.post('/forms/hire', {name: $("#hire-form [name='Name']").val(), name: $("#hire-form [name='Name']").val(), email: $("#hire-form [name='Email']").val(), message: $("#hire-form [name='Message']").val(), budget: $('#budget').text()}, function(evt){
+          console.log(evt)
+        })
+        
+
+        return false;
       })
 
       var card = $('#tinder-card')

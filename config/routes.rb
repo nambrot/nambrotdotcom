@@ -9,6 +9,7 @@ Nambrotdotcom::Application.routes.draw do
   get 'namsremote' => 'high_voltage/pages#show', :id => 'namsremote'
   get 'mapsoffline' => 'high_voltage/pages#show', :id => 'mapsoffline'
   get 'hire' => 'high_voltage/pages#show', :id => 'hire'
+  post 'forms/hire' => "forms#hire"
   get 'blog' => "blogit/posts#index"
   get 'blog/:id' => 'blogit/posts#show'
   get 'clear_cache' => 'admin#clear_cache'
