@@ -52,11 +52,15 @@
         @include transform();
       }
     }
-    
+
     #hired-card {
-      
+      padding: 6px;
       header {
         text-align: center;
+      }
+
+      form {
+
       }
     }
 

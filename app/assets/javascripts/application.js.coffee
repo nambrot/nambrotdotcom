@@ -15,6 +15,7 @@
 # = require foundation/foundation
 # = require foundation/foundation.dropdown
 # = require foundation/foundation.topbar
+# = require foundation/foundation.slider
 # = require simple_slider
 # = require timelinify
 # = require gallery/gallery
