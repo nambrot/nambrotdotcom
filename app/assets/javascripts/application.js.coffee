@@ -20,6 +20,7 @@
 # = require gallery/gallery
 # = require about
 # = require basic
+# = require pep
 
 
 

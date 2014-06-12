@@ -1,0 +1,136 @@
+<script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Raleway:400,700:latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })(); </script>
+<div id="hire-page">
+  <nav id="topbar">
+    <h1>hire me</h1>
+  </nav>
+  
+  <section id="background">
+    <div id="tinder-card" class="hire-card">
+      <span id="hire">HIRE</span>
+      <span id="fire">FIRE</span>
+      <img src="<%= image_path 'canyon.jpg' %>" alt="">
+      <div id="metainfo">
+        <span id="name">Nam</span><span id="age">, 22</span>
+        <span id="more-detail">
+          <span id="title">Fullstack Developer</span>
+          <span id="distance"></span>
+        </span>
+      </div>
+      
+      <div id="description">
+        <header>
+          About Nam
+        </header>
+        <p>
+          I'm a product-oriented full-stack developer that unlike many others, knows how product translates to business. Last year, I worked on my own startup, so I know the common pitfalls.<a href="/">Test</a>
+        </p>
+      </div>
+      
+      
+    </div>
+    
+    <div id="hired-card" class='hire-card'>
+      <header>
+        <h3>Woo You Hired me</h3>
+      </header>
+      <p>You are awesome</p>
+    </div>
+    
+    <div id="fired-card" class='hire-card'>
+      <header>
+        <h3>Please?</h3>
+      </header>
+      <p>You are awesome</p>
+    </div>
+    
+  </section>
+</div>
+
+<script type="text/javascript">
+  setTimeout(function(){
+    $(function(){
+
+      $.get("http://ipinfo.io", function(response) {
+          var mylat = 42.3529523,
+              mylong = -71.1259286;
+          var userlat = parseInt(response.loc.split(',')[0]),
+              userlong = parseInt(response.loc.split(',')[1]);
+
+          Number.prototype.toRad = function() {
+            return this * Math.PI / 180;
+          }
+
+          calculateDistance = function(lat1, lon1, lat2, lon2) {
+            var R = 6371; // km
+            var dLat = (lat2 - lat1).toRad();
+            var dLon = (lon2 - lon1).toRad(); 
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * 
+                    Math.sin(dLon / 2) * Math.sin(dLon / 2); 
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); 
+            var d = R * c;
+            return d;
+          }
+
+          $('#distance').text(parseInt(calculateDistance(mylat, mylong, userlat, userlong)) + " km away")
+      }, "jsonp");
+
+
+      var card = $('#tinder-card')
+      var hire_label = $('#hire')
+      var fire_label = $('#fire')
+
+      var manage_card_swipe = function(callback){
+        console.log(callback)
+        this.options.revert = false;
+        this.options.multiplier = 1.5;
+        setTimeout( function(){
+          $('#tinder-card').animate({opacity: 0}, 200)
+          $.pep.unbind(card)
+          callback()
+        }, 1)
+      }
+
+      $('#tinder-card').pep({
+        removeMargins: false,
+        multiplier: 0.4,
+        revert: true,
+        useCSSTranslation: true,
+        elementsWithInteraction: 'a',
+        drag: function(){
+          if(this.cssX > 0)
+            hire_label.css({opacity: this.cssX / 70})
+          else
+            fire_label.css({opacity: -this.cssX / 70})
+        },
+        stop: function(){
+          hire_label.css({opacity: 0})
+          fire_label.css({opacity: 0})
+          threshold = 90
+          if(this.cssX > threshold)
+            manage_card_swipe.call(this, function(){
+              $('#hired-card').addClass('show')
+            })
+
+          if(this.cssX < -threshold)
+            manage_card_swipe.call(this, function(){
+              $('#fired-card').addClass('show')
+            })
+
+        }
+      });
+    })
+  }, 1000)
+</script>
