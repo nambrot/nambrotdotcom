@@ -9,10 +9,6 @@
   border: 1px solid #AAA;
   border-radius: 5px;
   #topbar {
-    // height: 70px;
-    @media(max-width: $mobile-width){
-      // height: 50px;
-    }
     background-color: #FAFAFA;
     width: 100%;
     z-index: 2;
@@ -34,8 +30,11 @@
       float: right;
       width: 50px;
       height: 50px;
+      @include transition(all 0.1s ease);
+
       &:hover {
         cursor: pointer;
+        @include transform(scale(1.2));
       }
       background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAERElEQVRoQ+1YUU4bMRAlKESqVKm0FyCVAuof8NPfhhMUTlA4QcMJCDcIJ2j4r1RuQJD61R/CXwWR2CNQqa3aQEjfs8YrJ3h37Y03VGhXWmGy4/G8eTPjsSsLT+SpPBEcCyWQ/43JkpGSkYI8UIZWQY7NrXZujNTxVKvV9cXFxY3xeLwMizcMq/uVSuXm/v6+f3d3dxZF0Y0vokKB0PharfYBRu3irXsYF0G2OxwOj1xBFQKEAJaWlg7gZQJQD1j4gf97GPYxjvgawDbA1DJ+a5IpyL0w5nVvb2/3swAFB7K6uvoRRrRhDA37gfEJ3s7V1VXflZFGo9GkE/CSTTqBodaGjqMkHTMBgeOXGfdauSyuWMDix/BkK8uTaeAkNDuQeS86uwCzZ5vjDWRtbW0bRlIxQyBOWPz2Df+/JQt4tweDAcMoyAOW6ZwOQw66rWCcgNDzSFqGDBXWp62D8u9Y5I2EUtMnjFyRAgyd1iMYVLd9OIpMxU8mEMYrEvGTDYDQ/RPKn8t4swgQ2lpGA8ZfmDMI202EbaS/pQLBxDYED9K8Bu8MALQBmcPLy0vKF/qAmS6LAHMQTmOEqCcRiJ6QZhWUjaFU6UDNfzlLYruilwJwLay81mtagTC5YB/DKfXRQPD3DN5pZsmH+g77mCvvEA1buqg8ACKb2Tn3gayFDUbmElbaHh0tZtI/AOKSF1rhYwExbIwdaAPCSrCSxQa/G6F1hNBqucwJIePKyNh1MQNIH0A2XefNKgdGrqGjjvXjcj/BiOwZpz4LQdkQ+VQzlfrM95XVNnLzhfPiPJ4Awt0TRp37KDfy5AT7yI7P3DyysPEUNrJCThQYW444h5bOE/wdQXnV1jrkMTZpjk5ysoGdvW7uWzYgbLtVt+n6mBsjxnugvOs611XO3NvM/UPPtwFR/YzrAlpuCkwHHjsMsdOzYZVDmqqKSY5K2tnVzjkLGMyN8LaRN8e+erQ8QokHqzZeVige0lpJbFuBiBci88jpagyZgewfzH0mc3isPeGLduIsS4+06+qcr7sLtkACIvGUmdY0xv1/1uK27xJqv/BNtfhGCPZkrG5OZHwB5pibC2DBLDYX0MNjcjfLhtQ2XjpNLhAfZ7MUTn8Xhv7C6N/49ipl/g7BaCC++1LmwUq81IbiVp5Qm2Lj62g0+ozzywV+1zcndTlfkJ0tjOm4FRwL2KJHro5zAkJlctGwCyN2fRniIYgG6vCZNg4sqJIPOYYbbVq3ldg0UM5ATCX6PGD8xlieuB2EPT0Y08PNYT+rDMudAHMnDuHHAMJENa8/XaNhQs68XOCHuQBBKDB2V2ytQi4UMklfLswTiCqRvpXFBaRxaFJVzGUOZXLlCEtkkQ2i5GDP51YmFxCe0MyrGFevucpJZ7HtshFqnbmAcKGsSuRqdCi5XEBCLR5STwkkpDdD6CoZCeHFkDpKRkJ6M4SuJ8PIP6GyflH1yYr/AAAAAElFTkSuQmCC);
     }
@@ -61,12 +60,16 @@
       @include transform(translateY(50px));
       @include transition(all 0.6s ease-in-out);
       opacity: 0;
-      padding: 6px;
+      padding: 3%;
       pointer-events: none;
       &.show {
         pointer-events: auto;
         opacity: 1;
         @include transform();
+      }
+
+      form {
+        width: 94%;
       }
     }
 
@@ -83,6 +86,8 @@
 
     #tinder-card {
 
+      -webkit-font-smoothing: antialiased;
+      
       .tooltip {
         background-color: rgba(29, 23, 23, 0.83);
         display: none;
@@ -179,7 +184,7 @@
         margin: 0 10px;
         color: #424242;
         display: block;
-        margin-top: 24px;
+        margin-top: 12px;
 
         header {
           font-weight: 600;
