@@ -113,12 +113,35 @@ class TimelineEntry
 class TimelineEntryManager
   column_mapping: [],
   entries_currently_displayed: [],
+  set_location_hash: ->
+    acceptable_categories = $(@settings.category_picker_form + ' input:checked').map (index, value) ->
+      value.value
+    importance_threshold = parseInt($(@settings.importance_slider).val())
+    window.location.hash = "categories:#{acceptable_categories.toArray().join(',')};importance:#{importance_threshold}"
+  set_filters_from_location_hash: ->
+    filters = window.location.hash.split(';')
+    return if filters[0] == ""
+    while [filter_name, filter_value] = filters.shift().split(':')
+      switch filter_name
+        when "importance"
+          console.log @settings
+          $(@settings.importance_slider).simpleSlider('setValue', filter_value)
+        when "categories"
+          checked_categories = filter_value.split(',')
+          for input in $(@settings.category_picker_form + ' input')
+            if checked_categories.indexOf(input.value) == -1
+              input.checked = false
+            else
+              input.checked = true
   initialize_from_DOM_elements: (entries, settings = {}) ->
     @entries_dom_elements = entries
     @timeline_entries = $.map entries, (val) ->
         (new TimelineEntry).initialize_from_DOM_element val, settings
 
     @settings = settings
+
+    # read from location hash
+    
 
     # Observe clicks on entries
     $(@settings.timeline_selector).on 'click', "#{@settings.timeline_entry_selector}.flippable", null , (evt) =>
@@ -127,16 +150,23 @@ class TimelineEntryManager
 
     # Observe category picker
     $(@settings.category_picker_form + ' input').on 'change', =>
+      @set_location_hash()
       @reflow()
 
     # Observe importance slider
 
     $(@settings.importance_slider).simpleSlider()
     $(@settings.importance_slider).on 'change slider:changed', =>
+      @set_location_hash()
       @reflow()
+
+    @set_filters_from_location_hash()
+    $(window).on "hashchange", =>
+      @set_filters_from_location_hash()
+      @reflow()
+
     this
   reflow: ->
-
     # helper functions
     intersection = (a, b) ->
       [a, b] = [b, a] if a.length > b.length
