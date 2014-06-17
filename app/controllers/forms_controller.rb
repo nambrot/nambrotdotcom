@@ -1,7 +1,12 @@
 class FormsController < ApplicationController
 
   def hire
-    puts params
+    FormMailer.hire_email(params).deliver
+    render json: {status: 'OK'}
   end
   
+  def fire
+    FormMailer.fire_email(params).deliver
+    render json: {status: 'OK'}
+  end
 end

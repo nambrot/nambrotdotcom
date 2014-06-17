@@ -11,85 +11,140 @@
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(wf, s);
   })(); </script>
-<div id="hire-page">
-  <nav id="topbar">
-    <h1>hire me</h1>
-  </nav>
+<div id="hire-page" data-offcanvas class="off-canvas-wrap">
+  <div class="inner-wrap">
   
-  <section id="background">
-    <div id="hired-card" class='hire-card'>
-      <header>
-        <h3>Woo You Hired me</h3>
-      </header>
-      <p>You are awesome</p>
-      <form id="hire-form" data-abide="ajax">
-        <div class="large-12 columns">
-          <label for="">Name:
-          <input type="text" name="Name" placeholder="Mark Zuckerberg" required pattern="[a-zA-Z]+">
-          </label>
-          <small class="error">But who are you?</small>
-        </div>
-       
-        <div class="large-12 columns">
-          <label for="">Email:
-          <input type="email" name="Email" placeholder="zuckdog@fb.com" required>
-          </label>
-          <small class="error">I can't quite read your mind yet.</small>
-        </div>
+    <aside class="right-off-canvas-menu" id="message-menu">
+      <h3>Send a message</h3>
+      <p>Send a message and I'll be sure to respond to you as quick as possible.</p>
+       <form id="message-form" data-abide="ajax" class=''>
+         <div class="large-12 columns">
+           <label for="">Name:
+           <input type="text" name="Name" placeholder="Mark Zuckerberg" required pattern="[a-zA-Z]+">
+           </label>
+           <small class="error">But who are you?</small>
+         </div>
         
-        <div class="large-12 columns">
-          <label for="">Budget (optional): <span id="budget"></span>
-          <div class="range-slider round" data-slider>
-            <span class="range-slider-handle"></span>
-            <span class="range-slider-active-segment"></span>
-            <input type="hidden">
-          </div>
-          </label>
-        </div>
-        
-        <div class="large-12 columns">
-          <label for="">Message:</label>
-          <textarea name="Message" rows=7 required></textarea>
-          <small class="error">You are a quiet one, aren't you?</small>
-        </div>
-        
-        <button type="submit" class="button round">Submit</button>
-      </form>
-    </div>
-    <div id="tinder-card" class="hire-card">
-      <span id="hire">HIRE</span>
-      <span id="fire">FIRE</span>
-      <img src="<%= image_path 'canyon.jpg' %>" alt="">
-      <div id="metainfo">
-        <span id="name">Nam</span><span id="age">, 22</span>
-        <span id="more-detail">
-          <span id="title">Fullstack Developer</span>
-          <span id="distance"></span>
-        </span>
-      </div>
+         <div class="large-12 columns">
+           <label for="">Email:
+           <input type="email" name="Email" placeholder="zuckdog@fb.com" required>
+           </label>
+           <small class="error">Can I please have your Email Address?</small>
+         </div>
+         
+         <div class="large-12 columns">
+           <label for="">Message:</label>
+           <textarea name="Message" rows=7 required></textarea>
+           <small class="error">You are a quiet one, aren't you?</small>
+         </div>
+         
+         <button type="submit" class="button round">Submit</button>
+       </form>
+    </aside>
+    <a class="exit-off-canvas"></a>
       
-      <div id="description">
+    <nav id="topbar">
+      <h1>hire me</h1>
+      <div class="right-off-canvas-toggle"></div>
+    </nav>
+    
+    <section id="background">
+      <div id="hired-card" class='hire-card'>
         <header>
-          About Nam
+          <h3>Woo You Hired me</h3>
         </header>
-        <p>
-          I'm a product-oriented full-stack developer that unlike many others, knows how product translates to business. Last year, I worked on my own startup, so I know the common pitfalls.<a href="/">Test</a>
-        </p>
+        <p>You are awesome</p>
+        <form id="hire-form" data-abide="ajax">
+          <div class="large-12 columns">
+            <label for="">Name:
+            <input type="text" name="Name" placeholder="Mark Zuckerberg" required pattern="[a-zA-Z]+">
+            </label>
+            <small class="error">But who are you?</small>
+          </div>
+         
+          <div class="large-12 columns">
+            <label for="">Email:
+            <input type="email" name="Email" placeholder="zuckdog@fb.com" required>
+            </label>
+            <small class="error">Can I please have your Email Address?</small>
+          </div>
+          
+          <div class="large-12 columns">
+            <label for="">Budget (optional): <span class="budget"></span>
+            <div class="range-slider round" data-slider>
+              <span class="range-slider-handle"></span>
+              <span class="range-slider-active-segment"></span>
+              <input type="hidden">
+            </div>
+            </label>
+          </div>
+          
+          <div class="large-12 columns">
+            <label for="">Message:</label>
+            <textarea name="Message" rows=7 required></textarea>
+            <small class="error">You are a quiet one, aren't you?</small>
+          </div>
+          
+          <button type="submit" class="button round">Submit</button>
+        </form>
+      </div>
+      <div id="tinder-card" class="hire-card">
+        <span class="tooltip">Swipe me left or right.</span>
+        <span id="hire">HIRE</span>
+        <span id="fire">FIRE</span>
+        <img src="<%= image_path 'canyon.jpg' %>" alt="">
+        <div id="metainfo">
+          <span id="name">Nam</span><span id="age">, 22</span>
+          <span id="more-detail">
+            <span id="title">Fullstack Developer</span>
+            <span id="distance"></span>
+          </span>
+        </div>
+        
+        <div id="description">
+          <header>
+            About Nam
+          </header>
+          <p>
+            I'm a product-oriented full-stack developer that unlike many others, knows how product translates to business. Last year, I worked on my own startup, so I know the common pitfalls.<a href="/">Test</a>
+          </p>
+        </div>
+        
+        
+      </div>
+      <div id="fired-card" class='hire-card'>
+        <header>
+          <h3>Please?</h3>
+        </header>
+        <p>You are awesome</p>
+        <form id="fire-form" data-abide="ajax">
+          <div class="large-12 columns">
+            <label for="">Name:
+            <input type="text" name="Name" placeholder="Mark Zuckerberg" required pattern="[a-zA-Z]+">
+            </label>
+            <small class="error">But who are you?</small>
+          </div>
+         
+          <div class="large-12 columns">
+            <label for="">Email:
+            <input type="email" name="Email" placeholder="zuckdog@fb.com" required>
+            </label>
+            <small class="error">Can I please have your Email Address?</small>
+          </div>
+          
+          <div class="large-12 columns">
+            <label for="">Message:</label>
+            <textarea name="Message" rows=7 required></textarea>
+            <small class="error">You are a quiet one, aren't you?</small>
+          </div>
+          
+          <button type="submit" class="button round">Submit</button>
+        </form>
       </div>
       
-      
-    </div>
-    
-   
-    
-    <div id="fired-card" class='hire-card'>
-      <header>
-        <h3>Please?</h3>
-      </header>
-      <p>You are awesome</p>
-    </div>
-    
-  </section>
+    </section>
+  </div>
+ 
 </div>
 
 <script type="text/javascript">
@@ -128,17 +183,30 @@
       }, "jsonp");
 
       $('#hire-form .range-slider').on('change', function(){
-        $('#budget').text("$" + Math.round($('#hire-form .range-slider').attr('data-slider') / 10) * 1000)
+        $('#hire-form .budget').text("$" + Math.round($('#hire-form .range-slider').attr('data-slider') / 10) * 1000)
         if($('#hire-form .range-slider').attr('data-slider') == 100)
-          $('#budget').text("$10000+")
+          $('#hire-form .budget').text("$10000+")
       })
 
       $('#hire-form').on('valid', function(evt){
-        $.post('/forms/hire', {name: $("#hire-form [name='Name']").val(), name: $("#hire-form [name='Name']").val(), email: $("#hire-form [name='Email']").val(), message: $("#hire-form [name='Message']").val(), budget: $('#budget').text()}, function(evt){
-          console.log(evt)
+        $.post('/forms/hire', {name: $("#hire-form [name='Name']").val(), name: $("#hire-form [name='Name']").val(), email: $("#hire-form [name='Email']").val(), message: $("#hire-form [name='Message']").val(), budget: $('#hire-form .budget').text()}, function(evt){
+          $('#hired-card').append('<div data-alert class="alert-box">Thank You, I will be in contact shortly.<a href="#" class="close">&times;</a></div>')
         })
-        
+        return false;
+      })
 
+      $('#message-form').on('valid', function(evt){
+        $.post('/forms/fire', {name: $("#message-form [name='Name']").val(), name: $("#message-form [name='Name']").val(), email: $("#message-form [name='Email']").val(), message: $("#message-form [name='Message']").val()}, function(evt){
+          $('#message-menu').append('<div data-alert class="alert-box">Thank You, I will be in contact shortly.<a href="#" class="close">&times;</a></div>')
+        })
+        return false;
+      })
+
+      $('#fire-form').on('valid', function(evt){
+        $.post('/forms/fire', {name: $("#fire-form [name='Name']").val(), name: $("#fire-form [name='Name']").val(), email: $("#fire-form [name='Email']").val(), message: $("#fire-form [name='Message']").val()}, function(evt){
+          // $('#fire-form').slideUp(400);
+          $('#fired-card').append('<div data-alert class="alert-box">CThank You, I will be in contact shortly.<a href="#" class="close">&times;</a></div>')
+        })
         return false;
       })
 
@@ -156,22 +224,32 @@
         }, 1)
       }
 
+      if(localStorage.getItem('swiped_hire_card') == null){
+        localStorage.setItem('swiped_hire_card', true)
+        $('#tinder-card .tooltip').addClass('show')
+      }
+
       $('#tinder-card').pep({
         removeMargins: false,
-        multiplier: 0.4,
+        multiplier: 0.5,
         revert: true,
         useCSSTranslation: true,
         elementsWithInteraction: 'a,form',
         drag: function(){
-          if(this.cssX > 0)
+          if(this.cssX > 0){
+            fire_label.css({opacity: 0})
             hire_label.css({opacity: this.cssX / 70})
-          else
+          }
+          else{
+            hire_label.css({opacity: 0})
             fire_label.css({opacity: -this.cssX / 70})
+          }
+            
         },
         stop: function(){
           hire_label.css({opacity: 0})
           fire_label.css({opacity: 0})
-          threshold = 90
+          threshold = 80
           if(this.cssX > threshold)
             manage_card_swipe.call(this, function(){
               $('#hired-card').addClass('show')

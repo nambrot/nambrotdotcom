@@ -22,5 +22,14 @@ module Nambrotdotcom
 
     config.assets.precompile += ['multi_part_tweets.js', 'multi_part_tweets.css', 'basic.css', 'basic.js', 'madagascar.css', 'madagascar.js', 'custom.modernizr.js']
     config.action_controller.default_url_options = { :trailing_slash => true }
+
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address:              'smtp.gmail.com',
+      port:                 587,
+      user_name:            'nambrot@googlemail.com',
+      password:             ENV["GMAIL_PASSWORD"],
+      authentication:       'plain',
+      enable_starttls_auto: true  }
   end
 end

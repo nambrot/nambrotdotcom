@@ -9,9 +9,9 @@
   border: 1px solid #AAA;
   border-radius: 5px;
   #topbar {
-    height: 70px;
+    // height: 70px;
     @media(max-width: $mobile-width){
-      height: 50px;
+      // height: 50px;
     }
     background-color: #FAFAFA;
     width: 100%;
@@ -21,17 +21,30 @@
     border-bottom: 1px solid #CCC;
 
     h1 {
+      line-height: 1.2;
       text-align: center;
       font-family: Raleway;
       font-weight: 700;
       color: #CF4232;
+    }
+
+    .right-off-canvas-toggle {
+      margin-top: -55px;
+      margin-right: 2%;
+      float: right;
+      width: 50px;
+      height: 50px;
+      &:hover {
+        cursor: pointer;
+      }
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAERElEQVRoQ+1YUU4bMRAlKESqVKm0FyCVAuof8NPfhhMUTlA4QcMJCDcIJ2j4r1RuQJD61R/CXwWR2CNQqa3aQEjfs8YrJ3h37Y03VGhXWmGy4/G8eTPjsSsLT+SpPBEcCyWQ/43JkpGSkYI8UIZWQY7NrXZujNTxVKvV9cXFxY3xeLwMizcMq/uVSuXm/v6+f3d3dxZF0Y0vokKB0PharfYBRu3irXsYF0G2OxwOj1xBFQKEAJaWlg7gZQJQD1j4gf97GPYxjvgawDbA1DJ+a5IpyL0w5nVvb2/3swAFB7K6uvoRRrRhDA37gfEJ3s7V1VXflZFGo9GkE/CSTTqBodaGjqMkHTMBgeOXGfdauSyuWMDix/BkK8uTaeAkNDuQeS86uwCzZ5vjDWRtbW0bRlIxQyBOWPz2Df+/JQt4tweDAcMoyAOW6ZwOQw66rWCcgNDzSFqGDBXWp62D8u9Y5I2EUtMnjFyRAgyd1iMYVLd9OIpMxU8mEMYrEvGTDYDQ/RPKn8t4swgQ2lpGA8ZfmDMI202EbaS/pQLBxDYED9K8Bu8MALQBmcPLy0vKF/qAmS6LAHMQTmOEqCcRiJ6QZhWUjaFU6UDNfzlLYruilwJwLay81mtagTC5YB/DKfXRQPD3DN5pZsmH+g77mCvvEA1buqg8ACKb2Tn3gayFDUbmElbaHh0tZtI/AOKSF1rhYwExbIwdaAPCSrCSxQa/G6F1hNBqucwJIePKyNh1MQNIH0A2XefNKgdGrqGjjvXjcj/BiOwZpz4LQdkQ+VQzlfrM95XVNnLzhfPiPJ4Awt0TRp37KDfy5AT7yI7P3DyysPEUNrJCThQYW444h5bOE/wdQXnV1jrkMTZpjk5ysoGdvW7uWzYgbLtVt+n6mBsjxnugvOs611XO3NvM/UPPtwFR/YzrAlpuCkwHHjsMsdOzYZVDmqqKSY5K2tnVzjkLGMyN8LaRN8e+erQ8QokHqzZeVige0lpJbFuBiBci88jpagyZgewfzH0mc3isPeGLduIsS4+06+qcr7sLtkACIvGUmdY0xv1/1uK27xJqv/BNtfhGCPZkrG5OZHwB5pibC2DBLDYX0MNjcjfLhtQ2XjpNLhAfZ7MUTn8Xhv7C6N/49ipl/g7BaCC++1LmwUq81IbiVp5Qm2Lj62g0+ozzywV+1zcndTlfkJ0tjOm4FRwL2KJHro5zAkJlctGwCyN2fRniIYgG6vCZNg4sqJIPOYYbbVq3ldg0UM5ATCX6PGD8xlieuB2EPT0Y08PNYT+rDMudAHMnDuHHAMJENa8/XaNhQs68XOCHuQBBKDB2V2ytQi4UMklfLswTiCqRvpXFBaRxaFJVzGUOZXLlCEtkkQ2i5GDP51YmFxCe0MyrGFevucpJZ7HtshFqnbmAcKGsSuRqdCi5XEBCLR5STwkkpDdD6CoZCeHFkDpKRkJ6M4SuJ8PIP6GyflH1yYr/AAAAAElFTkSuQmCC);
     }
   }
 
   #background {
     position: relative;
     background-color: #FEFEFE;
-    height: 600px;
+    height: 700px;
     
     .hire-card {
       border-radius: 5px;
@@ -43,10 +56,12 @@
       max-width: 90%;
       border: 1px solid #AAA;
     }
+
     #hired-card, #fired-card {
       @include transform(translateY(50px));
       @include transition(all 0.6s ease-in-out);
       opacity: 0;
+      padding: 6px;
       pointer-events: none;
       &.show {
         pointer-events: auto;
@@ -56,7 +71,7 @@
     }
 
     #hired-card {
-      padding: 6px;
+      
       header {
         text-align: center;
       }
@@ -67,6 +82,37 @@
     }
 
     #tinder-card {
+
+      .tooltip {
+        background-color: rgba(29, 23, 23, 0.83);
+        display: none;
+        position: absolute;
+        left: 35%;
+        top: -36px;
+        width: auto;
+        font-size: 11px;
+        padding: 7px;
+        border-radius: 7px;
+
+        &.show {
+          display: block;
+        }
+        &:after {
+          top: 100%;
+          left: 50%;
+          border: solid transparent;
+          content: " ";
+          height: 0;
+          width: 0;
+          position: absolute;
+          pointer-events: none;
+          border-color: rgba(136, 183, 213, 0);
+          border-top-color: rgba(29, 23, 23, 0.83);
+          border-width: 6px;
+          margin-left: -6px;
+        }
+      }
+
       #hire, #fire {
         opacity: 0;
         position: absolute;
@@ -145,6 +191,32 @@
           font-size: 13px;
         }
       }
+    }
+  }
+
+  &.off-canvas-wrap.move-left .inner-wrap {
+    @include transform(translate3d(-16.5rem, 0, 0))
+  }
+
+  #message-menu {
+    width: 250px;
+    max-width: 80%;
+    padding: 3%;
+    color: white;
+
+    form {
+      width: 94%;
+    }
+    p {
+      font-size: 13px
+    }
+
+    h3, label {
+      color: white;
+    }
+
+    .columns {
+      padding: 0;
     }
   }
 }
