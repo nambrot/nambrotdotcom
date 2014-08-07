@@ -45,7 +45,7 @@ gem 'newrelic_rpm'
 gem 'leaflet-rails' #for madagascar
 gem 'backbone-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.1'
+gem 'rails', '~> 4.1.3'
 
 # Use sqlite3 as the database for Active Record
 
