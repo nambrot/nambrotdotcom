@@ -121,7 +121,7 @@ class TimelineEntryManager
   set_filters_from_location_hash: ->
     filters = window.location.hash.split(';')
     return if filters[0] == ""
-    while [filter_name, filter_value] = filters.shift().split(':')
+    while filters.length > 0 and [filter_name, filter_value] = filters.shift().split(':')
       switch filter_name
         when "importance"
           console.log @settings
