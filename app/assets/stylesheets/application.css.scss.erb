@@ -60,6 +60,34 @@
   }
 }
 
+.blog_post.index {
+  margin: 0;
+  border: 0;
+  
+  header {
+    @include clearfix;
+    margin-bottom: 3px;
+  }
+
+  h1 {
+    float: left;
+    font-size: 24px;
+  }
+
+  h6 {
+    font-size: 14px;
+  }
+  p {
+    line-height: 1.3em;
+    margin-bottom: 0.5em;
+    font-size: 0.9em;
+  }
+}
+
+.blog_post_spacer {
+  margin: 3px;
+}
+
 .blog_post_header {
   margin-bottom: 20px;
 
@@ -70,6 +98,8 @@
   h6 {
     text-align: right;
   }
+
+
 }
 
 #disqus_thread, #blog_share_bar {

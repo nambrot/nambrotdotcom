@@ -1,6 +1,4 @@
 <%= blog_tag :header do %>
   <%= content_tag(:h1, link_to(post.title, post)) %>
-  <h6><%= post.blogger_display_name %>
-    on
-    <%= time_tag(post.created_at, blogit_conf.datetime_format) %></h6>
+  <h6><%= time_tag(post.created_at, "%B %Y") %></h6>
 <% end %>
