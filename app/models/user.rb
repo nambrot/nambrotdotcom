@@ -8,6 +8,6 @@ class User < ActiveRecord::Base
   validate :name, :presence => true
 
   def blog_posts
-    Blogit::Post.where :blogger => self
+    Post.where :blogger => self
   end
 end

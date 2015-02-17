@@ -3,7 +3,9 @@ Nambrotdotcom::Application.routes.draw do
   get "madagascar/" => "madagascar#index"
   get "madagascar/:anything" => "madagascar#index"
   devise_for :users, :skip => [:registration], :sign_out_via => [ :get ]
-  mount Blogit::Engine => "/", :as => :blog
+  # mount Blogit::Engine => "/", :as => :blog
+  resources :posts
+  root 'posts#index'
   mount Gallery::Engine => "gallery"
   get 'about' => 'high_voltage/pages#show', :id => 'about'
   get 'namsremote' => 'high_voltage/pages#show', :id => 'namsremote'

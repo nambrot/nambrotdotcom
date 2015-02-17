@@ -1,0 +1,9 @@
+<%= content_tag(:article, id: "blog_post_#{post.id}", class: "blog_post index") do %>
+
+  <%# Render the header for this blog post %>
+  <%= render "posts/post_head", post: post %>
+
+  <%# Render the body of this blog post (as Markdown) %>
+  <%= render "posts/post_summary", post: post %>
+
+<% end %>

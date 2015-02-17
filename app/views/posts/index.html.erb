@@ -1,0 +1,12 @@
+<% cache @posts do %>
+<% if @posts.any? %>
+
+  <%= render partial: "posts/post_on_index_action",
+    collection: @posts,
+    as: :post,
+    locals: {show_comments_count: false }  %>
+<% else %>
+
+  <%= render partial: "blogit/posts/empty" %>
+<% end %>
+<% end %>
