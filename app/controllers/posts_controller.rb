@@ -6,6 +6,9 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.order('created_at DESC')
+    if params[:tags]
+      @posts = @posts.joins(:categories).where(categories: { name: params[:tags] })
+    end
   end
 
   def show
@@ -50,7 +53,7 @@ class PostsController < ApplicationController
   protected
 
   def valid_params
-    params.require(:post).permit(:title, :summary, :body, :blogger_type, :blogger_id)
+    params.require(:post).permit(:title, :summary, :body, :blogger_type, :blogger_id, :category_ids => [])
   end
 
 end
