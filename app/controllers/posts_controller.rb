@@ -2,8 +2,6 @@ class PostsController < ApplicationController
   
   before_filter :authenticate_user!, except: [:index, :show]
 
-  caches_action :index, :show
-
   def index
     @posts = Post.order('created_at DESC')
     if params[:tags]
