@@ -7,8 +7,5 @@
     collection: @posts,
     as: :post,
     locals: {show_comments_count: false }  %>
-<% else %>
-
-  <%= render partial: "blogit/posts/empty" %>
 <% end %>
 <% end %>
