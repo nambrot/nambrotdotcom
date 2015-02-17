@@ -1,4 +1,4 @@
-<% cache @posts do %>
+<% cache [@posts.first.updated_at, params[:tags]] do %>
 <% if @posts.any? %>
   <% if params[:tags] %>
     <h4>Posts tagged '<%= params[:tags] %>'</h4>
