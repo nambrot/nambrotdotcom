@@ -32,7 +32,7 @@ end
 gem 'unicorn'
 gem 'acts_as_taggable'
 gem 'cloudinary'
-gem 'devise', :github => 'plataformatec/devise', :branch => 'rails4'
+gem 'devise'
 gem 'redcarpet'
 gem 'high_voltage', '>= 1.2.4'
 gem 'bourbon'
