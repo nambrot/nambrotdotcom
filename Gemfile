@@ -13,7 +13,6 @@ group :development do
   gem 'binding_of_caller'
   gem 'better_errors'
   gem 'hirb'
-  gem 'localtunnel'
   gem 'lol_dba'
   # gem 'mailcatcher'
   gem 'meta_request'
