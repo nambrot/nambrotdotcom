@@ -38,7 +38,6 @@ gem 'bourbon'
 gem 'foundation-rails', '>= 5.2.3'
 gem 'gallery', '~> 0.0.16'
 gem 'actionpack-action_caching'
-gem 'memcachier'
 gem 'dalli'
 gem 'newrelic_rpm'
 gem 'leaflet-rails' #for madagascar

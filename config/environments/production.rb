@@ -79,4 +79,8 @@ Nambrotdotcom::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
   config.cache_store = :dalli_store
 
+  if ENV["MEMCACHE_SERVERS"]
+    config.cache_store = :dalli_store, ENV["MEMCACHE_SERVERS"].split(',')
+  end
+
 end

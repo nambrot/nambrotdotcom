@@ -126,7 +126,6 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    memcachier (0.0.2)
     meta_request (0.2.7)
       callsite
       rack-contrib
@@ -274,7 +273,6 @@ DEPENDENCIES
   jquery-rails
   leaflet-rails
   lol_dba
-  memcachier
   meta_request
   newrelic_rpm
   pg
