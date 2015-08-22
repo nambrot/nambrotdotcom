@@ -299,7 +299,7 @@ DEPENDENCIES
   dalli
   devise
   flay
-  foundation-rails (>= 5.2.3)
+  foundation-rails (>= 5.4.5)
   gallery (~> 0.0.16)
   guard
   guard-livereload
