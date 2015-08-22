@@ -35,7 +35,7 @@ gem 'devise'
 gem 'redcarpet'
 gem 'high_voltage', '>= 1.2.4'
 gem 'bourbon'
-gem 'foundation-rails', '>= 5.4.5'
+gem 'foundation-rails', '5.4.5'
 gem 'gallery', '~> 0.0.16'
 gem 'actionpack-action_caching'
 gem 'dalli'
@@ -48,7 +48,7 @@ gem 'rails', '~> 4.2'
 # Use sqlite3 as the database for Active Record
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 5.0.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
