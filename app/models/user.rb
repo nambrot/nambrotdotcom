@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validate :name, :presence => true
+  validates :name, :presence => true
 
   def blog_posts
     Post.where :blogger => self
