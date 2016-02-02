@@ -27,18 +27,7 @@ Nambrotdotcom::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
-  config.middleware.insert_after(ActionDispatch::Static, Rack::LiveReload)
-
   # ...or, change some options...
-
-  config.middleware.insert_before(
-    Rack::Lock, Rack::LiveReload,
-    :min_delay => 500,
-    :max_delay => 10000,
-    :port => 56789,
-    :host => 'localhost',
-    :ignore => [ %r{dont/modify\.html$} ]
-  )
 end
 
 # Rack::MiniProfiler.config.position = 'right'

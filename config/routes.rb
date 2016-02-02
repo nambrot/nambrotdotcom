@@ -8,6 +8,7 @@ Nambrotdotcom::Application.routes.draw do
   root 'posts#index'
   mount Gallery::Engine => "gallery"
   get 'about' => 'high_voltage/pages#show', :id => 'about'
+  get 'aroundtheworld' => 'high_voltage/pages#show', :id => 'aroundtheworld'
   get 'namsremote' => 'high_voltage/pages#show', :id => 'namsremote'
   get 'mapsoffline' => 'high_voltage/pages#show', :id => 'mapsoffline'
   get 'hire' => 'high_voltage/pages#show', :id => 'hire'
