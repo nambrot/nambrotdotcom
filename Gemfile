@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.2.1"
+ruby "2.2.3"
 
 group :production do
   gem 'pg'
@@ -41,6 +41,7 @@ gem 'actionpack-action_caching'
 gem 'dalli'
 gem 'newrelic_rpm'
 gem 'leaflet-rails' #for madagascar
+gem 'sprockets-coffee-react'
 gem 'backbone-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2'

@@ -29,6 +29,16 @@
   background: white;
 }
 
+#playlist {
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  width: 50%;
+  height: 20%;
+  background: white;
+  overflow: hidden;
+}
+
 .youtubeplayer {
   position: fixed;
   top: 50%;
