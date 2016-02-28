@@ -31,12 +31,25 @@
 
 #playlist {
   position: fixed;
-  right: 0px;
-  bottom: 0px;
+  left: 0px;
+  bottom: 50%;
   width: 50%;
   height: 20%;
   background: white;
   overflow: hidden;
+
+  h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+}
+
+.PlayListItem {
+  h3 {
+    margin: 0;
+  }
 }
 
 .youtubeplayer {

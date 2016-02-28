@@ -4,7 +4,7 @@
 # = require leaflet.google
 
 internalState = {}
-queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1 }, action) ->
+queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPlayTimeout: null }, action) ->
   indexOf = (id) -> state.queue.indexOf(id)
 
   nextId = (id) ->
@@ -28,6 +28,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1 }, acti
         onStateChange: (event) ->
           store.dispatch type: 'INITIAL_AUTO_PLAY_STARTED', id: id if event.data == 1
           store.dispatch type: 'PLAY_ENDED', id: id if event.data == 0
+          store.dispatch type: 'PAUSE_VIDEO', id: id if event.data == 2
     })
   addToCache = (preloadCache, id) ->
     Object.assign {}, preloadCache, "#{id}": { ytPlayer: cacheVideo(id) }
@@ -47,10 +48,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1 }, acti
         state
       else
         id = action.id
-        console.log 'addToCache'
-        console.log id
         newState = Object.assign {}, state, preloadCache: addToCache(state.preloadCache, id)
-        console.log newState
         newState
     when 'PLAY_VIDEO'
       if state.currentActive != -1 and state.currentActive != indexOf(action.id)
@@ -62,23 +60,25 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1 }, acti
         newId = action.id
         showVideo(newId)
 
-        setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: newId), 3000
+        timeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: newId), 3000
 
-        Object.assign {}, state, currentActive: indexOf(newId)
+        Object.assign {}, state, currentActive: indexOf(newId), nextPlayTimeout: timeout
     when 'INITIAL_AUTO_PLAY_STARTED'
       id = action.id
       state.preloadCache[id].ytPlayer.pauseVideo() unless state.currentActive == indexOf(id)
       state
     when 'PLAY_ENDED'
       hideVideo action.id
-
       newId = nextId(action.id)
-
       showVideo(newId)
-
-      setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: newId), 3000
-
-      Object.assign {}, state, currentActive: indexOf(newId)
+      timeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: newId), 3000
+      Object.assign {}, state, currentActive: indexOf(newId), nextPlayTimeout: timeout
+    when 'PAUSE_VIDEO'
+      if state.currentActive == indexOf(action.id)
+        clearTimeout state.nextPlayTimeout
+        Object.assign {}, state, nextPlayTimeout: null
+      else
+        state
     when 'ADD_TO_QUEUE'
       _.assign {}, state, queue: state.queue.concat([action.properties.id])
     when 'SHUFFLE_QUEUE'
@@ -98,22 +98,34 @@ window.store = Redux.createStore(reducer, {})
 
 PlayListItem = React.createClass
   render: ->
-    <div>
+    <div className='PlayListItem'>
       <h3>{ @props.item.name }</h3>
     </div>
 
 PlayList = React.createClass
   render: ->
+    containerStyle =
+      height: '38px'
+      overflow: 'hidden'
+
+    scrollContainerStyle =
+      'margin-top': "#{-@props.currentActive*37}px"
+
     <div>
       <h1>Around the world with Nam</h1>
-      {
-        @props.items.map (item) ->
-          <PlayListItem item=item />
-      }
+      <div className='PlayListContainer' style=containerStyle>
+        <div className='PlayListScrollContainer' style=scrollContainerStyle>
+          {
+            @props.items.map (item) ->
+              <PlayListItem item=item />
+          }
+        </div>
+      </div>
     </div>
 
 mapStateToProps = (state) ->
   items: state.queueReducer.queue.map (id) -> state.properties[id]
+  currentActive: state.queueReducer.currentActive
 
 PlayListContainer = ReactRedux.connect(mapStateToProps)(PlayList)
 Root = ->
@@ -150,14 +162,44 @@ GEO_JSON = {
             "geometry": {
                 "type": "Point",
                 "coordinates": [
+                    108.2825416667,
+                    15.9766861111
+                ]
+            },
+            "properties": {
+                "id": 'K7nFKJwbAwA',
+                "name": "Danang, Thailand",
+                "description": "https://youtu.be/K7nFKJwbAwA;28-06-2013"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
                     21.0113277778,
                     52.2510527778
                 ]
             },
             "properties": {
-                "id": "nf9pAraanoQ",
+                "id": 'nf9pAraanoQ',
                 "name": "Warsaw, Poland",
                 "description": "https://youtu.be/nf9pAraanoQ;28-08-2013"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -71.6893527778,
+                    43.4777611111
+                ]
+            },
+            "properties": {
+                "id": 'KTIk7scgpKs',
+                "name": "Franklin, New Hampshire",
+                "description": "https://youtu.be/KTIk7scgpKs;17-08-2015"
             }
         },
         {
@@ -170,7 +212,7 @@ GEO_JSON = {
                 ]
             },
             "properties": {
-                "id": "UpY3g0iYsRk",
+                "id": 'UpY3g0iYsRk',
                 "name": "Panathenic Statdium, Athens, Greece",
                 "description": "https://youtu.be/UpY3g0iYsRk;22-12-2015"
             }
@@ -185,7 +227,7 @@ GEO_JSON = {
                 ]
             },
             "properties": {
-                "id": "saLOxSw2L2Y",
+                "id": 'saLOxSw2L2Y',
                 "name": "Gulfoss, Iceland",
                 "description": "https://youtu.be/saLOxSw2L2Y;27-01-2016"
             }
@@ -200,8 +242,8 @@ GEO_JSON = {
                 ]
             },
             "properties": {
-                "id": "wisVWS64ptU",
-                "name": "Algar Seco",
+                "id": 'wisVWS64ptU',
+                "name": "Algar Seco, Portugal",
                 "description": "https://youtu.be/wisVWS64ptU;"
             }
         },
@@ -215,9 +257,84 @@ GEO_JSON = {
                 ]
             },
             "properties": {
-                "id": "x19Fn1SOOG8",
+                "id": 'x19Fn1SOOG8',
                 "name": "Geneva, Switzerland",
                 "description": "https://youtu.be/x19Fn1SOOG8;"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    100.4928527778,
+                    13.7517638889
+                ]
+            },
+            "properties": {
+                "id": 'StfV6zyvMwU',
+                "name": "Bangkok, Thailand",
+                "description": "https://youtu.be/StfV6zyvMwU;"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -118.4938555556,
+                    34.0084361111
+                ]
+            },
+            "properties": {
+                "id": '6U_Rfkqq0KI',
+                "name": "Santa Monica, California",
+                "description": "https://youtu.be/6U_Rfkqq0KI;"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.0196361111,
+                    46.4088222222
+                ]
+            },
+            "properties": {
+                "id": 'uVO5fsAcOKk',
+                "name": "Bernina, Switzerland",
+                "description": "https://youtu.be/uVO5fsAcOKk;"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -71.3374666667,
+                    42.3442305556
+                ]
+            },
+            "properties": {
+                "id": 'Sn8KJ7JRBOY',
+                "name": "Wayland, Massachusetts",
+                "description": "https://youtu.be/Sn8KJ7JRBOY;"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.5485,
+                    48.1328583333
+                ]
+            },
+            "properties": {
+                "id": '2tlV9GSoBtw',
+                "name": "Oktoberfest, Munich, Germany",
+                "description": "https://youtu.be/2tlV9GSoBtw;"
             }
         }
     ]
