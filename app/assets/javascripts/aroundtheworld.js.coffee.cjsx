@@ -4,7 +4,7 @@
 # = require leaflet.google
 
 internalState = {}
-queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPlayTimeout: null }, action) ->
+queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPlayTimeout: null, playerState: 'stop' }, action) ->
   indexOf = (id) -> state.queue.indexOf(id)
 
   nextId = (id) ->
@@ -14,8 +14,8 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
     el = $("<div id='cachedVideo#{id}' class='youtubeplayer hidden'></div>")
     $('#cachedVideos').append(el)
     new YT.Player("cachedVideo#{id}", {
-      width: 400,
-      height: 200,
+      width: 900,
+      height: 400,
       videoId: id,
       playerVars: {
         autohide: 1,
@@ -51,6 +51,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
         newState = Object.assign {}, state, preloadCache: addToCache(state.preloadCache, id)
         newState
     when 'PLAY_VIDEO'
+      clearTimeout(state.nextPlayTimeout)
       if state.currentActive != -1 and state.currentActive != indexOf(action.id)
         hideVideo state.queue[state.currentActive]
 
@@ -62,21 +63,28 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
 
         timeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: newId), 3000
 
-        Object.assign {}, state, currentActive: indexOf(newId), nextPlayTimeout: timeout
+        Object.assign {}, state, currentActive: indexOf(newId), nextPlayTimeout: timeout, playerState: 'play'
     when 'INITIAL_AUTO_PLAY_STARTED'
       id = action.id
-      state.preloadCache[id].ytPlayer.pauseVideo() unless state.currentActive == indexOf(id)
-      state
+      if state.currentActive == indexOf(id)
+        newState = Object.assign {}, state, playerState: 'play'
+        unless state.nextPlayTimeout
+          newState.nextPlayTimeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: id), 3000
+        newState
+      else
+        state.preloadCache[id].ytPlayer.pauseVideo()
+        state
     when 'PLAY_ENDED'
+      clearTimeout(state.nextPlayTimeout)
       hideVideo action.id
       newId = nextId(action.id)
       showVideo(newId)
       timeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: newId), 3000
-      Object.assign {}, state, currentActive: indexOf(newId), nextPlayTimeout: timeout
+      Object.assign {}, state, currentActive: indexOf(newId), nextPlayTimeout: timeout, playerState: 'play'
     when 'PAUSE_VIDEO'
       if state.currentActive == indexOf(action.id)
         clearTimeout state.nextPlayTimeout
-        Object.assign {}, state, nextPlayTimeout: null
+        Object.assign {}, state, nextPlayTimeout: null, playerState: 'pause'
       else
         state
     when 'ADD_TO_QUEUE'
@@ -98,33 +106,50 @@ window.store = Redux.createStore(reducer, {})
 
 PlayListItem = React.createClass
   render: ->
-    <div className='PlayListItem'>
-      <h3>{ @props.item.name }</h3>
+    <div className="PlayListItem #{if @props.item.isActive then @props.item.playerState else ''}">
+      <span className='title'>{ @props.item.name }</span>
     </div>
 
 PlayList = React.createClass
+  getInitialState: ->
+    isHover: false
+  onMouseEnter: ->
+    @setState isHover: true
+  onMouseLeave: ->
+    @setState isHover: false
   render: ->
-    containerStyle =
-      height: '38px'
-      overflow: 'hidden'
+    rootStyle = height: '90%'
+    containerStyle = if @state.isHover
+                       height: '90%'
+                       overflow: 'scroll'
+                     else
+                       height: '37px'
+                       overflow: 'hidden'
 
+    marginTop = if @state.isHover then 0 else @props.currentActive * -37
     scrollContainerStyle =
-      'margin-top': "#{-@props.currentActive*37}px"
+      'margin-top': "#{marginTop}px"
 
-    <div>
+    <div className='PlayListMenu' style=rootStyle onMouseEnter={@onMouseEnter} onMouseLeave={@onMouseLeave}>
       <h1>Around the world with Nam</h1>
       <div className='PlayListContainer' style=containerStyle>
         <div className='PlayListScrollContainer' style=scrollContainerStyle>
           {
             @props.items.map (item) ->
-              <PlayListItem item=item />
+              <PlayListItem item=item key=item.id />
           }
         </div>
       </div>
     </div>
 
 mapStateToProps = (state) ->
-  items: state.queueReducer.queue.map (id) -> state.properties[id]
+  items: state.queueReducer.queue.map (id, idx) ->
+    Object.assign(
+      {},
+      state.properties[id],
+      isActive: state.queueReducer.currentActive == idx
+      playerState: state.queueReducer.playerState
+    )
   currentActive: state.queueReducer.currentActive
 
 PlayListContainer = ReactRedux.connect(mapStateToProps)(PlayList)
@@ -132,7 +157,7 @@ Root = ->
   <ReactRedux.Provider store={store}><PlayListContainer /></ReactRedux.Provider>
 
 $(document).ready ->
-  map = L.map('map').setView([25, 0], 3)
+  window.map = L.map('map').setView([45, 0], 1)
   map.addLayer(new L.Google('HYBRID'))
   window.player = null
   React.render <Root />, document.getElementById('playlist')

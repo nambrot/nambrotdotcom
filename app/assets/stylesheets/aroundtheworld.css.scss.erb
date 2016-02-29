@@ -1,0 +1,123 @@
+// Place all the styles related to the madagascar controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+// = require foundation
+// = require leaflet
+@import "bourbon";
+@import "_globals.css.scss";
+
+#aroundtheworld-container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+}
+
+#map {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 40%;
+  height: 40%;
+  opacity: 0.3;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+#global-nav {
+  display: none;
+}
+
+#playlist {
+  @include transition(all ease 0.3s);
+  position: fixed;
+  right: 0px;
+  bottom: 0%;
+  width: 40%;
+  height: 80px;
+  color: white;
+  background: rgba(52, 52, 52, 0.4);
+  overflow: hidden;
+
+  h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  &:hover {
+    height: 50%;
+  }
+}
+
+.PlayListItem {
+  span.title {
+    margin: 0;
+    line-height: 37px;
+    font-size: 18px;
+    padding-left: 10px;
+  }
+
+  &.play, &.pause {
+    position: relative;
+
+    span.title {
+      padding-left: 40px;
+    }
+  }
+
+  &.play {
+    &:before {
+      position: absolute;
+      content: '';
+      left: 9px;
+      top: 9px;
+      width: 20px;
+      height: 20px;
+      background-size: cover;
+      background-image: url(<%= image_path 'play.png' %>);
+    }
+  }
+
+  &.pause {
+    &:before {
+      position: absolute;
+      content: '';
+      left: 9px;
+      top: 9px;
+      width: 20px;
+      height: 20px;
+      background-size: cover;
+      background-image: url(<%= image_path 'pause.png' %>);
+    }
+  }
+}
+
+.youtubeplayer {
+  position: fixed;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  background: white;
+  left: 0;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.offpage {
+  opacity: 0;
+}
+
+.PlayListMenu {
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 1;
+  }
+}
