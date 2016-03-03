@@ -1,0 +1,121 @@
+@media (max-width: 950px) {
+  /* line 51, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/_globals.css.scss */
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
+
+/* line 6, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/multi_part_tweets.css.scss */
+#container {
+  padding-top: 12px;
+  min-width: 1200px;
+}
+
+/* line 10, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/multi_part_tweets.css.scss */
+#twitter-compose {
+  vertical-align: top;
+  display: inline-block;
+  border: 1px solid #CCC;
+  width: 250px;
+  margin-right: 12px;
+  border-radius: 10px;
+  background-color: white;
+}
+/* line 20, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/multi_part_tweets.css.scss */
+#twitter-compose header {
+  padding: 10px 6px;
+}
+/* line 22, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/multi_part_tweets.css.scss */
+#twitter-compose header h2 {
+  font-size: 1.1em;
+  font-weight: 700;
+}
+/* line 27, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/multi_part_tweets.css.scss */
+#twitter-compose header p {
+  color: #525252;
+  font-size: 0.8em;
+  line-height: 1.4em;
+}
+/* line 34, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/multi_part_tweets.css.scss */
+#twitter-compose #twitter-compose-input {
+  min-height: 200px;
+}
+/* line 38, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/multi_part_tweets.css.scss */
+#twitter-compose #twitter-compose-charactercount {
+  text-align: right;
+  margin-right: 6px;
+  font-size: 0.9em;
+  color: #AAA;
+}
+/* line 45, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/multi_part_tweets.css.scss */
+#twitter-compose #twitter-compose-button {
+  text-align: center;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+/* line 52, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/multi_part_tweets.css.scss */
+#twitter-timeline {
+  border: 1px solid #CCC;
+  width: 522px;
+  display: inline-block;
+  border-radius: 10px;
+  background-color: white;
+}
+/* line 59, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/multi_part_tweets.css.scss */
+#twitter-timeline > header {
+  padding: 6px 12px;
+  border-bottom: 1px solid #CCC;
+}
+
+/* line 65, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/multi_part_tweets.css.scss */
+#twitter-timeline-tweets {
+  list-style: none;
+}
+
+/* line 69, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/multi_part_tweets.css.scss */
+.twitter-timeline-tweet {
+  border-bottom: 1px solid #CCC;
+  padding: 6px;
+}
+/* line 24, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/_globals.css.scss */
+.twitter-timeline-tweet:before, .twitter-timeline-tweet:after {
+  content: " ";
+  display: table;
+}
+/* line 30, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/_globals.css.scss */
+.twitter-timeline-tweet:after {
+  clear: both;
+}
+/* line 35, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/_globals.css.scss */
+.twitter-timeline-tweet {
+  *zoom: 1;
+}
+/* line 75, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/multi_part_tweets.css.scss */
+.twitter-timeline-tweet img {
+  float: left;
+  margin: 6px 10px;
+  border-radius: 4px;
+}
+/* line 81, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/multi_part_tweets.css.scss */
+.twitter-timeline-tweet .tweet_body {
+  margin-top: 2px;
+  margin-left: 70px;
+}
+/* line 85, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/multi_part_tweets.css.scss */
+.twitter-timeline-tweet .tweet_body .name {
+  font-weight: bold;
+  font-size: 0.9em;
+  line-height: 0.9em;
+  margin-right: 6px;
+}
+/* line 92, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/multi_part_tweets.css.scss */
+.twitter-timeline-tweet .tweet_body .nick {
+  font-size: 0.8em;
+  line-height: 0.8em;
+  color: #AAA;
+}
+/* line 99, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/multi_part_tweets.css.scss */
+.twitter-timeline-tweet .tweet_body .tweet_text {
+  font-size: 0.9em;
+}

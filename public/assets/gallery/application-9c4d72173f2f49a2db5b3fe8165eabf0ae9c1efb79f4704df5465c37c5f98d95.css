@@ -1,0 +1,261 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+
+
+ */
+
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+/* line 4, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-admin {
+  width: 300px;
+  display: inline-block;
+  margin: 10px;
+  border: 1px solid #d8d8d8;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #fff;
+  border-bottom-width: 2px;
+  vertical-align: top;
+}
+/* line 15, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-admin p {
+  padding: 0px 5%;
+}
+/* line 19, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-admin h3 {
+  padding: 0px 5%;
+  font-weight: 200;
+}
+
+/* line 28, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album {
+  outline: none;
+}
+/* line 30, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album h3 {
+  font-weight: 200;
+}
+
+/* line 37, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos {
+  outline: none;
+  position: relative;
+  height: 400px;
+  width: 100%;
+  background-color: #FFF;
+}
+/* line 44, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos:-webkit-full-screen {
+  height: 100%;
+}
+/* line 48, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos .gallery-fullscreen {
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+  position: absolute;
+  width: 30px;
+  height: 20px;
+  bottom: 10px;
+  right: 10px;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 1px 1px 12px 3px;
+}
+/* line 59, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos .gallery-fullscreen:hover {
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
+  cursor: pointer;
+  background-color: white;
+}
+/* line 67, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos:hover .gallery-fullscreen {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+/* line 71, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos.fullscreen .gallery-fullscreen:hover {
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  -o-transform: scale(0.8);
+  transform: scale(0.8);
+}
+/* line 75, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos .gallery-arrow-left, .gallery-album-photos .gallery-arrow-right {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 45%;
+  z-index: 10;
+}
+/* line 81, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos .gallery-arrow-left:after, .gallery-album-photos .gallery-arrow-left:before, .gallery-album-photos .gallery-arrow-right:after, .gallery-album-photos .gallery-arrow-right:before {
+  background: rgba(255, 255, 255, 0.3);
+  -moz-border-radius: 0.2em;
+  -webkit-border-radius: 0.2em;
+  border-radius: 0.2em;
+  content: "";
+  display: block;
+  height: 0.5em;
+  position: absolute;
+  right: 0;
+  width: 2em;
+}
+/* line 96, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos:hover .gallery-arrow-left:after, .gallery-album-photos:hover .gallery-arrow-left:before, .gallery-album-photos:hover .gallery-arrow-right:after, .gallery-album-photos:hover .gallery-arrow-right:before {
+  background: rgba(255, 255, 255, 0.7);
+}
+/* line 102, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos .gallery-arrow-left:hover, .gallery-album-photos .gallery-arrow-right:hover {
+  cursor: pointer;
+}
+/* line 104, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos .gallery-arrow-left:hover:after, .gallery-album-photos .gallery-arrow-left:hover:before, .gallery-album-photos .gallery-arrow-right:hover:after, .gallery-album-photos .gallery-arrow-right:hover:before {
+  background: white;
+}
+/* line 109, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos .gallery-arrow-right {
+  right: 10px;
+}
+/* line 112, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos .gallery-arrow-right:after {
+  bottom: 2em;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+/* line 116, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos .gallery-arrow-right:before {
+  bottom: 1em;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+/* line 122, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos .gallery-arrow-left {
+  left: 10px;
+}
+/* line 125, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos .gallery-arrow-left:after {
+  bottom: 1em;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+/* line 129, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos .gallery-arrow-left:before {
+  bottom: 2em;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+/* line 136, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos.small .gallery-arrow-left {
+  left: 0px;
+}
+/* line 141, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos:after {
+  pointer-events: none;
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  box-shadow: inset 2px 2px 10px #aaa, inset -2px -2px 10px #aaa;
+}
+/* line 151, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos .gallery-spinner {
+  position: absolute;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  top: 0px;
+  right: 0px;
+}
+
+/* line 160, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos-canvas {
+  outline: none;
+  width: 100%;
+  height: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+/* line 168, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos-canvas img {
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+  display: inline-block;
+  height: 95%;
+  margin-top: 0.675%;
+  max-width: 1000000px;
+  vertical-align: top;
+  border-radius: 12px;
+  opacity: 0;
+}
+/* line 179, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos-canvas img.loaded {
+  opacity: 1;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+/* line 187, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+#gallery-fallback-fullscreen {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+}
+
+/* line 196, /Users/nambrot/.rvm/gems/ruby-2.2.3/gems/gallery-0.0.16/app/assets/stylesheets/gallery/style.css.scss */
+.gallery-album-photos.fullscreen .gallery-album-photos-canvas img {
+  height: 98%;
+}
