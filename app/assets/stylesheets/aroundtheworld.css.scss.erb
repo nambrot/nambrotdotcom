@@ -32,15 +32,23 @@
 }
 
 #playlist {
-  @include linear-gradient(rgba(40, 40, 40, 0.01), rgba(2,2,2,0.9));
   @include transition(all ease 0.3s);
   position: fixed;
   right: 0px;
   bottom: 0%;
   width: 60%;
+  height: 150px;
+  &:hover {
+    height: 50%;
+  }
+}
+
+.PlayListMenu {
+  @include linear-gradient(rgba(40, 40, 40, 0.01), rgba(2,2,2,0.9));
+  @include transition(all ease 0.3s);
   padding-top: 50px;
   padding-left: 5%;
-  height: 130px;
+  height: 100%;
   color: white;
   overflow: hidden;
 
@@ -50,11 +58,6 @@
     font-weight: bold;
     text-decoration: underline;
     color: white;
-  }
-
-  &:hover {
-    padding-top: 0px;
-    height: 50%;
   }
 }
 

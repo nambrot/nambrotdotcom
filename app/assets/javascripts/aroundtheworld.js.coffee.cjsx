@@ -125,9 +125,9 @@ PlayList = React.createClass
         @refs.container.scrollTop = _.max([this.props.currentActive - 3, 0]) * 38
         ), 250
   render: ->
-    rootStyle = height: '90%'
+    rootStyle = height: '100%'
     containerStyle = if @state.isHover
-                       height: '90%'
+                       height: '100%'
                        overflow: 'scroll'
                      else
                        height: '37px'
