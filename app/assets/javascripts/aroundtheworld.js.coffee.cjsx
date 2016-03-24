@@ -58,12 +58,15 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
       if state.currentActive == indexOf(action.id)
         state
       else
-        newId = action.id
-        showVideo(newId)
+        if state.preloadCache[action.id]
+          newId = action.id
+          showVideo(newId)
 
-        timeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: newId), 3000
+          timeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: newId), 3000
 
-        Object.assign {}, state, currentActive: indexOf(newId), nextPlayTimeout: timeout, playerState: 'play'
+          Object.assign {}, state, currentActive: indexOf(newId), nextPlayTimeout: timeout, playerState: 'play'
+        else
+          queueReducer(state, { type: 'PRELOAD_VIDEO', id: action.id })
     when 'INITIAL_AUTO_PLAY_STARTED'
       id = action.id
       if state.currentActive == indexOf(id)
@@ -72,8 +75,11 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
           newState.nextPlayTimeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: id), 3000
         newState
       else
-        state.preloadCache[id].ytPlayer.pauseVideo()
-        state
+        if state.currentActive == -1
+          queueReducer(state, { type: 'PLAY_VIDEO', id: action.id })
+        else
+          state.preloadCache[id].ytPlayer.pauseVideo()
+          state
     when 'PLAY_ENDED'
       clearTimeout(state.nextPlayTimeout)
       hideVideo action.id
@@ -105,9 +111,11 @@ reducer = Redux.combineReducers queueReducer: queueReducer, properties: properti
 window.store = Redux.createStore(reducer, {})
 
 PlayListItem = React.createClass
+  onClick: (evt) ->
+    store.dispatch type: 'PLAY_VIDEO', id: @props.item.id
   render: ->
     <div className="PlayListItem #{if @props.item.isActive then @props.item.playerState else ''}">
-      <span className='title'>{ @props.item.name }</span>
+      <span className='title' onClick={@onClick}>{ @props.item.name }</span>
     </div>
 
 PlayList = React.createClass
