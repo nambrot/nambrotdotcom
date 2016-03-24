@@ -117,6 +117,13 @@ PlayList = React.createClass
     @setState isHover: true
   onMouseLeave: ->
     @setState isHover: false
+  componentDidUpdate: (prevProps, prevState) ->
+    if prevState.isHover and !@state.isHover
+      @refs.container.scrollTop = 0
+    if !prevState.isHover and @state.isHover
+      setTimeout (=>
+        @refs.container.scrollTop = _.max([this.props.currentActive - 3, 0]) * 38
+        ), 250
   render: ->
     rootStyle = height: '90%'
     containerStyle = if @state.isHover
@@ -132,7 +139,7 @@ PlayList = React.createClass
 
     <div className='PlayListMenu' style=rootStyle onMouseEnter={@onMouseEnter} onMouseLeave={@onMouseLeave}>
       <h1>Around the world with Nam</h1>
-      <div className='PlayListContainer' style=containerStyle>
+      <div className='PlayListContainer' style=containerStyle ref='container'>
         <div className='PlayListScrollContainer' style=scrollContainerStyle>
           {
             @props.items.map (item) ->
