@@ -77,6 +77,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
 
           Object.assign {}, state, currentActive: indexOf(newId), nextPlayTimeout: timeout, playerState: 'play'
         else
+          setTimeout (-> store.dispatch type: 'PLAY_VIDEO', id: action.id), 300
           queueReducer(state, { type: 'PRELOAD_VIDEO', id: action.id })
     when 'INITIAL_AUTO_PLAY_STARTED'
       id = action.id
