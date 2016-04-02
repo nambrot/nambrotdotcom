@@ -10,7 +10,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
   nextId = (id) ->
     state.queue[(indexOf(id) + 1) % state.queue.length]
 
-  cacheVideo = (id) ->
+  cacheVideo = (id, autoplay) ->
     el = $("<div id='cachedVideo#{id}' class='youtubeplayer hidden'></div>")
     $('#cachedVideos').append(el)
     new YT.Player("cachedVideo#{id}", {
@@ -19,28 +19,33 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
       videoId: id,
       playerVars: {
         autohide: 1,
-        autoplay: true,
+        autoplay: autoplay,
         controls: 0,
         showinfo: 0
       },
       events:
-        onReady: (event) -> event.target.playVideo()
+        onReady: (event) -> event.target.playVideo() if autoplay
         onStateChange: (event) ->
           store.dispatch type: 'INITIAL_AUTO_PLAY_STARTED', id: id if event.data == 1
           store.dispatch type: 'PLAY_ENDED', id: id if event.data == 0
           store.dispatch type: 'PAUSE_VIDEO', id: id if event.data == 2
     })
-  addToCache = (preloadCache, id) ->
-    Object.assign {}, preloadCache, "#{id}": { ytPlayer: cacheVideo(id) }
+  addToCache = (preloadCache, id, autoplay = true) ->
+    Object.assign {}, preloadCache, "#{id}": { ytPlayer: cacheVideo(id, autoplay) }
   hideVideo = (id) ->
     $("#cachedVideo#{id}").addClass('hidden')
     state.preloadCache[id].ytPlayer.pauseVideo()
-  showVideo = (id) ->
-    state.preloadCache[id].ytPlayer.seekTo(0)
-    state.preloadCache[id].ytPlayer.playVideo()
-    $("#cachedVideo#{id}").removeClass('hidden')
-    next = nextId(id)
-    setTimeout (-> store.dispatch type: 'PRELOAD_VIDEO', id: next), 100
+  showVideo = (id, play = true) ->
+    if state.preloadCache[id].ytPlayer.seekTo
+      if play
+        state.preloadCache[id].ytPlayer.seekTo(0)
+        state.preloadCache[id].ytPlayer.playVideo()
+        document.getElementById('song').play()
+      $("#cachedVideo#{id}").removeClass('hidden')
+      next = nextId(id)
+      setTimeout (-> store.dispatch type: 'PRELOAD_VIDEO', id: next), 100
+    else
+      setTimeout (-> showVideo(id, play)), 100
 
   switch action.type
     when 'PRELOAD_VIDEO'
@@ -48,7 +53,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
         state
       else
         id = action.id
-        newState = Object.assign {}, state, preloadCache: addToCache(state.preloadCache, id)
+        newState = Object.assign {}, state, preloadCache: addToCache(state.preloadCache, id, action.autoplay)
         newState
     when 'PLAY_VIDEO'
       clearTimeout(state.nextPlayTimeout)
@@ -69,13 +74,15 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
           queueReducer(state, { type: 'PRELOAD_VIDEO', id: action.id })
     when 'INITIAL_AUTO_PLAY_STARTED'
       id = action.id
+
       if state.currentActive == indexOf(id)
         newState = Object.assign {}, state, playerState: 'play'
         unless state.nextPlayTimeout
           newState.nextPlayTimeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: id), 3000
+        document.getElementById('song').play()
         newState
       else
-        if state.currentActive == -1
+        if state.currentActive == -1 and indexOf(id) == 0
           queueReducer(state, { type: 'PLAY_VIDEO', id: action.id })
         else
           state.preloadCache[id].ytPlayer.pauseVideo()
@@ -90,6 +97,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
     when 'PAUSE_VIDEO'
       if state.currentActive == indexOf(action.id)
         clearTimeout state.nextPlayTimeout
+        document.getElementById('song').pause()
         Object.assign {}, state, nextPlayTimeout: null, playerState: 'pause'
       else
         state
@@ -97,6 +105,13 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
       _.assign {}, state, queue: state.queue.concat([action.properties.id])
     when 'SHUFFLE_QUEUE'
       _.assign {}, state, queue: _.shuffle(state.queue)
+    when 'SHOW_VIDEO'
+      showVideo(action.id, false)
+      state
+    when 'CACHE_FIRST'
+      id = state.queue[0]
+      newState = queueReducer(state, { type: 'PRELOAD_VIDEO', id: id, autoplay: false})
+      queueReducer(newState, { type: 'SHOW_VIDEO', id: id})
     else
       state
 
@@ -162,10 +177,10 @@ mapStateToProps = (state) ->
     Object.assign(
       {},
       state.properties[id],
-      isActive: state.queueReducer.currentActive == idx
+      isActive: state.queueReducer.currentActive == idx or (state.queueReducer.currentActive == -1 and idx == 0)
       playerState: state.queueReducer.playerState
     )
-  currentActive: state.queueReducer.currentActive
+  currentActive: if state.queueReducer.currentActive == -1 then 0 else state.queueReducer.currentActive
 
 PlayListContainer = ReactRedux.connect(mapStateToProps)(PlayList)
 Root = ->
@@ -193,6 +208,7 @@ $(document).ready ->
   .addTo(map)
 
   store.dispatch type: 'SHUFFLE_QUEUE'
+  setTimeout (-> store.dispatch type: 'CACHE_FIRST'), 500
 
 GEO_JSON = {
     "type": "FeatureCollection",
