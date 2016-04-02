@@ -10,6 +10,13 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
   nextId = (id) ->
     state.queue[(indexOf(id) + 1) % state.queue.length]
 
+  preloadVideos = (id, count = 2) ->
+    return if count == 0
+    newId = nextId(id)
+    setTimeout (->
+      store.dispatch type: 'PRELOAD_VIDEO', id: newId
+      preloadVideos(newId, count - 1)
+    ), 1
   cacheVideo = (id, autoplay) ->
     el = $("<div id='cachedVideo#{id}' class='youtubeplayer hidden'></div>")
     $('#cachedVideos').append(el)
@@ -42,8 +49,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
         state.preloadCache[id].ytPlayer.playVideo()
         document.getElementById('song').play()
       $("#cachedVideo#{id}").removeClass('hidden')
-      next = nextId(id)
-      setTimeout (-> store.dispatch type: 'PRELOAD_VIDEO', id: next), 100
+      preloadVideos(id)
     else
       setTimeout (-> showVideo(id, play)), 100
 
