@@ -20218,19 +20218,41 @@ L.Google.asyncInitialize = function() {
 //})(window.google, L)
 ;
 (function() {
-  var GEO_JSON, PlayList, PlayListContainer, PlayListItem, Root, internalState, mapStateToProps, properties, queueReducer, reducer;
+  var GEO_JSON, PlayList, PlayListContainer, PlayListItem, Root, emptyReducer, initalPlayListHint, internalState, mapStateToProps, properties, queueReducer, reducer;
 
   internalState = {};
 
+  initalPlayListHint = false;
+
+  emptyReducer = function(state, action) {
+    if (state == null) {
+      state = {
+        firstPlay: false,
+        zoomedIn: false
+      };
+    }
+    switch (action.type) {
+      case 'FIRST_PLAY':
+        return {
+          firstPlay: true
+        };
+      default:
+        return state;
+    }
+  };
+
+  window.emptyStore = Redux.createStore(emptyReducer, {});
+
   queueReducer = function(state, action) {
-    var addToCache, cacheVideo, hideVideo, id, indexOf, newId, newState, nextId, preloadVideos, showVideo, timeout;
+    var addToCache, cacheVideo, hideVideo, id, indexOf, newId, newLoc, newState, nextId, pauseVideo, playVideo, preloadVideos, showVideo, timeout, weirdstate;
     if (state == null) {
       state = {
         queue: [],
         preloadCache: {},
         currentActive: -1,
         nextPlayTimeout: null,
-        playerState: 'stop'
+        playerState: 'stop',
+        zoomedIn: false
       };
     }
     indexOf = function(id) {
@@ -20334,6 +20356,17 @@ L.Google.asyncInitialize = function() {
         }), 100);
       }
     };
+    pauseVideo = function(id) {
+      if (state.preloadCache[id].ytPlayer.pauseVideo) {
+        return state.preloadCache[id].ytPlayer.pauseVideo();
+      }
+    };
+    playVideo = function(id) {
+      if (state.preloadCache[id].ytPlayer.playVideo) {
+        state.preloadCache[id].ytPlayer.playVideo();
+        return document.getElementById('song').play();
+      }
+    };
     switch (action.type) {
       case 'PRELOAD_VIDEO':
         if (state.preloadCache[action.id]) {
@@ -20346,13 +20379,38 @@ L.Google.asyncInitialize = function() {
           return newState;
         }
         break;
+      case 'CONTINUE_PLAY':
+        id = state.queue[state.currentActive];
+        playVideo(id);
+        timeout = setTimeout((function() {
+          return store.dispatch({
+            type: 'PLAY_ENDED',
+            id: id
+          });
+        }), 3000);
+        if (state.zoomedIn) {
+          map.setView([10, 0], 1);
+        }
+        return Object.assign({}, state, {
+          nextPlayTimeout: timeout,
+          playerState: 'play',
+          zoomedIn: false
+        });
       case 'PLAY_VIDEO':
+        emptyStore.dispatch({
+          type: 'FIRST_PLAY'
+        });
         clearTimeout(state.nextPlayTimeout);
         if (state.currentActive !== -1 && state.currentActive !== indexOf(action.id)) {
           hideVideo(state.queue[state.currentActive]);
         }
         if (state.currentActive === indexOf(action.id)) {
-          return state;
+          if (state.zoomedIn) {
+            map.setView([10, 0], 1);
+          }
+          return Object.assign({}, state, {
+            zoomedIn: false
+          });
         } else {
           if (state.preloadCache[action.id]) {
             newId = action.id;
@@ -20366,7 +20424,8 @@ L.Google.asyncInitialize = function() {
             return Object.assign({}, state, {
               currentActive: indexOf(newId),
               nextPlayTimeout: timeout,
-              playerState: 'play'
+              playerState: 'play',
+              zoomedIn: false
             });
           } else {
             setTimeout((function() {
@@ -20384,9 +20443,16 @@ L.Google.asyncInitialize = function() {
         break;
       case 'INITIAL_AUTO_PLAY_STARTED':
         id = action.id;
+        if (!initalPlayListHint) {
+          initalPlayListHint = true;
+        }
         if (state.currentActive === indexOf(id)) {
+          if (state.zoomedIn) {
+            map.setView([10, 0], 1);
+          }
           newState = Object.assign({}, state, {
-            playerState: 'play'
+            playerState: 'play',
+            zoomedIn: false
           });
           if (!state.nextPlayTimeout) {
             newState.nextPlayTimeout = setTimeout((function() {
@@ -20430,14 +20496,26 @@ L.Google.asyncInitialize = function() {
         if (state.currentActive === indexOf(action.id)) {
           clearTimeout(state.nextPlayTimeout);
           document.getElementById('song').pause();
+          if (!state.zoomedIn) {
+            weirdstate = mapStateToProps(store.getState());
+            newLoc = weirdstate.items[weirdstate.currentActive].coordinates;
+            map.setView([newLoc[1], newLoc[0]], 10);
+          }
           return Object.assign({}, state, {
             nextPlayTimeout: null,
-            playerState: 'pause'
+            playerState: 'pause',
+            zoomedIn: true
           });
         } else {
           return state;
         }
         break;
+      case 'USER_PAUSE':
+        id = state.queue[state.currentActive];
+        pauseVideo(id);
+        return Object.assign({}, state, {
+          zoomedIn: true
+        });
       case 'ADD_TO_QUEUE':
         return _.assign({}, state, {
           queue: state.queue.concat([action.properties.id])
@@ -20509,7 +20587,8 @@ L.Google.asyncInitialize = function() {
   PlayList = React.createClass({displayName: "PlayList",
     getInitialState: function() {
       return {
-        isHover: false
+        isHover: false,
+        shownInit: false
       };
     },
     onMouseEnter: function() {
@@ -20533,6 +20612,25 @@ L.Google.asyncInitialize = function() {
           };
         })(this)), 250);
       }
+    },
+    componentDidMount: function() {
+      return emptyStore.subscribe((function(_this) {
+        return function() {
+          if (!_this.state.shownInit && emptyStore.getState().firstPlay) {
+            _this.setState({
+              shownInit: true,
+              isHover: true
+            });
+            $('#playlist').addClass('hover');
+            return setTimeout((function() {
+              _this.setState({
+                isHover: false
+              });
+              return $('#playlist').removeClass('hover');
+            }), 4000);
+          }
+        };
+      })(this));
     },
     render: function() {
       var containerStyle, marginTop, rootStyle, scrollContainerStyle;
@@ -20579,7 +20677,8 @@ L.Google.asyncInitialize = function() {
           playerState: state.queueReducer.playerState
         });
       }),
-      currentActive: state.queueReducer.currentActive === -1 ? 0 : state.queueReducer.currentActive
+      currentActive: state.queueReducer.currentActive === -1 ? 0 : state.queueReducer.currentActive,
+      zoomedIn: state.queueReducer.zoomedIn
     };
   };
 
@@ -20607,13 +20706,14 @@ L.Google.asyncInitialize = function() {
         });
       },
       pointToLayer: function(feature, latlng) {
-        return L.circleMarker(latlng, {
+        return L.marker(latlng, {
           radius: 8,
           fillColor: "#ff7800",
           color: "#000",
           weight: 1,
           opacity: 1,
-          fillOpacity: 0.8
+          fillOpacity: 0.8,
+          title: "" + feature.properties.name
         }).on('mouseover', function(e) {
           return store.dispatch({
             type: 'PRELOAD_VIDEO',
@@ -20636,18 +20736,34 @@ L.Google.asyncInitialize = function() {
       });
     }), 500);
     window.marker = L.marker([52.2510527778, 21.0113277778], {
+      zIndexOffset: 100,
+      title: 'Toggle zoom',
       icon: L.icon({
         iconUrl: "/assets/namface",
         iconSize: [38, 55]
       })
-    }).addTo(map);
+    }).addTo(map).on('click', function(e) {
+      var newLoc, state;
+      state = mapStateToProps(store.getState());
+      newLoc = state.items[state.currentActive].coordinates;
+      if (state.zoomedIn) {
+        store.dispatch({
+          type: 'CONTINUE_PLAY'
+        });
+        return map.setView([10, 0], 1);
+      } else {
+        store.dispatch({
+          type: 'USER_PAUSE'
+        });
+        return map.setView([newLoc[1], newLoc[0]], 10);
+      }
+    });
     lastLoc = [52.2510527778, 21.0113277778];
     return store.subscribe(function() {
       var newLoc, state;
-      state = mapStateToProps(store.getState(state));
+      state = mapStateToProps(store.getState());
       newLoc = state.items[state.currentActive].coordinates;
       if (!marker.getLatLng().equals(newLoc)) {
-        console.log(newLoc);
         return marker.setLatLng({
           lat: newLoc[1],
           lng: newLoc[0]

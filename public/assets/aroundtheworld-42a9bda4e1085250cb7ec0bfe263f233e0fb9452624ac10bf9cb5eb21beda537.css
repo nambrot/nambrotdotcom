@@ -22836,24 +22836,27 @@ th.hide-for-touch {
 
 /* line 17, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
 #map {
+  -webkit-transition: all ease 0.3s;
+  -moz-transition: all ease 0.3s;
+  transition: all ease 0.3s;
   position: fixed;
   bottom: 0px;
   left: 0px;
   width: 40%;
-  height: 40%;
-  opacity: 0.3;
+  height: 50%;
+  opacity: 0.7;
 }
-/* line 25, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
+/* line 26, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
 #map:hover {
   opacity: 1;
 }
 
-/* line 30, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
+/* line 31, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
 #global-nav {
   display: none;
 }
 
-/* line 34, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
+/* line 35, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
 #playlist {
   -webkit-transition: all ease 0.3s;
   -moz-transition: all ease 0.3s;
@@ -22861,40 +22864,53 @@ th.hide-for-touch {
   position: fixed;
   right: 0px;
   bottom: 0%;
-  width: 40%;
-  height: 80px;
+  width: 60%;
+  height: 150px;
+}
+/* line 42, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
+#playlist:hover, #playlist.hover {
+  height: 50%;
+}
+
+/* line 47, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
+.PlayListMenu {
+  background-color: rgba(40, 40, 40, 0.01);
+  background-image: -webkit-linear-gradient(rgba(40, 40, 40, 0.01), rgba(2, 2, 2, 0.9));
+  background-image: linear-gradient(rgba(40, 40, 40, 0.01), rgba(2, 2, 2, 0.9));
+  -webkit-transition: all ease 0.3s;
+  -moz-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+  padding-top: 50px;
+  padding-left: 5%;
+  height: 100%;
   color: white;
-  background: rgba(52, 52, 52, 0.4);
   overflow: hidden;
 }
-/* line 45, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
-#playlist h1 {
+/* line 56, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
+.PlayListMenu h1 {
   margin: 0;
   font-size: 26px;
   font-weight: bold;
   text-decoration: underline;
-}
-/* line 52, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
-#playlist:hover {
-  height: 50%;
+  color: white;
 }
 
-/* line 58, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
+/* line 66, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
 .PlayListItem span.title {
   margin: 0;
   line-height: 37px;
   font-size: 18px;
   padding-left: 10px;
 }
-/* line 65, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
+/* line 73, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
 .PlayListItem.play, .PlayListItem.pause {
   position: relative;
 }
-/* line 68, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
+/* line 76, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
 .PlayListItem.play span.title, .PlayListItem.pause span.title {
   padding-left: 40px;
 }
-/* line 74, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
+/* line 82, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
 .PlayListItem.play:before {
   position: absolute;
   content: '';
@@ -22905,7 +22921,7 @@ th.hide-for-touch {
   background-size: cover;
   background-image: url(/assets/play.png);
 }
-/* line 87, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
+/* line 95, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
 .PlayListItem.pause:before {
   position: absolute;
   content: '';
@@ -22916,8 +22932,13 @@ th.hide-for-touch {
   background-size: cover;
   background-image: url(/assets/pause.png);
 }
+/* line 107, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
+.PlayListItem:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
 
-/* line 100, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
+/* line 113, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
 .youtubeplayer {
   position: fixed;
   top: 0px;
@@ -22926,21 +22947,24 @@ th.hide-for-touch {
   background: white;
   left: 0;
 }
-/* line 108, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
+/* line 121, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
 .youtubeplayer.hidden {
   display: none;
 }
 
-/* line 113, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
+/* line 126, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
 .offpage {
   opacity: 0;
 }
 
-/* line 117, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
-.PlayListMenu {
-  opacity: 0.5;
-}
-/* line 120, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
+/* line 131, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
 .PlayListMenu:hover {
   opacity: 1;
+}
+
+/* line 136, /Users/nambrot/devstuff/nambrotdotcom/app/assets/stylesheets/aroundtheworld.css.scss.erb */
+.PlayListScrollContainer {
+  -webkit-transition: all ease 0.3s;
+  -moz-transition: all ease 0.3s;
+  transition: all ease 0.3s;
 }

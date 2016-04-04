@@ -4,7 +4,18 @@
 # = require leaflet.google
 
 internalState = {}
-queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPlayTimeout: null, playerState: 'stop' }, action) ->
+initalPlayListHint = false
+
+emptyReducer = (state = { firstPlay: false, zoomedIn: false }, action) ->
+  switch action.type
+    when 'FIRST_PLAY'
+      firstPlay: true
+    else
+      state
+
+window.emptyStore = Redux.createStore(emptyReducer, {})
+
+queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPlayTimeout: null, playerState: 'stop', zoomedIn: false}, action) ->
   indexOf = (id) -> state.queue.indexOf(id)
 
   nextId = (id) ->
@@ -52,6 +63,13 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
       preloadVideos(id)
     else
       setTimeout (-> showVideo(id, play)), 100
+  pauseVideo = (id) ->
+    if state.preloadCache[id].ytPlayer.pauseVideo
+      state.preloadCache[id].ytPlayer.pauseVideo()
+  playVideo = (id) ->
+    if state.preloadCache[id].ytPlayer.playVideo
+      state.preloadCache[id].ytPlayer.playVideo()
+      document.getElementById('song').play()
 
   switch action.type
     when 'PRELOAD_VIDEO'
@@ -61,13 +79,23 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
         id = action.id
         newState = Object.assign {}, state, preloadCache: addToCache(state.preloadCache, id, action.autoplay)
         newState
+    when 'CONTINUE_PLAY'
+      id = state.queue[state.currentActive]
+      playVideo(id)
+      timeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: id), 3000
+      if state.zoomedIn
+        map.setView [10, 0], 1
+      Object.assign {}, state, nextPlayTimeout: timeout, playerState: 'play', zoomedIn: false
     when 'PLAY_VIDEO'
+      emptyStore.dispatch type: 'FIRST_PLAY'
       clearTimeout(state.nextPlayTimeout)
       if state.currentActive != -1 and state.currentActive != indexOf(action.id)
         hideVideo state.queue[state.currentActive]
 
       if state.currentActive == indexOf(action.id)
-        state
+        if state.zoomedIn
+          map.setView [10, 0], 1
+        Object.assign {}, state, zoomedIn: false
       else
         if state.preloadCache[action.id]
           newId = action.id
@@ -75,15 +103,20 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
 
           timeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: newId), 3000
 
-          Object.assign {}, state, currentActive: indexOf(newId), nextPlayTimeout: timeout, playerState: 'play'
+          Object.assign {}, state, currentActive: indexOf(newId), nextPlayTimeout: timeout, playerState: 'play', zoomedIn: false
         else
           setTimeout (-> store.dispatch type: 'PLAY_VIDEO', id: action.id), 300
           queueReducer(state, { type: 'PRELOAD_VIDEO', id: action.id })
     when 'INITIAL_AUTO_PLAY_STARTED'
       id = action.id
+      unless initalPlayListHint
+        initalPlayListHint = true
+
 
       if state.currentActive == indexOf(id)
-        newState = Object.assign {}, state, playerState: 'play'
+        if state.zoomedIn
+          map.setView [10, 0], 1
+        newState = Object.assign {}, state, playerState: 'play', zoomedIn: false
         unless state.nextPlayTimeout
           newState.nextPlayTimeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: id), 3000
         document.getElementById('song').play()
@@ -105,9 +138,17 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
       if state.currentActive == indexOf(action.id)
         clearTimeout state.nextPlayTimeout
         document.getElementById('song').pause()
-        Object.assign {}, state, nextPlayTimeout: null, playerState: 'pause'
+        if !state.zoomedIn
+          weirdstate = mapStateToProps(store.getState())
+          newLoc = weirdstate.items[weirdstate.currentActive].coordinates
+          map.setView [newLoc[1], newLoc[0]], 10
+        Object.assign {}, state, nextPlayTimeout: null, playerState: 'pause', zoomedIn: true
       else
         state
+    when 'USER_PAUSE'
+      id = state.queue[state.currentActive]
+      pauseVideo(id)
+      Object.assign {}, state, zoomedIn: true
     when 'ADD_TO_QUEUE'
       _.assign {}, state, queue: state.queue.concat([action.properties.id])
     when 'SHUFFLE_QUEUE'
@@ -143,6 +184,7 @@ PlayListItem = React.createClass
 PlayList = React.createClass
   getInitialState: ->
     isHover: false
+    shownInit: false
   onMouseEnter: ->
     @setState isHover: true
   onMouseLeave: ->
@@ -154,6 +196,15 @@ PlayList = React.createClass
       setTimeout (=>
         @refs.container.scrollTop = _.max([this.props.currentActive - 3, 0]) * 38
         ), 250
+  componentDidMount: ->
+    emptyStore.subscribe =>
+      if !@state.shownInit and emptyStore.getState().firstPlay
+        @setState shownInit: true, isHover: true
+        $('#playlist').addClass('hover')
+        setTimeout (=>
+          @setState isHover: false
+          $('#playlist').removeClass('hover')
+          ), 4000
   render: ->
     rootStyle = height: '100%'
     containerStyle = if @state.isHover
@@ -188,6 +239,7 @@ mapStateToProps = (state) ->
       playerState: state.queueReducer.playerState
     )
   currentActive: if state.queueReducer.currentActive == -1 then 0 else state.queueReducer.currentActive
+  zoomedIn: state.queueReducer.zoomedIn
 
 PlayListContainer = ReactRedux.connect(mapStateToProps)(PlayList)
 Root = ->
@@ -203,13 +255,14 @@ $(document).ready ->
     onEachFeature: (feature, layer) ->
       store.dispatch type: 'ADD_TO_QUEUE', properties: Object.assign({}, feature.properties, coordinates: feature.geometry.coordinates)
     pointToLayer: (feature, latlng) ->
-      L.circleMarker latlng,
+      L.marker latlng,
         radius: 8,
         fillColor: "#ff7800",
         color: "#000",
         weight: 1,
         opacity: 1,
-        fillOpacity: 0.8
+        fillOpacity: 0.8,
+        title: "#{feature.properties.name}"
       .on 'mouseover', (e) -> store.dispatch type: 'PRELOAD_VIDEO', id: feature.properties.id
       .on 'click', (e) -> store.dispatch type: 'PLAY_VIDEO', id: feature.properties.id
   .addTo(map)
@@ -217,18 +270,31 @@ $(document).ready ->
   store.dispatch type: 'SHUFFLE_QUEUE'
   setTimeout (-> store.dispatch type: 'CACHE_FIRST'), 500
 
-  window.marker = L.marker([52.2510527778, 21.0113277778], {icon: L.icon({
-      iconUrl:  "<%= image_path 'namface' %>",
-      iconSize:     [38, 55]
-  });}).addTo(map);
+  window.marker = L.marker([52.2510527778, 21.0113277778], {
+                      zIndexOffset: 100,
+                      title: 'Toggle zoom',
+                      icon: L.icon({
+                        iconUrl:  "<%= image_path 'namface' %>",
+                        iconSize:     [38, 55]
+                      })
+                    })
+                    .addTo(map)
+                    .on 'click', (e) ->
+                      state = mapStateToProps(store.getState())
+                      newLoc = state.items[state.currentActive].coordinates
+                      if state.zoomedIn
+                        store.dispatch type: 'CONTINUE_PLAY'
+                        map.setView [10, 0], 1
+                      else
+                        store.dispatch type: 'USER_PAUSE'
+                        map.setView [newLoc[1], newLoc[0]], 10
 
   lastLoc = [52.2510527778, 21.0113277778]
 
   store.subscribe ->
-    state = mapStateToProps(store.getState(state))
+    state = mapStateToProps(store.getState())
     newLoc = state.items[state.currentActive].coordinates
     if !marker.getLatLng().equals(newLoc)
-      console.log newLoc
       marker.setLatLng lat: newLoc[1], lng: newLoc[0]
 
 GEO_JSON = {
