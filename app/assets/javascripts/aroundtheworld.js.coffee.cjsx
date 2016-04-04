@@ -194,14 +194,14 @@ Root = ->
   <ReactRedux.Provider store={store}><PlayListContainer /></ReactRedux.Provider>
 
 $(document).ready ->
-  window.map = L.map('map').setView([45, 0], 1)
+  window.map = L.map('map').setView([10, 0], 1)
   map.addLayer(new L.Google('HYBRID'))
   window.player = null
   React.render <Root />, document.getElementById('playlist')
 
   L.geoJson GEO_JSON,
     onEachFeature: (feature, layer) ->
-      store.dispatch type: 'ADD_TO_QUEUE', properties: feature.properties
+      store.dispatch type: 'ADD_TO_QUEUE', properties: Object.assign({}, feature.properties, coordinates: feature.geometry.coordinates)
     pointToLayer: (feature, latlng) ->
       L.circleMarker latlng,
         radius: 8,
@@ -216,6 +216,20 @@ $(document).ready ->
 
   store.dispatch type: 'SHUFFLE_QUEUE'
   setTimeout (-> store.dispatch type: 'CACHE_FIRST'), 500
+
+  window.marker = L.marker([52.2510527778, 21.0113277778], {icon: L.icon({
+      iconUrl: '/assets/namface.png',
+      iconSize:     [38, 55]
+  });}).addTo(map);
+
+  lastLoc = [52.2510527778, 21.0113277778]
+
+  store.subscribe ->
+    state = mapStateToProps(store.getState(state))
+    newLoc = state.items[state.currentActive].coordinates
+    if !marker.getLatLng().equals(newLoc)
+      console.log newLoc
+      marker.setLatLng lat: newLoc[1], lng: newLoc[0]
 
 GEO_JSON = {
     "type": "FeatureCollection",
