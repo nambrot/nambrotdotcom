@@ -218,7 +218,7 @@ $(document).ready ->
   setTimeout (-> store.dispatch type: 'CACHE_FIRST'), 500
 
   window.marker = L.marker([52.2510527778, 21.0113277778], {icon: L.icon({
-      iconUrl: '/assets/namface.png',
+      iconUrl:  "<%= image_path 'namface' %>",
       iconSize:     [38, 55]
   });}).addTo(map);
 
