@@ -6,6 +6,24 @@
 @import "bourbon";
 @import "_globals.css.scss";
 
+#home {
+  @include transition(all ease 0.3s);
+  position: fixed;
+  left: 50px;
+  top: 0;
+  color: #525252;
+  background-color: white;
+  padding: 2px 5px 5px 5px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 1px 1px 12px 2px rgba(10, 10, 10, 0.5);
+
+  &:hover {
+    padding: 10px 20px 20px 20px;
+    text-decoration: underline;
+  }
+}
+
 #aroundtheworld-container {
   position: fixed;
   height: 100%;
@@ -19,13 +37,9 @@
   position: fixed;
   bottom: 0px;
   left: 0px;
-  width: 40%;
-  height: 50%;
-  opacity: 0.3;
-
-  &:hover {
-    opacity: 0.7;
-  }
+  opacity: 1;
+  width: 100%;
+  height: 100%;
 }
 
 #global-nav {
@@ -37,7 +51,7 @@
   position: fixed;
   right: 0px;
   bottom: 0%;
-  width: 60%;
+  width: 45%;
   height: 150px;
   &:hover, &.hover {
     height: 50%;
@@ -112,11 +126,13 @@
 
 .youtubeplayer {
   position: fixed;
-  top: 0px;
-  height: 100%;
-  width: 100%;
   background: white;
   left: 0;
+
+  height: 55%;
+  width: 55%;
+  bottom: 0px;
+  z-index: 100;
 
   &.hidden {
     display: none;

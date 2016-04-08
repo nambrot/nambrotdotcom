@@ -5,6 +5,7 @@
 
 internalState = {}
 initalPlayListHint = false
+cacheSize = 15
 
 emptyReducer = (state = { firstPlay: false, zoomedIn: false }, action) ->
   switch action.type
@@ -21,7 +22,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
   nextId = (id) ->
     state.queue[(indexOf(id) + 1) % state.queue.length]
 
-  preloadVideos = (id, count = 2) ->
+  preloadVideos = (id, count = 5) ->
     return if count == 0
     newId = nextId(id)
     setTimeout (->
@@ -48,8 +49,19 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
           store.dispatch type: 'PLAY_ENDED', id: id if event.data == 0
           store.dispatch type: 'PAUSE_VIDEO', id: id if event.data == 2
     })
+  removeVideo = (id, player) ->
+    player.destroy()
+    $("#cachedVideo#{id}").remove()
   addToCache = (preloadCache, id, autoplay = true) ->
-    Object.assign {}, preloadCache, "#{id}": { ytPlayer: cacheVideo(id, autoplay) }
+    newVideo = cacheVideo(id, autoplay)
+    newPreloadCache = null
+    if _.size(preloadCache) > cacheSize
+      firstKey = _.keys(preloadCache)[0]
+      removeVideo(firstKey, state.preloadCache[firstKey].ytPlayer)
+      newPreloadCache = _.omitBy(preloadCache, (val, key) -> key == firstKey)
+    else
+      newPreloadCache = preloadCache
+    Object.assign {}, newPreloadCache, "#{id}": { ytPlayer: newVideo }
   hideVideo = (id) ->
     $("#cachedVideo#{id}").addClass('hidden')
     state.preloadCache[id].ytPlayer.pauseVideo()
@@ -84,7 +96,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
       playVideo(id)
       timeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: id), 3000
       if state.zoomedIn
-        map.setView [10, 0], 1
+        map.setView [-20, -40], 2
       Object.assign {}, state, nextPlayTimeout: timeout, playerState: 'play', zoomedIn: false
     when 'PLAY_VIDEO'
       emptyStore.dispatch type: 'FIRST_PLAY'
@@ -94,7 +106,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
 
       if state.currentActive == indexOf(action.id)
         if state.zoomedIn
-          map.setView [10, 0], 1
+          map.setView [-20, -40], 2
         Object.assign {}, state, zoomedIn: false
       else
         if state.preloadCache[action.id]
@@ -115,7 +127,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
 
       if state.currentActive == indexOf(id)
         if state.zoomedIn
-          map.setView [10, 0], 1
+          map.setView [-20, -40], 2
         newState = Object.assign {}, state, playerState: 'play', zoomedIn: false
         unless state.nextPlayTimeout
           newState.nextPlayTimeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: id), 3000
@@ -126,6 +138,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
           queueReducer(state, { type: 'PLAY_VIDEO', id: action.id })
         else
           state.preloadCache[id].ytPlayer.pauseVideo()
+          state.preloadCache[id].ytPlayer.setPlaybackQuality('hd720')
           state
     when 'PLAY_ENDED'
       clearTimeout(state.nextPlayTimeout)
@@ -142,6 +155,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
           weirdstate = mapStateToProps(store.getState())
           newLoc = weirdstate.items[weirdstate.currentActive].coordinates
           map.setView [newLoc[1], newLoc[0]], 10
+          map.panBy L.point(-200, 0), animate: false
         Object.assign {}, state, nextPlayTimeout: null, playerState: 'pause', zoomedIn: true
       else
         state
@@ -246,7 +260,7 @@ Root = ->
   <ReactRedux.Provider store={store}><PlayListContainer /></ReactRedux.Provider>
 
 $(document).ready ->
-  window.map = L.map('map').setView([10, 0], 1)
+  window.map = L.map('map').setView([-20, -40], 2)
   map.addLayer(new L.Google('HYBRID'))
   window.player = null
   React.render <Root />, document.getElementById('playlist')
@@ -284,10 +298,11 @@ $(document).ready ->
                       newLoc = state.items[state.currentActive].coordinates
                       if state.zoomedIn
                         store.dispatch type: 'CONTINUE_PLAY'
-                        map.setView [10, 0], 1
+                        map.setView [-20, -40], 2
                       else
                         store.dispatch type: 'USER_PAUSE'
                         map.setView [newLoc[1], newLoc[0]], 10
+                        map.panBy L.point(-200, 0), animate: false
 
   lastLoc = [52.2510527778, 21.0113277778]
 
