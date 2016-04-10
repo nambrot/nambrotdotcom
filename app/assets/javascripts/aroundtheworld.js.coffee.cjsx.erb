@@ -96,7 +96,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
       playVideo(id)
       timeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: id), 3000
       if state.zoomedIn
-        map.setView [-20, -40], 2
+        map.setView [-35, -130], 2
       Object.assign {}, state, nextPlayTimeout: timeout, playerState: 'play', zoomedIn: false
     when 'PLAY_VIDEO'
       emptyStore.dispatch type: 'FIRST_PLAY'
@@ -105,20 +105,35 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
         hideVideo state.queue[state.currentActive]
 
       if state.currentActive == indexOf(action.id)
-        if state.zoomedIn
-          map.setView [-20, -40], 2
-        Object.assign {}, state, zoomedIn: false
+        if state.playerState == 'play'
+          if state.preloadCache[action.id].ytPlayer?
+            newId = action.id
+            showVideo(newId)
+            if state.preloadCache[action.id].ytPlayer?.getPlayerState() == 3
+              timeout == null
+            else
+              timeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: newId), 3000
+            Object.assign {}, state, currentActive: indexOf(newId), nextPlayTimeout: timeout, playerState: 'play', zoomedIn: false
+          else
+            setTimeout (-> store.dispatch type: 'PLAY_VIDEO', id: action.id), 100
+            state
+        else
+          if state.zoomedIn
+            map.setView [-35, -130], 2
+          Object.assign {}, state, zoomedIn: false
       else
         if state.preloadCache[action.id]
           newId = action.id
           showVideo(newId)
-
-          timeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: newId), 3000
+          if state.preloadCache[action.id].ytPlayer?.getPlayerState() == 3
+            timeout == null
+          else
+            timeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: newId), 3000
 
           Object.assign {}, state, currentActive: indexOf(newId), nextPlayTimeout: timeout, playerState: 'play', zoomedIn: false
         else
-          setTimeout (-> store.dispatch type: 'PLAY_VIDEO', id: action.id), 300
-          queueReducer(state, { type: 'PRELOAD_VIDEO', id: action.id })
+          setTimeout (-> store.dispatch type: 'PLAY_VIDEO', id: action.id), 100
+          Object.assign {}, queueReducer(state, { type: 'PRELOAD_VIDEO', id: action.id }), currentActive: indexOf(action.id), nextPlayTimeout: null
     when 'INITIAL_AUTO_PLAY_STARTED'
       id = action.id
       unless initalPlayListHint
@@ -127,7 +142,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
 
       if state.currentActive == indexOf(id)
         if state.zoomedIn
-          map.setView [-20, -40], 2
+          map.setView [-35, -130], 2
         newState = Object.assign {}, state, playerState: 'play', zoomedIn: false
         unless state.nextPlayTimeout
           newState.nextPlayTimeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: id), 3000
@@ -155,7 +170,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
           weirdstate = mapStateToProps(store.getState())
           newLoc = weirdstate.items[weirdstate.currentActive].coordinates
           map.setView [newLoc[1], newLoc[0]], 10
-          map.panBy L.point(-200, 0), animate: false
+          map.panBy L.point(-400, 0), animate: false
         Object.assign {}, state, nextPlayTimeout: null, playerState: 'pause', zoomedIn: true
       else
         state
@@ -260,7 +275,7 @@ Root = ->
   <ReactRedux.Provider store={store}><PlayListContainer /></ReactRedux.Provider>
 
 $(document).ready ->
-  window.map = L.map('map').setView([-20, -40], 2)
+  window.map = L.map('map').setView([-35, -130], 2)
   map.addLayer(new L.Google('HYBRID'))
   window.player = null
   React.render <Root />, document.getElementById('playlist')
@@ -277,7 +292,6 @@ $(document).ready ->
         opacity: 1,
         fillOpacity: 0.8,
         title: "#{feature.properties.name}"
-      .on 'mouseover', (e) -> store.dispatch type: 'PRELOAD_VIDEO', id: feature.properties.id
       .on 'click', (e) -> store.dispatch type: 'PLAY_VIDEO', id: feature.properties.id
   .addTo(map)
 
@@ -298,11 +312,11 @@ $(document).ready ->
                       newLoc = state.items[state.currentActive].coordinates
                       if state.zoomedIn
                         store.dispatch type: 'CONTINUE_PLAY'
-                        map.setView [-20, -40], 2
+                        map.setView [-35, -130], 2
                       else
                         store.dispatch type: 'USER_PAUSE'
                         map.setView [newLoc[1], newLoc[0]], 10
-                        map.panBy L.point(-200, 0), animate: false
+                        map.panBy L.point(-400, 0), animate: false
 
   lastLoc = [52.2510527778, 21.0113277778]
 
@@ -746,7 +760,7 @@ GEO_JSON = {
             },
             "properties": {
                 "id": "L6NtPZdO3E0",
-                "name": "Kuala Lumpur",
+                "name": "Kuala Lumpur, Malaysia",
                 "description": "https://youtu.be/L6NtPZdO3E0"
             }
         },
@@ -1346,7 +1360,7 @@ GEO_JSON = {
             },
             "properties": {
                 "id": "Tnw07MXzIqQ",
-                "name": "Nghia Hi",
+                "name": "Nghia Hi, Vietnam",
                 "description": "https://youtu.be/Tnw07MXzIqQ"
             }
         },
