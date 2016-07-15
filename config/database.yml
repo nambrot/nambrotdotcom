@@ -19,4 +19,12 @@ test:
   timeout: 5000
 
 production:
-  url: <%= ENV["DATABASE_URL"] %>
+  adapter: postgresql
+  pool: 5
+  host: localhost
+  username: ENV['POSTGRES_USER']
+  password: ENV['POSTGRES_PASSWORD']
+  # please see the update below about using hostnames to
+  # access linked services via docker-compose
+  host: postgres
+  port: 5432

@@ -1,0 +1,13 @@
+# memcached-service.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: memcached
+  labels:
+    name: memcached
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 11211
+  selector:
+    name: memcached

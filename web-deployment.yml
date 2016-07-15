@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: web-deployment
+spec:
+  strategy:
+    type: RollingUpdate
+  replicas: 2
+  selector:
+    matchLabels:
+      name: web
+  template:
+    metadata:
+      labels:
+        name: web
+    spec:
+      containers:
+      - image: gcr.io/nambrotdotcom/nambrotdotcom-app:latest
+        env:
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: secrets
+                key: postgrespassword
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: secrets
+                key: postgresuser
+          - name: RAILS_ENV
+            value: production
+          - name: SECRET_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: secrets
+                key: railssecret
+        name: web
+        ports:
+        - containerPort: 3000
+          name: http-server
