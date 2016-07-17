@@ -35,6 +35,7 @@ rails:
   - docker run $CONTAINER_TEST_IMAGE bundle exec rake test
  
 release-image:
+  image: gitlab/dind
   stage: deploy
   script:
     - docker pull $CONTAINER_TEST_IMAGE
