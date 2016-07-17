@@ -23,8 +23,8 @@ before_script:
   - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" registry.gitlab.com
 
 variables:
-  CONTAINER_TEST_IMAGE: registry.example.com/nambrot/nambrotdotcom:$CI_BUILD_REF_NAME
-  CONTAINER_RELEASE_IMAGE: registry.example.com/nambrot/nambrotdotcom:latest
+  CONTAINER_TEST_IMAGE: registry.gitlab.com/nambrot/nambrotdotcom:$CI_BUILD_REF_NAME
+  CONTAINER_RELEASE_IMAGE: registry.gitlab.com/nambrot/nambrotdotcom:latest
 
 # Optional - Delete if not using `rubocop`
 rails:
