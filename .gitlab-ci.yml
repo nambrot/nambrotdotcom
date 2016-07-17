@@ -35,7 +35,7 @@ rails:
   - docker run $CONTAINER_TEST_IMAGE bundle exec rake test
  
 release-image:
-  stage: release
+  stage: deploy
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
