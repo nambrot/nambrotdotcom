@@ -23,17 +23,29 @@ before_script:
   - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" registry.gitlab.com
 
 variables:
-  IMAGE: registry.gitlab.com/nambrot/nambrotdotcom
+  CONTAINER_TEST_IMAGE: registry.example.com/my-group/my-project:$CI_BUILD_REF_NAME
+  CONTAINER_RELEASE_IMAGE: registry.example.com/my-group/my-project:latest
 
 # Optional - Delete if not using `rubocop`
 rails:
+  image: gitlab/dind
+  stage: test
   script:
-  - bundle exec rake db:migrate
-  - bundle exec rake test
+  - docker pull $CONTAINER_TEST_IMAGE
+  - docker run $CONTAINER_TEST_IMAGE bundle exec rake test
+ 
+release-image:
+  stage: release
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE
+  only:
+    - master
   
 image-test:
   image: gitlab/dind
   stage: build
   script:
-  - docker build -t "$IMAGE:image-dind" .
-  - docker push "$IMAGE:image-dind"
+  - docker build --pull -t $CONTAINER_TEST_IMAGE .
+  - docker push $CONTAINER_TEST_IMAGE
