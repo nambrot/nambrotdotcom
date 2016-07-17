@@ -20,12 +20,21 @@ cache:
 # services such as redis or postgres
 before_script:
   - ruby -v                                   # Print out ruby version for debugging
-  - apt-get update && apt-get install -y nodejs
-  - gem install bundler  --no-ri --no-rdoc    # Bundler is not installed with the image
-  - bundle install -j $(nproc) --path vendor  # Install dependencies into ./vendor/ruby
+  - docker info
+  - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" registry.gitlab.com
+
+variables:
+  IMAGE: registry.gitlab.com/nambrot/nambrotdotcom
 
 # Optional - Delete if not using `rubocop`
 rails:
   script:
   - bundle exec rake db:migrate
   - bundle exec rake test
+  
+image-test:
+  image: gitlab/dind
+  stage: build
+  script:
+  - docker build -t "$IMAGE:image-dind" .
+  - docker push "$IMAGE:image-dind"
