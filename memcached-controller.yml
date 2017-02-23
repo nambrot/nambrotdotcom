@@ -17,3 +17,7 @@ spec:
       containers:
       - image: memcached
         name: memcached
+        resources:
+          requests:
+            cpu: 50m
+            memory: 25Mi

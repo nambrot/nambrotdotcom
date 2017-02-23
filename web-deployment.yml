@@ -16,6 +16,10 @@ spec:
     spec:
       containers:
       - image: gcr.io/nambrotdotcom/nambrotdotcom-app:latest
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
         env:
           - name: POSTGRES_PASSWORD
             valueFrom:

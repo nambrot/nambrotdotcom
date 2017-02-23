@@ -11,6 +11,7 @@ production:
   api_secret: crFJ4XzRs3toVE7SFqLMTiM5pes
   enhance_image_tag: true
   static_image_support: true
+  secure: true
 test:
   cloud_name: nambrot
   api_key: '339963851661517'
