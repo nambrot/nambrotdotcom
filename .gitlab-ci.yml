@@ -33,7 +33,7 @@ rails:
   script:
   - docker pull $CONTAINER_TEST_IMAGE
   - docker run $CONTAINER_TEST_IMAGE bundle exec rake test
- 
+
 release-image:
   image: gitlab/dind
   stage: deploy
@@ -43,10 +43,11 @@ release-image:
     - docker push $CONTAINER_RELEASE_IMAGE
   only:
     - master
-  
+
 image-test:
-  image: gitlab/dind
+  image: docker:1.13-dind
   stage: build
   script:
-  - docker build --pull -t $CONTAINER_TEST_IMAGE .
+  - docker pull $CONTAINER_RELEASE_IMAGE
+  - docker build --pull  --cache-from $CONTAINER_RELEASE_IMAGE -t $CONTAINER_TEST_IMAGE .
   - docker push $CONTAINER_TEST_IMAGE
