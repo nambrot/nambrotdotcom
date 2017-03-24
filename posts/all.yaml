@@ -1,0 +1,233 @@
+---
+- id: 1
+  title: Heroku Dyno on Steroids
+  summary: How to get more out of your Heroku Dyno
+  tags:
+  - Rails
+  - Development
+  created_at: '2013-08-01T11:57:31.644Z'
+- id: 2
+  title: Facebook Photo Browser - a prototype
+  summary: For a couple weeks, I have been working on an idea that I hope will develop
+    into something greater in the next months. While that idea involved mainly theoretical
+    and operational issues, I wanted to keep my practical skills inline and since
+    I have been reading a lot about web applications and especially Backbone.js, I
+    decided to just play around with it. I ended up writing a small prototype for
+    a Facebook Photo Browser based on the Graph API.
+  tags:
+  - Development
+  created_at: '2013-08-12T14:58:08.931Z'
+- id: 3
+  title: How to disagree with your partner
+  summary: Over the course of [Credport](https://www.credport.org) (which is nearly
+    a year now), I have made some very invaulable experiences in terms of disagreeing
+    with your partner that I'd like to share for people who may be in the similar
+    situation.
+  tags:
+  - Personal
+  - Startups
+  created_at: '2013-08-12T14:59:21.739Z'
+- id: 4
+  title: Anatomy of an About Page Redesign
+  summary: "It's this time of the year again. Every once in a while comes that twitch,
+    that realization that maybe, I should redo my website. Said and done, you are
+    looking at the fourth revision of it. It all started with a [Wordpress Blog](http://mapsoffline.wordpress.com/)
+    for [Maps Offline](/mapsoffline), then a Joomla CMS for [Nam's Remote](/namsremote),
+    then an iWeb site, then a basic Rails site and now hopefully a slightly more polished
+    version. Back then, I also had very modest site titles such as \"Nambrot.com -
+    Showcase of Incredibility\".\r\n\r\nI wanted to take this opportunity and talk
+    a bit about how I have approached this redesign."
+  tags:
+  - Development
+  created_at: '2013-08-16T19:51:58.236Z'
+- id: 10
+  title: On How I Met Your Mother
+  summary: "With the series final still in somewhat fresh memory, I wanted to write
+    down some words on what I can only describe as a profound emotional reaction I
+    had last night.\r\n"
+  tags:
+  - Personal
+  created_at: '2014-04-01T19:08:49.868Z'
+- id: 13
+  title: The Tale of Credport
+  summary: Get ready for this 4000+ word behemoth that tells the story of Credport.
+    This is a post that recaps the product and business decisions we made over the
+    course of Credport. Prepare for a long post with a mix of high-level overview
+    and deep comments.
+  tags:
+  - Personal
+  - Startups
+  created_at: '2014-06-06T14:35:27.450Z'
+- id: 6
+  title: Jumping back into college
+  summary: If you have read my [last post](http://nambrot.com/posts/5-finding-your-passion-is-supposed-to-be-easy),
+    you know that I'm on a mission to address my fears of regret and failure. The
+    game plan is to trust and do. So why on earth do I think college would be a good
+    place to do so?
+  tags:
+  - Personal
+  created_at: '2013-09-02T20:46:47.436Z'
+- id: 7
+  title: Running an Intro to Web Development
+  summary: For quite some time now, I have seen people become more and more interested
+    in startups and buildings products. There are many reasons why startups are becoming
+    hip but I believe a fundemental one is the sheer reduction in resources needed
+    to get something out of the door. I attribute a lot of my experience to the fact
+    that I stumbled upon the powerful combination of Ruby on Rails and Heroku, so
+    I decided to give back and give people the opportunity to be enlightened as well
+    :)
+  tags:
+  - Development
+  created_at: '2013-11-13T18:32:05.489Z'
+- id: 18
+  title: My crazy SF story
+  summary: San Francisco has always something exciting to offer.
+  tags: []
+  created_at: '2014-11-25T02:04:20.724Z'
+- id: 12
+  title: The Most Spontaneous Thing I Have Done So Far
+  summary: Instead of going home to Boston after showing my parents NYC and DC, I
+    decided to hop on the flight to Costa Rica the next day. Read about some thoughts
+    while they are fresh
+  tags:
+  - Personal
+  created_at: '2014-06-02T03:28:33.757Z'
+- id: 8
+  title: Strength of Paternalistic Arguments
+  summary: A repost from my final paper for my 'Introdution to Ethics' class.
+  tags:
+  - Philosophy
+  created_at: '2014-02-26T15:11:34.725Z'
+- id: 11
+  title: 'Finding Your Passion: An Update'
+  summary: "It's been a while since my[ last post on the topic](http://nambrot.com/posts/5-finding-your-passion-is-supposed-to-be-easy/),
+    so I figured I give some sort of status update. While things are not 100% set
+    and obvious yet, I feel a sense of clarity and comfort that I haven't felt in
+    a while. I'd like to share what led to this.\r\n"
+  tags:
+  - Personal
+  created_at: '2014-04-16T15:49:25.227Z'
+- id: 14
+  title: Credport Technical Post-mortem
+  summary: This is a companion post to our [Tale of Credport post](http://nambrot.com/posts/13-the-tale-of-credport/)
+    in which I will go into further detail about the technical problems we had and
+    decisions we made. You probably want to read that one before this one. Credport’s
+    evolution in technical design on both the front-end and the back-end effectively
+    coincided with our evolution from Boston/Webcred to Berlin/Credport.
+  tags:
+  - Development
+  - Startups
+  created_at: '2014-06-06T15:58:09.070Z'
+- id: 5
+  title: Finding your passion is supposed to be easy
+  summary: In this post, you get a glimpse into the inner workings of my brain and
+    how I currently feel about my situation of having incredibly opportunity, but
+    hints of self-doubts.
+  tags:
+  - Personal
+  created_at: '2013-09-02T20:28:07.188Z'
+- id: 20
+  title: Finding Cheap Flights - When Place matters
+  summary: Whatever people are willing to pay for, Airlines try to extract as much
+    revenue from that as possible. One way to do it is to account for variable demand
+    by place of booking, departure and arrival. Let’s see how you can reduce your
+    airfare by optimizing all three
+  tags:
+  - Travel
+  created_at: '2015-02-11T11:14:57.467Z'
+- id: 19
+  title: Finding Cheap Flights - When Time Matters
+  summary: This article is about how airfare is influenced by date and time, both
+    for the time of booking as well as the time of travel.
+  tags:
+  - Travel
+  created_at: '2015-02-11T11:09:40.662Z'
+- id: 24
+  title: Semi-Nomadism - a way of life
+  summary: 'In this post, I''m talking about the setup of my life after college. Warming:
+    A bunch of generalizations and strong opinions'
+  tags:
+  - Travel
+  - Personal
+  created_at: '2015-04-19T20:19:40.175Z'
+- id: 9
+  title: Find_each with custom ordering in Rails
+  summary: "In a recent project of mine I had to implement an activity feed. I have
+    been meaning to try out the proposed solution by [GiveGab](http://blog.givegab.com/post/75043413459/using-enumerations-to-make-a-faster-activity-feed-in)
+    which was a response to [ThoughtBot's approach](http://robots.thoughtbot.com/using-polymorphism-to-make-a-better-activity-feed-in-rails).
+    I especially liked GiveGab's elegant solution to address the issues ThoughtBot
+    had with the fan out on read approach by using Enumerations with find_each_in_batches
+    in the background to do the heavy-lifting in the database.\r\n"
+  tags:
+  - Rails
+  - Development
+  created_at: '2014-03-18T19:02:11.658Z'
+- id: 15
+  title: Make my visas more useful
+  summary: One of my greatest sources of frustration is my inability to travel spontaneously
+    and freely due to my Vietnamese citizenship. I compiled a list to make my existing
+    visas more useful.
+  tags:
+  - Travel
+  created_at: '2014-06-20T21:40:44.197Z'
+- id: 16
+  title: Chrome Extension Development with Bower, Grund and RequireJS
+  summary: I just wanted to start a chrome extension and figured I should check out
+    what all the hype with the frontend tooling scene is all about. The ecosystem
+    looks pretty amazing, however, it seemed like there wasn't a lot of content out
+    there on how to make the chrome-extension work with require-js for modular JS,
+    so I figured i'd write it down here.
+  tags:
+  - Development
+  created_at: '2014-06-23T22:39:44.444Z'
+- id: 17
+  title: Better Devise Password Reset UX
+  summary: A simple improvement to devise
+  tags:
+  - Rails
+  - Development
+  created_at: '2014-09-12T03:54:35.864Z'
+- id: 22
+  title: Finding Cheap Flights - Introduction
+  summary: I had some thoughts laying around, so I finally put it in a presentable
+    form.
+  tags:
+  - Travel
+  created_at: '2015-02-11T13:45:02.577Z'
+- id: 21
+  title: Finding Cheap Flights - Search Tools
+  summary: "This post presents some tools you can use to put that knowledge you have
+    learned into play to finally book your flight.\r\n"
+  tags:
+  - Travel
+  created_at: '2015-02-11T13:23:42.307Z'
+- id: 23
+  title: Snappy server-rendered web app with Rails/Webpack/React/Flux
+  summary: In this blog post, I show up to build a web application that combines the
+    benefits of server-rendered HTML and client-side JS
+  tags:
+  - Rails
+  - Development
+  created_at: '2015-04-13T13:50:35.798Z'
+- id: 25
+  title: How I turned away from the digital nomad lifestyle
+  summary: "\r\nIt's been a while since I have blogged and a lot has changed. Last
+    time on here, I wrote about the the choices I have made post-college to create
+    the optimal lifestyle for me and how I thought more people might want to consider
+    such lifestyle. As per usual, I've been learning a lot, thus been readjusting
+    what the optimal lifestyle means to me. Some of those learnings I want to share
+    here.\r\n"
+  tags:
+  - Travel
+  - Personal
+  created_at: '2016-01-11T16:07:29.841Z'
+- id: 26
+  title: Auto-generated API documentation
+  summary: Let's face it, you are probably not documenting as much as you should.
+    However, code is read a lot more than it is written. We often think about the
+    computer executing the code, but how often do you think about your fellow co-workers/co-programmers
+    when writing your code?
+  tags:
+  - Rails
+  - Development
+  created_at: '2016-02-02T04:10:02.054Z'

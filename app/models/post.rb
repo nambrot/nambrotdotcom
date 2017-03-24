@@ -1,15 +1,36 @@
-class Post < ActiveRecord::Base
-  self.table_name = "blog_posts"
+class Post
 
-  validates :title, presence: true, length: { minimum: 10, maximum: 66 }
-  validates :summary,  presence: true, length: { minimum: 10 }
-  validates :body,  presence: true, length: { minimum: 10 }
-  validates :blogger_id, presence: true
+  attr_accessor :id, :title, :summary, :categories, :created_at
 
-  belongs_to :blogger, :polymorphic => true
-  has_and_belongs_to_many :categories
+  def initialize(id, title, summary, categories, created_at)
+    @id = id
+    @title = title
+    @summary = summary
+    @categories = categories
+    @created_at = DateTime.parse(created_at)
+  end
 
   def to_param
     "#{id}-#{title.parameterize}"
+  end
+
+  def body
+    @body ||= File.read("#{Rails.root.to_s}/posts/#{id}.md")
+  end
+
+  def self.all
+    @posts ||=
+      YAML
+        .load_file("#{Rails.root.to_s}/posts/all.yaml")
+        .map { |h| Post.new(h['id'], h['title'], h['summary'], h['tags'], h['created_at']) }
+        .sort_by { |post| -post.created_at.to_i }
+  end
+
+  def to_partial_path
+    'posts/post'
+  end
+
+  def persisted?
+    true
   end
 end

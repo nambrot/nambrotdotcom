@@ -2,11 +2,9 @@ Nambrotdotcom::Application.routes.draw do
   get "madagascar$", to: redirect("madagascar/")
   get "madagascar/" => "madagascar#index"
   get "madagascar/:anything" => "madagascar#index"
-  devise_for :users, :skip => [:registration], :sign_out_via => [ :get ]
   # mount Blogit::Engine => "/", :as => :blog
   resources :posts
   root 'posts#index'
-  mount Gallery::Engine => "gallery"
   get 'about' => 'high_voltage/pages#show', :id => 'about'
   get 'aroundtheworld' => 'high_voltage/pages#show', :id => 'aroundtheworld'
   get 'namsremote' => 'high_voltage/pages#show', :id => 'namsremote'
@@ -16,7 +14,6 @@ Nambrotdotcom::Application.routes.draw do
   post 'forms/fire' => "forms#fire"
   get 'blog' => "blogit/posts#index"
   get 'blog/:id' => 'blogit/posts#show'
-  get 'clear_cache' => 'admin#clear_cache'
   get 'multi_part_tweets' => 'multi_part_tweets#show'
 
   # The priority is based upon order of creation: first created -> highest priority.

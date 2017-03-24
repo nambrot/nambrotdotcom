@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 ruby "2.2.3"
 
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
   gem 'rails_serve_static_assets'
 end
@@ -23,20 +22,16 @@ group :development do
   gem 'guard'
   gem 'rack-livereload'
   gem 'guard-livereload'
-
-  gem 'sqlite3'
   # gem 'debugger'
 end
 
 gem 'unicorn'
 gem 'acts_as_taggable'
 gem 'cloudinary'
-gem 'devise'
 gem 'redcarpet'
 gem 'high_voltage', '>= 1.2.4'
 gem 'bourbon'
 gem 'foundation-rails', '5.4.5'
-gem 'gallery', '~> 0.0.16'
 gem 'actionpack-action_caching'
 gem 'dalli'
 gem 'newrelic_rpm'
