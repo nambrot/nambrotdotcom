@@ -1,10 +1,10 @@
 <header class="blog_post_header">
-  <h1><%= link_to post.title, post %></h1>
+  <h1><%= link_to post.title, post_path(post.to_param) %></h1>
   <h6><%= time_tag(post.created_at, format: "%B %Y") %>
   <% if post.categories.any? %>
     <br />
     <% for category in post.categories do %>
-      <%= link_to category.name, posts_path(tags: category.name) %>
+      <%= link_to category, posts_path(tags: category) %>
     <% end %>
   <% end %>
   </h6>
