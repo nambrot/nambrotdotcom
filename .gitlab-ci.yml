@@ -1,15 +1,9 @@
 # This file is a template, and might need editing before it works on your project.
 # Official language image. Look for the different tagged releases at:
 # https://hub.docker.com/r/library/ruby/tags/
-image: "ruby:2.2.3"
-
-# Pick zero or more services to be used on all builds.
-# Only needed when using a docker container to run your tests in.
-# Check out: http://docs.gitlab.com/ce/ci/docker/using_docker_images.html#what-is-service
+image: docker:1.13-dind
 services:
-  - mysql:latest
-  - redis:latest
-  - postgres:latest
+  - docker:dind
 
 # Cache gems in between builds
 cache:
@@ -33,7 +27,7 @@ rails:
   script:
   - docker pull $CONTAINER_TEST_IMAGE
   - docker run $CONTAINER_TEST_IMAGE bundle exec rake test
- 
+
 release-image:
   image: gitlab/dind
   stage: deploy
@@ -43,10 +37,11 @@ release-image:
     - docker push $CONTAINER_RELEASE_IMAGE
   only:
     - master
-  
+
 image-test:
   image: gitlab/dind
   stage: build
   script:
+  - docker pull $CONTAINER_RELEASE_IMAGE
   - docker build --pull -t $CONTAINER_TEST_IMAGE .
   - docker push $CONTAINER_TEST_IMAGE
