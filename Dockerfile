@@ -6,5 +6,6 @@ ADD Gemfile /myapp/Gemfile
 ADD Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install --path vendor
 ADD . /myapp
+RUN bundle exec rake assets:clean
 RUN bundle exec rake assets:precompile
 CMD bundle exec rails server -b 0.0.0.0
