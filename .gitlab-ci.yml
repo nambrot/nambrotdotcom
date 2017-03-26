@@ -2,7 +2,8 @@
 # Official language image. Look for the different tagged releases at:
 # https://hub.docker.com/r/library/ruby/tags/
 image: docker:1.13-dind
-
+services:
+  - docker:1.13-dind
 # Cache gems in between builds
 cache:
   paths:
@@ -51,8 +52,6 @@ deploy_to_gke:
 
 image-test:
   stage: build
-  services:
-  - docker:1.13-dind
   script:
   - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" registry.gitlab.com
   - docker pull $CONTAINER_BASE_IMAGE
