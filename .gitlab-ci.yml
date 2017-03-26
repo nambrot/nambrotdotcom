@@ -3,7 +3,7 @@
 # https://hub.docker.com/r/library/ruby/tags/
 image: docker:1.13-dind
 services:
-  - docker:dind
+  - docker:1.13-dind
 
 # Cache gems in between builds
 cache:
@@ -19,7 +19,7 @@ before_script:
 variables:
   CONTAINER_TEST_IMAGE: registry.gitlab.com/nambrot/nambrotdotcom:$CI_BUILD_REF_NAME
   CONTAINER_RELEASE_IMAGE: registry.gitlab.com/nambrot/nambrotdotcom:latest
-
+  DOCKER_HOST: tcp://docker:2375
 # Optional - Delete if not using `rubocop`
 rails:
   image: gitlab/dind
@@ -39,9 +39,8 @@ release-image:
     - master
 
 image-test:
-  image: gitlab/dind
   stage: build
   script:
   - docker pull $CONTAINER_RELEASE_IMAGE
-  - docker build --pull -t $CONTAINER_TEST_IMAGE .
+  - docker build --pull  --cache-from $CONTAINER_RELEASE_IMAGE -t $CONTAINER_TEST_IMAGE .
   - docker push $CONTAINER_TEST_IMAGE
