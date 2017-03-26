@@ -1,9 +1,7 @@
 # This file is a template, and might need editing before it works on your project.
 # Official language image. Look for the different tagged releases at:
 # https://hub.docker.com/r/library/ruby/tags/
-image: docker:1.13-dind
-services:
-  - docker:1.13-dind
+image: docker:1.13
 
 # Cache gems in between builds
 cache:
@@ -31,7 +29,6 @@ rails:
   - docker run $CONTAINER_TEST_IMAGE bundle exec rake test
 
 release-image:
-  image: google/cloud-sdk
   stage: deploy
   script:
     - docker pull $CONTAINER_TEST_IMAGE
@@ -59,6 +56,8 @@ deploy_to_gke:
 
 image-test:
   stage: build
+  services:
+  - docker:1.13-dind
   script:
   - docker pull $CONTAINER_BASE_IMAGE
   - docker build --pull  --cache-from $CONTAINER_RELEASE_IMAGE -t $CONTAINER_TEST_IMAGE .
