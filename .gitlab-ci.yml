@@ -18,8 +18,8 @@ before_script:
   - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" registry.gitlab.com
 
 variables:
-  CONTAINER_TEST_IMAGE: registry.gitlab.com/nambrot/nambrotdotcom:$CI_BUILD_REF_NAME
-  CONTAINER_RELEASE_IMAGE: registry.gitlab.com/nambrot/nambrotdotcom:latest
+  CONTAINER_TEST_IMAGE: registry.gitlab.com/nambrot/nambrotdotcom:$CI_COMMIT_SHA
+  CONTAINER_RELEASE_IMAGE: registry.gitlab.com/nambrot/nambrotdotcom:prod-$CI_COMMIT_SHA
   DOCKER_HOST: tcp://docker:2375
 # Optional - Delete if not using `rubocop`
 rails:
@@ -30,7 +30,7 @@ rails:
   - docker run $CONTAINER_TEST_IMAGE bundle exec rake test
 
 release-image:
-  image: gitlab/dind
+  image: google/cloud-sdk
   stage: deploy
   script:
     - docker pull $CONTAINER_TEST_IMAGE
@@ -38,6 +38,21 @@ release-image:
     - docker push $CONTAINER_RELEASE_IMAGE
   only:
     - master
+
+deploy_to_gke:
+  image: google/cloud-sdk
+  stage: deploy
+  script:
+    - echo "$GOOGLE_KEY" > key.json
+    - gcloud auth activate-service-account --key-file key.json
+    - gcloud config set compute/zone us-central1-f
+    - gcloud config set project nambrotdotcom
+    - gcloud config set container/use_client_certificate True
+    - gcloud container clusters get-credentials nambrotdotcom
+    - kubectl rolling-update web-deployment --image=$CONTAINER_RELEASE_IMAGE
+  only:
+    - master
+  when: manual
 
 image-test:
   stage: build
