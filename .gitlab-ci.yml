@@ -19,6 +19,7 @@ before_script:
 
 variables:
   CONTAINER_TEST_IMAGE: registry.gitlab.com/nambrot/nambrotdotcom:$CI_COMMIT_SHA
+  CONTAINER_BASE_IMAGE: registry.gitlab.com/nambrot/nambrotdotcom:$CI_COMMIT_REF_NAME
   CONTAINER_RELEASE_IMAGE: registry.gitlab.com/nambrot/nambrotdotcom:prod-$CI_COMMIT_SHA
   DOCKER_HOST: tcp://docker:2375
 # Optional - Delete if not using `rubocop`
@@ -34,6 +35,8 @@ release-image:
   stage: deploy
   script:
     - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_BASE_IMAGE
+    - docker push $CONTAINER_BASE_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
     - docker push $CONTAINER_RELEASE_IMAGE
   only:
@@ -57,6 +60,6 @@ deploy_to_gke:
 image-test:
   stage: build
   script:
-  - docker pull $CONTAINER_RELEASE_IMAGE
+  - docker pull $CONTAINER_BASE_IMAGE
   - docker build --pull  --cache-from $CONTAINER_RELEASE_IMAGE -t $CONTAINER_TEST_IMAGE .
   - docker push $CONTAINER_TEST_IMAGE
