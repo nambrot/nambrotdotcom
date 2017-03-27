@@ -45,7 +45,7 @@ deploy_to_gke:
     - gcloud config set project nambrotdotcom
     - gcloud config set container/use_client_certificate True
     - gcloud container clusters get-credentials nambrotdotcom
-    - kubectl rolling-update web-deployment --image=$CONTAINER_RELEASE_IMAGE
+    - kubectl set image web-deployment web=$CONTAINER_RELEASE_IMAGE
   only:
     - master
   when: manual
