@@ -8,7 +8,7 @@ services:
 cache:
   paths:
     - vendor/ruby
-    - public/assets
+    - myapp/public/assets
 
 variables:
   CONTAINER_TEST_IMAGE: registry.gitlab.com/nambrot/nambrotdotcom:$CI_COMMIT_SHA
