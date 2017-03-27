@@ -55,5 +55,5 @@ image-test:
   script:
   - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" registry.gitlab.com
   - docker pull $CONTAINER_BASE_IMAGE
-  - docker build --pull  --cache-from $CONTAINER_RELEASE_IMAGE -t $CONTAINER_TEST_IMAGE .
+  - docker build --pull  --cache-from $CONTAINER_BASE_IMAGE -t $CONTAINER_TEST_IMAGE .
   - docker push $CONTAINER_TEST_IMAGE
