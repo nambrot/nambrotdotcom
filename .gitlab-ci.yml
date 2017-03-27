@@ -2,8 +2,7 @@
 # Official language image. Look for the different tagged releases at:
 # https://hub.docker.com/r/library/ruby/tags/
 image: docker:1.13-dind
-services:
-  - docker:1.13-dind
+
 # Cache gems in between builds
 cache:
   paths:
@@ -15,9 +14,13 @@ variables:
   CONTAINER_BASE_IMAGE: registry.gitlab.com/nambrot/nambrotdotcom:$CI_COMMIT_REF_NAME
   CONTAINER_RELEASE_IMAGE: registry.gitlab.com/nambrot/nambrotdotcom:prod-$CI_COMMIT_SHA
   DOCKER_HOST: tcp://docker:2375
+  DOCKER_DRIVER: overlay
+
 # Optional - Delete if not using `rubocop`
 rails:
   stage: test
+  services:
+  - docker:1.13-dind
   script:
   - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" registry.gitlab.com
   - docker pull $CONTAINER_TEST_IMAGE
@@ -25,6 +28,8 @@ rails:
 
 release-image:
   stage: deploy
+  services:
+  - docker:1.13-dind
   script:
     - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" registry.gitlab.com
     - docker pull $CONTAINER_TEST_IMAGE
@@ -52,6 +57,8 @@ deploy_to_gke:
 
 image-test:
   stage: build
+  services:
+  - docker:1.13-dind
   script:
   - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" registry.gitlab.com
   - docker pull $CONTAINER_BASE_IMAGE
