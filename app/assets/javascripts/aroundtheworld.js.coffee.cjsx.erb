@@ -40,7 +40,9 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
         autohide: 1,
         autoplay: autoplay,
         controls: 0,
-        showinfo: 0
+        showinfo: 0,
+        rel: 0,
+        modestbranding: 1
       },
       events:
         onReady: (event) -> event.target.playVideo() if autoplay
