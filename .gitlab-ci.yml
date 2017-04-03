@@ -37,8 +37,6 @@ release-image:
     - docker push $CONTAINER_BASE_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
     - docker push $CONTAINER_RELEASE_IMAGE
-  only:
-    - master
 
 deploy_to_gke:
   image: google/cloud-sdk
