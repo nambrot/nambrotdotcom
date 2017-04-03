@@ -76,8 +76,7 @@ deploy_review:
       --docker-password=$GITLAB_BOT_USER_PASSWORD --docker-email=nambrot+gitlabbot@gmail.com
       --namespace=$CI_COMMIT_REF_NAME || true
     - >
-      helm upgrade kube-config/charts/review-app-chart
-      --install --name $CI_COMMIT_REF_NAME
+      helm upgrade $CI_COMMIT_REF_NAME kube-config/charts/review-app-chart --install
       --set namespace.name=$CI_COMMIT_REF_NAME,slugName=$GITLAB_BOT_USER_PASSWORD,image=$CONTAINER_RELEASE_IMAGE || true
     - kubectl set image deployment/nambrotdotcom nambrotdotcom-web=$CONTAINER_RELEASE_IMAGE --namespace=$CI_COMMIT_REF_NAME
   environment:
