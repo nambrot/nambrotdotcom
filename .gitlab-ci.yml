@@ -69,15 +69,15 @@ deploy_review:
     - gcloud config set project nambrotdotcom
     - gcloud config set container/use_client_certificate True
     - gcloud container clusters get-credentials nambrotdotcom
-    - kubectl create namespace $CI_COMMIT_REF_NAME
+    - kubectl create namespace $CI_COMMIT_REF_NAME || true
     - >
       kubectl create secret docker-registry registry.gitlab.com
       --docker-server=https://registry.gitlab.com --docker-username=namsgitlabbot
       --docker-password=$GITLAB_BOT_USER_PASSWORD --docker-email=nambrot+gitlabbot@gmail.com
-      --namespace=$CI_COMMIT_REF_NAME
+      --namespace=$CI_COMMIT_REF_NAME || true
     - >
       helm install kube-config/charts/review-app-chart
-      --set namespace.name=$CI_COMMIT_REF_NAME,slugName=$GITLAB_BOT_USER_PASSWORD,image=$CONTAINER_RELEASE_IMAGE
+      --set namespace.name=$CI_COMMIT_REF_NAME,slugName=$GITLAB_BOT_USER_PASSWORD,image=$CONTAINER_RELEASE_IMAGE || true
     - kubectl set image deployment/nambrotdotcom nambrotdotcom-web=$CONTAINER_RELEASE_IMAGE --namespace=$CI_COMMIT_REF_NAME
   environment:
     name: review/$CI_COMMIT_REF_NAME
