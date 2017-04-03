@@ -3,6 +3,12 @@
 # https://hub.docker.com/r/library/ruby/tags/
 image: docker:1.13-dind
 
+stages:
+  - build
+  - test
+  - package
+  - deploy
+
 # Cache gems in between builds
 cache:
   paths:
@@ -27,7 +33,7 @@ rails:
   - docker run $CONTAINER_TEST_IMAGE bundle exec rake test
 
 release-image:
-  stage: deploy
+  stage: package
   services:
   - docker:1.13-dind
   script:
@@ -38,7 +44,7 @@ release-image:
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
     - docker push $CONTAINER_RELEASE_IMAGE
 
-deploy_to_gke:
+deploy_to_prod:
   image: google/cloud-sdk
   stage: deploy
   script:
@@ -83,7 +89,7 @@ deploy_review:
     - master
 
 stop_review:
-  image: devth/helm-docker
+  image: devth/helm
   stage: deploy
   variables:
     GIT_STRATEGY: none
