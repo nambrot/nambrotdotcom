@@ -76,7 +76,8 @@ deploy_review:
       --docker-password=$GITLAB_BOT_USER_PASSWORD --docker-email=nambrot+gitlabbot@gmail.com
       --namespace=$CI_COMMIT_REF_NAME || true
     - >
-      helm upgrade --install kube-config/charts/review-app-chart
+      helm upgrade kube-config/charts/review-app-chart
+      --install --name $CI_COMMIT_REF_NAME
       --set namespace.name=$CI_COMMIT_REF_NAME,slugName=$GITLAB_BOT_USER_PASSWORD,image=$CONTAINER_RELEASE_IMAGE || true
     - kubectl set image deployment/nambrotdotcom nambrotdotcom-web=$CONTAINER_RELEASE_IMAGE --namespace=$CI_COMMIT_REF_NAME
   environment:
@@ -100,6 +101,7 @@ stop_review:
     - gcloud config set project nambrotdotcom
     - gcloud config set container/use_client_certificate True
     - gcloud container clusters get-credentials nambrotdotcom
+    - helm delete $CI_COMMIT_REF_NAME
     - kubectl delete namespace $CI_COMMIT_REF_NAME
   when: manual
   environment:
