@@ -1,0 +1,57 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.slugName }}
+    application: {{ .Values.applicationName }}
+    environment: {{ .Values.environment }}
+    tier: webapp
+    resource: deployment
+  name: {{ .Values.applicationName }}
+  namespace: {{ .Values.namespace.name }}
+spec:
+  replicas: {{ .Values.repliacaCount }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: {{ .Values.slugName }}
+        application: {{ .Values.applicationName }}
+        environment: {{ .Values.environment }}
+        tier: webapp
+    spec:
+      containers:
+      - env:
+        - name: RAILS_ENV
+          value: production
+        - name: SECRET_TOKEN
+          value: somethingsecretthatisreallyhardtoguessagainstpoopers
+        image: {{ .Values.image }}
+        imagePullPolicy: Always
+        name: {{ .Values.applicationName }}-web
+        ports:
+        - containerPort: 3000
+          name: http-server
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 50m
+            memory: 70Mi
+          limits:
+            memory: 85Mi
+        terminationMessagePath: /dev/termination-log
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: registry.gitlab.com
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

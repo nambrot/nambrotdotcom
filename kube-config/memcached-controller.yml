@@ -1,0 +1,23 @@
+# memcached-controller.yml
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: memcached
+  name: memcached-controller
+spec:
+  replicas: 1
+  selector:
+    name: memcached
+  template:
+    metadata:
+      labels:
+        name: memcached
+    spec:
+      containers:
+      - image: memcached
+        name: memcached
+        resources:
+          requests:
+            cpu: 50m
+            memory: 25Mi
