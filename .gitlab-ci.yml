@@ -77,11 +77,11 @@ deploy_review:
       --namespace=$CI_COMMIT_REF_NAME || true
     - >
       helm upgrade $CI_COMMIT_REF_NAME kube-config/charts/review-app-chart --install
-      --set namespace.name=$CI_COMMIT_REF_NAME,slugName=$CI_ENVIRONMENT_SLUG,image=$CONTAINER_RELEASE_IMAGE
+      --set namespace.name=$CI_COMMIT_REF_NAME,slugName=$CI_COMMIT_REF_SLUG,image=$CONTAINER_RELEASE_IMAGE
     - kubectl set image deployment/nambrotdotcom nambrotdotcom-web=$CONTAINER_RELEASE_IMAGE --namespace=$CI_COMMIT_REF_NAME
   environment:
     name: review/$CI_COMMIT_REF_NAME
-    url: https://$CI_ENVIRONMENT_SLUG.nambrot.com
+    url: https://$CI_COMMIT_REF_SLUG.nambrot.com
     on_stop: stop_review
   only:
     - branches
