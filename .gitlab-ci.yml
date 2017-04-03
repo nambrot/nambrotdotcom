@@ -23,7 +23,7 @@ rails:
   - docker:1.13-dind
   script:
   - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" registry.gitlab.com
-  - docker pull $CONTAINER_TEST_IMAGE
+  - docker pull $CONTAINER_TEST_IMAGE || true
   - docker run $CONTAINER_TEST_IMAGE bundle exec rake test
 
 release-image:
