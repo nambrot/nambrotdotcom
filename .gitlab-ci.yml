@@ -60,7 +60,7 @@ deploy_to_prod:
   when: manual
 
 deploy_review:
-  image: devth/helm
+  image: nambrot/google-cloud-sdk-helm
   stage: deploy
   script:
     - echo "$GOOGLE_SERVICE_KEY" > key.json
@@ -76,7 +76,7 @@ deploy_review:
       --docker-password=$GITLAB_BOT_USER_PASSWORD --docker-email=nambrot+gitlabbot@gmail.com
       --namespace=$CI_COMMIT_REF_NAME || true
     - >
-      helm install kube-config/charts/review-app-chart
+      helm upgrade --install kube-config/charts/review-app-chart
       --set namespace.name=$CI_COMMIT_REF_NAME,slugName=$GITLAB_BOT_USER_PASSWORD,image=$CONTAINER_RELEASE_IMAGE || true
     - kubectl set image deployment/nambrotdotcom nambrotdotcom-web=$CONTAINER_RELEASE_IMAGE --namespace=$CI_COMMIT_REF_NAME
   environment:
@@ -89,7 +89,7 @@ deploy_review:
     - master
 
 stop_review:
-  image: devth/helm
+  image: nambrot/google-cloud-sdk-helm
   stage: deploy
   variables:
     GIT_STRATEGY: none
