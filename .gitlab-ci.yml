@@ -77,7 +77,7 @@ deploy_review:
       --namespace=$CI_COMMIT_REF_NAME || true
     - >
       helm upgrade $CI_COMMIT_REF_NAME kube-config/charts/review-app-chart --install
-      --set namespace.name=$CI_COMMIT_REF_NAME,slugName=$GITLAB_BOT_USER_PASSWORD,image=$CONTAINER_RELEASE_IMAGE || true
+      --set namespace.name=$CI_COMMIT_REF_NAME,slugName=$CI_ENVIRONMENT_SLUG,image=$CONTAINER_RELEASE_IMAGE
     - kubectl set image deployment/nambrotdotcom nambrotdotcom-web=$CONTAINER_RELEASE_IMAGE --namespace=$CI_COMMIT_REF_NAME
   environment:
     name: review/$CI_COMMIT_REF_NAME
