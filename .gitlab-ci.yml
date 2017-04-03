@@ -56,7 +56,7 @@ deploy_to_gke:
   when: manual
 
 deploy_review:
-  image: devth/helm-docker
+  image: devth/helm
   stage: deploy
   script:
     - echo "$GOOGLE_SERVICE_KEY" > key.json
