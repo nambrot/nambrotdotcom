@@ -16,7 +16,7 @@ spec:
   tls:
   - hosts:
     - {{ .Values.slugName }}.nambrot.com
-    secretName: echoserver-tls
+    secretName: {{ .Values.slugName }}-tls
   rules:
   - host: {{ .Values.slugName }}.nambrot.com
     http:
