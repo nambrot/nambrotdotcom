@@ -25,7 +25,8 @@ module Nambrotdotcom
 
     config.assets.precompile += ['multi_part_tweets.js', 'multi_part_tweets.css', 'basic.css', 'basic.js', 'madagascar.css', 'madagascar.js', 'custom.modernizr.js', 'aroundtheworld.js', 'aroundtheworld.css']
     config.action_controller.default_url_options = { :trailing_slash => true }
-
+    config.lograge.enabled = true
+    config.lograge.formatter = Lograge::Formatters::Json.new
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
       address:              'smtp.gmail.com',
