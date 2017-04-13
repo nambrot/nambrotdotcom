@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+  PostNotFound = Class.new(StandardError)
+  rescue_from PostNotFound, with: :redirect_to_root
+
   def index
     @posts = Post.all
     if params[:tags]
@@ -7,8 +10,14 @@ class PostsController < ApplicationController
   end
 
   def show
-    NamsPaas.instrument('cool event', {foo: :bar})
     @post = Post.all.find { |post| post.id.to_s == params[:id].match(/^(\d+)(-|$)/)[1] }
+    raise PostNotFound unless @post
+  end
+
+  private
+
+  def redirect_to_root
+    redirect_to posts_path
   end
 
 end

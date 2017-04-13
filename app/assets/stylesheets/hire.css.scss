@@ -44,7 +44,7 @@
     position: relative;
     background-color: #FEFEFE;
     height: 700px;
-    
+
     .hire-card {
       border-radius: 5px;
       background-color:  white;
@@ -74,7 +74,7 @@
     }
 
     #hired-card {
-      
+
       header {
         text-align: center;
       }
@@ -87,7 +87,7 @@
     #tinder-card {
 
       -webkit-font-smoothing: antialiased;
-      
+
       .tooltip {
         background-color: rgba(29, 23, 23, 0.83);
         display: none;
@@ -143,7 +143,8 @@
       }
 
       img {
-        width: 100%
+        width: 100%;
+        -webkit-user-drag: none;
       }
 
       #metainfo {

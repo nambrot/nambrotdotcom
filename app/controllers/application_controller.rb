@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
     payload[:format] = request.format.try(:ref)
   end
 
+  def error_404
+    redirect_to root_path
+  end
+
   protected
   def rescue_not_found
     if params[:controller] == "blogit/posts"

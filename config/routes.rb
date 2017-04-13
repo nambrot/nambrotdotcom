@@ -15,7 +15,7 @@ Nambrotdotcom::Application.routes.draw do
   get 'blog' => "blogit/posts#index"
   get 'blog/:id' => 'blogit/posts#show'
   get 'multi_part_tweets' => 'multi_part_tweets#show'
-
+  match '*path', via: :all, to: 'application#error_404'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

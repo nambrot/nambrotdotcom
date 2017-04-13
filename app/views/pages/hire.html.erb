@@ -13,7 +13,7 @@
   })(); </script>
 <div id="hire-page" data-offcanvas class="off-canvas-wrap">
   <div class="inner-wrap">
-  
+
     <aside class="right-off-canvas-menu" id="message-menu">
       <h3>Send a message</h3>
       <p>Send a message and I'll be sure to respond to you as quick as possible.</p>
@@ -24,30 +24,30 @@
            </label>
            <small class="error">But who are you?</small>
          </div>
-        
+
          <div class="large-12 columns">
            <label for="">Email:
            <input type="email" name="Email" placeholder="zuckdog@fb.com" required>
            </label>
            <small class="error">Can I please have your Email Address?</small>
          </div>
-         
+
          <div class="large-12 columns">
            <label for="">Message:</label>
            <textarea name="Message" rows=7 required></textarea>
            <small class="error">You are a quiet one, aren't you?</small>
          </div>
-         
+
          <button type="submit" class="button round">Submit</button>
        </form>
     </aside>
     <a class="exit-off-canvas"></a>
-      
+
     <nav id="topbar">
       <h1>hire me</h1>
       <div class="right-off-canvas-toggle"></div>
     </nav>
-    
+
     <section id="background">
       <div id="hired-card" class='hire-card'>
         <header>
@@ -61,14 +61,14 @@
             </label>
             <small class="error">But who are you?</small>
           </div>
-         
+
           <div class="large-12 columns">
             <label for="">Email:
             <input type="email" name="Email" placeholder="zuckdog@fb.com" required>
             </label>
             <small class="error">Can I please have your Email Address?</small>
           </div>
-          
+
           <div class="large-12 columns">
             <label for="">Budget (optional): <span class="budget"></span>
             <div class="range-slider round" data-slider>
@@ -78,13 +78,13 @@
             </div>
             </label>
           </div>
-          
+
           <div class="large-12 columns">
             <label for="">Message:</label>
             <textarea name="Message" rows=7 required></textarea>
             <small class="error">You are a quiet one, aren't you?</small>
           </div>
-          
+
           <button type="submit" class="button round">Submit</button>
         </form>
       </div>
@@ -100,7 +100,7 @@
             <span id="distance"></span>
           </span>
         </div>
-        
+
         <div id="description">
           <header>
             About Nam Chu Hoai
@@ -112,8 +112,8 @@
             With my prior experience, I have come to appreciate how crucial the interplay between product/customer/business is, so I make sure to have the best customized solutions for my clients. You can read more about my previous work on my <a href="/about#categories:coder,worker,student;importance:4">about page</a> or just go ahead and swipe this card to the right
           </p>
         </div>
-        
-        
+
+
       </div>
       <div id="fired-card" class='hire-card'>
         <header>
@@ -127,27 +127,27 @@
             </label>
             <small class="error">But who are you?</small>
           </div>
-         
+
           <div class="large-12 columns">
             <label for="">Email:
             <input type="email" name="Email" placeholder="zuckdog@fb.com" required>
             </label>
             <small class="error">Can I please have your Email Address?</small>
           </div>
-          
+
           <div class="large-12 columns">
             <label for="">Message:</label>
             <textarea name="Message" rows=7 required></textarea>
             <small class="error">You are a quiet one, aren't you?</small>
           </div>
-          
+
           <button type="submit" class="button round">Submit</button>
         </form>
       </div>
-      
+
     </section>
   </div>
- 
+
 </div>
 
 <script type="text/javascript">
@@ -173,11 +173,11 @@
           calculateDistance = function(lat1, lon1, lat2, lon2) {
             var R = 6371; // km
             var dLat = (lat2 - lat1).toRad();
-            var dLon = (lon2 - lon1).toRad(); 
+            var dLon = (lon2 - lon1).toRad();
             var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                    Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * 
-                    Math.sin(dLon / 2) * Math.sin(dLon / 2); 
-            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); 
+                    Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) *
+                    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
             var d = R * c;
             return d;
           }
@@ -238,7 +238,22 @@
         revert: true,
         useCSSTranslation: true,
         elementsWithInteraction: 'a,form',
+        axis: 'x',
         drag: function(){
+
+          function rotate($el, deg){
+            $el.css({
+                "-webkit-transform": "rotate("+ deg +"deg)",
+                  "-moz-transform": "rotate("+ deg +"deg)",
+                    "-ms-transform": "rotate("+ deg +"deg)",
+                    "-o-transform": "rotate("+ deg +"deg)",
+                        "transform": "rotate("+ deg +"deg)"
+              });
+          }
+          var posX = this.$el.position().left
+          var deg = posX/20;
+          rotate(this.$el, deg)
+
           if(this.cssX > 0){
             fire_label.css({opacity: 0})
             hire_label.css({opacity: this.cssX / 70})
@@ -247,7 +262,7 @@
             hire_label.css({opacity: 0})
             fire_label.css({opacity: -this.cssX / 70})
           }
-            
+
         },
         stop: function(){
           hire_label.css({opacity: 0})
