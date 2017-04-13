@@ -41,6 +41,7 @@ gem 'backbone-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2'
 gem 'lograge'
+gem 'ahoy_matey'
 # Use sqlite3 as the database for Active Record
 
 # Use SCSS for stylesheets

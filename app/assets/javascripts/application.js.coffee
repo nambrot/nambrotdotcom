@@ -22,5 +22,6 @@
 # = require about
 # = require basic
 # = require pep
+# = require ahoy
 
-
+ahoy.trackAll()

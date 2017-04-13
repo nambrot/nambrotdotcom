@@ -2,6 +2,8 @@
 # = require jquery_ujs
 # = require leaflet
 # = require leaflet.google
+# = require ahoy
+ahoy.trackAll()
 
 internalState = {}
 initalPlayListHint = false
@@ -111,6 +113,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
           if state.preloadCache[action.id].ytPlayer?
             newId = action.id
             showVideo(newId)
+            ahoy.track('AROUND_THE_WORLD_PLAY_VIDEO', id: newId)
             if state.preloadCache[action.id].ytPlayer?.getPlayerState() == 3
               timeout == null
             else
@@ -162,6 +165,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
       hideVideo action.id
       newId = nextId(action.id)
       showVideo(newId)
+      ahoy.track('AROUND_THE_WORLD_SHOW_NEXT_VIDEO', id: newId)
       timeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: newId), 3000
       Object.assign {}, state, currentActive: indexOf(newId), nextPlayTimeout: timeout, playerState: 'play'
     when 'PAUSE_VIDEO'
