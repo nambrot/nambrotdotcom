@@ -7,6 +7,16 @@ class ApplicationController < ActionController::Base
     authenticate_user!
   end
 
+  def append_info_to_payload(payload)
+    super
+    exceptions = %w(controller action format id)
+    payload[:host] = request.host
+    payload[:remote_ip] = request.remote_ip
+    payload[:request_id] = request.uuid
+    payload[:params] = ActionDispatch::Http::ParameterFilter.new(['password']).filter(request.params.except(*exceptions))
+    payload[:format] = request.format.try(:ref)
+  end
+
   protected
   def rescue_not_found
     if params[:controller] == "blogit/posts"
