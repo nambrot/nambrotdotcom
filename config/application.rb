@@ -24,9 +24,27 @@ module Nambrotdotcom
     # config.i18n.default_locale = :de
 
     config.assets.precompile += ['multi_part_tweets.js', 'multi_part_tweets.css', 'basic.css', 'basic.js', 'madagascar.css', 'madagascar.js', 'custom.modernizr.js', 'aroundtheworld.js', 'aroundtheworld.css']
+    config.autoload_paths += [
+      "#{config.root}/lib/nams_paas"
+    ]
+
+    config.autoload_paths << Rails.root.join('lib')
+
     config.action_controller.default_url_options = { :trailing_slash => true }
-    config.lograge.enabled = true
+    config.logger = Logger.new('/dev/null')
+    config.lograge.enabled = false
     config.lograge.formatter = Lograge::Formatters::Json.new
+    config.lograge.custom_options = lambda do |event|
+      # capture some specific timing values you are interested in
+      {
+        host: event.payload[:host],
+        remote_ip: event.payload[:remote_ip],
+        request_id: event.payload[:request_id],
+        params: event.payload[:params],
+        format: event.payload[:format],
+        stream: "#{Rails.env}-request"
+      }
+    end
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
       address:              'smtp.gmail.com',

@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    NamsPaas.instrument('cool event', {foo: :bar})
     @post = Post.all.find { |post| post.id.to_s == params[:id].match(/^(\d+)(-|$)/)[1] }
   end
 
