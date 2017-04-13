@@ -1,15 +1,20 @@
 class Ahoy::Store < Ahoy::Stores::BaseStore
   def track_visit(options)
-
-    ap 'Visit'
-    ap options
+    NamsPaas.track_ahoy_event({
+      event_type: 'NEW_VISIT',
+      timestamp: options[:started_at].to_i,
+      visit_token: ahoy.visit_token,
+      visitor_token: ahoy.visitor_token
+    })
   end
 
   def track_event(name, properties, options)
-    ap 'track event'
     NamsPaas.track_ahoy_event({
       event_type: name,
-      properties: properties
+      properties: properties,
+      visit_token: ahoy.visit_token,
+      visitor_token: ahoy.visitor_token,
+      timestamp: options[:time].to_i
     })
   end
 

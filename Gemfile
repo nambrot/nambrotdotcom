@@ -23,6 +23,8 @@ group :development do
   gem 'rack-livereload'
   gem 'guard-livereload'
   # gem 'debugger'
+  gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 gem 'unicorn'

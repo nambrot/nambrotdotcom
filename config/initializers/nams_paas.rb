@@ -33,7 +33,7 @@ module NamsPaas
     end
 
     def process_action event
-      return if event.payload[:controller] == Ahoy::EventsController.to_s
+      return if event.payload[:controller].in?([Ahoy::EventsController, Ahoy::VisitsController].map(&:to_s))
       logger.info event.payload.merge(environment: Rails.env, stream: 'request',view_runtime: event.payload[:view_runtime],
       db_runtime: event.payload[:db_runtime],
       duration: event.duration)

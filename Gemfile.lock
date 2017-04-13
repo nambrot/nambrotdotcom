@@ -67,6 +67,7 @@ GEM
       thor
     browser (2.3.0)
     builder (3.2.3)
+    byebug (8.2.4)
     callsite (0.0.11)
     cloudinary (1.1.0)
       aws_cf_signer
@@ -168,6 +169,11 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-byebug (3.3.0)
+      byebug (~> 8.0)
+      pry (~> 0.10)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     public_suffix (2.0.5)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
@@ -298,6 +304,8 @@ DEPENDENCIES
   lol_dba
   meta_request
   newrelic_rpm
+  pry-byebug
+  pry-rails
   quiet_assets
   rack-livereload
   rails (~> 4.2)
