@@ -32,6 +32,7 @@ module Nambrotdotcom
 
     config.action_controller.default_url_options = { :trailing_slash => true }
     config.logger = Logger.new('/dev/null')
+    Ahoy.mount = false
     config.lograge.enabled = false
     config.lograge.formatter = Lograge::Formatters::Json.new
     config.lograge.custom_options = lambda do |event|

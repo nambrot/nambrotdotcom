@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def error_404
+    NamsPaas.instrument('RAILS_ERROR', serviceContext: { service: 'nambrotdotcom' }, message: 'path was incorrect', context: { path: request.path, request_id: request.uuid })
     redirect_to root_path
   end
 
