@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def error_404
-    NamsPaas.instrument('RAILS_ERROR', serviceContext: { service: 'nambrotdotcom' }, message: 'path was incorrect', context: { path: request.path, request_id: request.uuid, reportLocation: { filePath: "/something.js", lineNumber: 3, functionName: "foo"} })
+    NamsPaas.instrument('RAILS_ERROR', serviceContext: { service: 'nambrotdotcom' }, message: "com.example.shop.Template$CartDiv retrieveCart: Error\njava.lang.IndexOutOfBoundsException: Index: 4, Size: 4\n\tat java.util.ArrayList.rangeCheck(ArrayList.java:635)\n\tat java.util.ArrayList.get(ArrayList.java:411)\n\tat com.example.shop.Cart.retrieve(Cart.java:76)\n\tat com.example.shop.Cart.generate(Cart.java:55)\n\tat com.example.shop.Template$CartDiv.retrieveCart(Template.java:113)\n\tat com.example.shop.Template.generate(Template.java:22)\n\tat com.example.shop.CartServlet.doGet(CartServlet.java:115)\n\tat javax.servlet.http.HttpServlet.service(HttpServlet.java:717)\n",, context: { path: request.path, request_id: request.uuid, reportLocation: { filePath: "/something.js", lineNumber: 3, functionName: "foo"} })
     redirect_to root_path
   end
 
