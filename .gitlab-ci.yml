@@ -120,3 +120,4 @@ image-test:
   - docker pull $CONTAINER_BASE_IMAGE || true
   - docker build --pull  --cache-from $CONTAINER_BASE_IMAGE -t $CONTAINER_TEST_IMAGE .
   - docker push $CONTAINER_TEST_IMAGE
+  - docker run $CONTAINER_TEST_IMAGE bundle exec rake test
