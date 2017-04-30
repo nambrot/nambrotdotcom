@@ -64,6 +64,24 @@ module NamsPaas
     end
   end
 
+  class ErrorLogSubscriber < ActiveSupport::LogSubscriber
+    def logger
+      @logger ||= ::Logger.new(STDOUT)
+      @logger.formatter = Formatter.new
+      @logger
+    end
+
+    def error_log event
+      logger.error event.payload.merge(environment: Rails.env, stream: 'error')
+    end
+
+    class Formatter
+      def call severity, time, progname, msg
+        msg.merge(timestamp: Time.now.to_i, severity: severity).to_json + "\n"
+      end
+    end
+  end
+
   class AhoyLogSubscriber < ActiveSupport::LogSubscriber
     def logger
       @logger ||= ::Logger.new(STDOUT)
@@ -84,6 +102,10 @@ module NamsPaas
 
   def self.instrument(event_type, payload)
     ActiveSupport::Notifications.instrument("event_log.nams_paas", payload.merge(event_type: event_type))
+  end
+
+  def self.track_error(payload)
+    ActiveSupport::Notifications.instrument("error_log.nams_paas", payload.merge(event_type: 'RAILS_ERROR'))
   end
 
   def self.track_ahoy_event(payload)
@@ -115,3 +137,4 @@ end
 NamsPaas::RequestLogSubscriber.attach_to :action_controller
 NamsPaas::EventLogSubscriber.attach_to :nams_paas
 NamsPaas::AhoyLogSubscriber.attach_to :nams_paas
+NamsPaas::ErrorLogSubscriber.attach_to :nams_paas

@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def error_404
-    NamsPaas.instrument('RAILS_ERROR', serviceContext: { service: 'manual-testing' }, message: '"Test Error\n    at /test.js:42:42', context: { httpRequest: { url: request.path, method: 'GET', responseStatusCode: 404 } })
+    NamsPaas.track_error(serviceContext: { service: 'nambrotdotcom' }, message: 'path was incorrect', context: { path: request.path, request_id: request.uuid, reportLocation: { filePath: "/something.js", lineNumber: 3, functionName: "foo"} })
     redirect_to root_path
   end
 
