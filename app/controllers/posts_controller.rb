@@ -14,6 +14,10 @@ class PostsController < ApplicationController
     raise PostNotFound unless @post
   end
 
+  def resume
+    render 'pages/resume', layout: false
+  end
+
   private
 
   def redirect_to_root
