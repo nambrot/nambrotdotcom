@@ -243,3 +243,9 @@
   tags:
   - Development
   created_at: '2017-10-05T04:10:02.054Z'
+- id: 29
+  title: "Comparing Streaming Frameworks"
+  summary: I recently decided that I wanted to learn more about the world of stream processing. I felt quite comfortable in the world of CRUD but knew that if I wanted to elevate as a software engineer, I couldn't ignore the tremendous progress and change that is happening when it comes to dealing with unbounded and plentiful data.
+  tags:
+  - Development
+  created_at: '2017-12-01T04:10:02.054Z'
