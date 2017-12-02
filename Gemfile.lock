@@ -37,7 +37,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    acts_as_taggable (2.0.2)
     addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
     ahoy_matey (1.5.5)
@@ -159,7 +158,6 @@ GEM
     multi_json (1.11.2)
     nenv (0.2.0)
     netrc (0.10.3)
-    newrelic_rpm (3.13.0.299)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
     notiffany (0.0.7)
@@ -282,7 +280,6 @@ PLATFORMS
 
 DEPENDENCIES
   actionpack-action_caching
-  acts_as_taggable
   ahoy_matey
   awesome_print
   backbone-rails
@@ -303,7 +300,6 @@ DEPENDENCIES
   lograge
   lol_dba
   meta_request
-  newrelic_rpm
   pry-byebug
   pry-rails
   quiet_assets

@@ -28,7 +28,6 @@ group :development do
 end
 
 gem 'unicorn'
-gem 'acts_as_taggable'
 gem 'cloudinary'
 gem 'redcarpet'
 gem 'high_voltage', '>= 1.2.4'
@@ -36,7 +35,6 @@ gem 'bourbon'
 gem 'foundation-rails', '5.4.5'
 gem 'actionpack-action_caching'
 gem 'dalli'
-gem 'newrelic_rpm'
 gem 'leaflet-rails' #for madagascar
 gem 'sprockets-coffee-react'
 gem 'backbone-rails'
