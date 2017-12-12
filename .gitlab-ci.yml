@@ -57,7 +57,7 @@ deploy_to_prod:
     - kubectl set image deployment/web-deployment web=$CONTAINER_RELEASE_IMAGE
   only:
     - master
-  when: manual
+  # when: manual
 
 deploy_review:
   image: nambrot/google-cloud-sdk-helm
