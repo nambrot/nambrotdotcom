@@ -249,7 +249,7 @@ PlayList = React.createClass
                        height: '37px'
                        overflow: 'hidden'
 
-    marginTop = if @state.isHover then 0 else @props.currentActive * -36.66
+    marginTop = if @state.isHover then 0 else Math.pow(@props.currentActive, 1.002) * -36.66
     scrollContainerStyle =
       'margin-top': "#{marginTop}px"
 
