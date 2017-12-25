@@ -116,7 +116,7 @@ class TimelineEntryManager
     importance_threshold = parseInt($(@settings.importance_slider).val())
     window.location.hash = "categories:#{acceptable_categories.toArray().join(',')};importance:#{importance_threshold}"
   set_filters_from_location_hash: ->
-    filters = window.location.hash.split(';')
+    filters = window.location.hash.substr(1).split(';')
     return if filters[0] == ""
     while filters.length > 0 and [filter_name, filter_value] = filters.shift().split(':')
       switch filter_name
