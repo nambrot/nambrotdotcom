@@ -23,7 +23,7 @@ module Nambrotdotcom
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.assets.precompile += ['multi_part_tweets.js', 'multi_part_tweets.css', 'basic.css', 'basic.js', 'madagascar.css', 'madagascar.js', 'custom.modernizr.js', 'aroundtheworld.js', 'aroundtheworld.css', 'about.css']
+    config.assets.precompile += ['multi_part_tweets.js', 'multi_part_tweets.css', 'basic.css', 'basic.js', 'madagascar.css', 'madagascar.js', 'custom.modernizr.js', 'aroundtheworld.js', 'aroundtheworld.css', 'about.css', 'applicaiton.js', 'application.css']
     config.autoload_paths += [
       "#{config.root}/lib/nams_paas"
     ]
