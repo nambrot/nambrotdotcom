@@ -1,77 +1,202 @@
+<%= stylesheet_link_tag "about", media: "all", "data-turbolinks-track" => true %>
+
 <div id="about-page">
   <div id="category-picker-box">
-    <h5>Dimensions</h5>
-    <p>Choose which aspects of my personality you want to learn more about</p>
-    <form action="" id="category-picker">
-      <label id='checkbox1'>
-        <input type="checkbox" name="category picker" value='geek'>
-        <div>
-          <span class="image"></span>
-          <span class='text'>Geek</span>
-        </div>
-      </label>
-      <label id='checkbox2'>
-        <input type="checkbox" name="category picker" value='coder'>
-        <div>
-          <span class="image"></span>
-          <span class='text'>Coder</span>
-        </div>
-      </label>
+    <div>
+      <p>Choose which aspects of my personality you want to learn more about</p>
+      <form action="" id="category-picker">
+        <label id='checkbox2'>
+          <input type="checkbox" name="category picker" value='coder'>
+          <div>
+            <span class="image"></span>
+            <span class='text'>Code</span>
+          </div>
+        </label>
 
-      <label id='checkbox3'>
-        <input type="checkbox" name="category picker" value='traveler'>
-        <div>
-          <span class="image"></span>
-          <span class='text'>Traveler</span>
-        </div>
-      </label>
+        <label id='checkbox3'>
+          <input type="checkbox" name="category picker" value='traveler'>
+          <div>
+            <span class="image"></span>
+            <span class='text'>Travel</span>
+          </div>
+        </label>
 
-      <label id='checkbox4'>
-        <input type="checkbox" name="category picker" value='worker' checked>
-        <div>
-          <span class="image"></span>
-          <span class='text'>Worker</span>
-        </div>
-      </label>
-
-      <label id='checkbox5'>
-        <input type="checkbox" name="category picker" value='student' checked>
-        <div>
-          <span class="image"></span>
-          <span class='text'>Student</span>
-        </div>
-      </label>
-
-      <label id='checkbox6'>
-        <input type="checkbox" name="category picker" value='creative'>
-        <div>
-          <span class="image"></span>
-          <span class='text'>Creative</span>
-        </div>
-      </label>
-    </form>
-  </div>
-  <div id="importance-slider-box">
-    <h5 id="importance-slider-label">
-      Detail
-    </h5>
-    <p>How much detail you want to see</p>
-    <div id="importance-slider-left-border">
-      German Privacy Advocate
+        <label id='checkbox4'>
+          <input type="checkbox" name="category picker" value='job' checked>
+          <div>
+            <span class="image"></span>
+            <span class='text'>Career</span>
+          </div>
+        </label>
+      </form>
     </div>
-    <div id="importance-slider-container">
-      <input type="text" id="importance-slider" data-slider="true" data-slider-range="2,4" data-slider-snap="true" data-slider-step="1" value='3'>
+
+    <div>
+      <p>How much detail you want to see</p>
+      <div id="importance-slider-left-border">
+        Overview
+      </div>
+      <div id="importance-slider-container">
+        <input type="text" id="importance-slider" data-slider="true" data-slider-range="2,3" data-slider-snap="true" data-slider-step="1" value='2'>
+      </div>
+      <div id="importance-slider-right-border">
+        Detail
+      </div>
     </div>
-    <div id="importance-slider-right-border">
-      NSA
-    </div>
+
   </div>
 
 
 
   <ul id="about-timeline">
 
-    <!-- #Capetown-->
+    <li class="about-timeline-entry" data-importance='2'>
+      <div class="about-timeline-entry-card">
+        <img src="<%= image_path 'blockchain.png' %>" style='height:150px;' alt="">
+        <h5>Blockchain Tutorial</h5>
+        <p>
+          As interest in blockchains grew, I wanted to learn more about it from a technical perspective. I ended up writing a simple tutorial where anyone can write a working blockchain from scratch in the browser. You can follow along the tutorial on <a href="https://github.com/nambrot/blockchain-in-js">Github</a> or see the demo live at <a href="https://blockchain.nambrot.com">blockchain.nambrot.com</a>
+        </p>
+        <footer>
+          <div class="location">
+            Boston, MA
+          </div>
+          <div class="date">
+            December 2017
+          </div>
+          <div class="timeline-entry-tags">
+            #coder
+          </div>
+        </footer>
+      </div>
+    </li>
+
+    <li class="about-timeline-entry" data-importance='3'>
+      <div class="about-timeline-entry-card">
+        <img src="<%= image_path 'watcher.png' %>" style='height:150px;' alt="">
+        <h5>Watcher</h5>
+        <p>
+          I was exploring the opportunities a cross platform data model could give us. You can read my <a href="/posts/28-higher-level-data-model-wanted/">write-up</a> or check out my proof-of-concept on <a href="https://github.com/nambrot/watcher">Github</a>
+        </p>
+        <footer>
+          <div class="location">
+            Boston, MA
+          </div>
+          <div class="date">
+            September 2017
+          </div>
+          <div class="timeline-entry-tags">
+            #coder
+          </div>
+        </footer>
+      </div>
+    </li>
+
+    <li class="about-timeline-entry" data-importance='3'>
+      <div class="about-timeline-entry-card">
+        <img src="<%= image_path 'algos.png' %>" style='height:150px;' alt="">
+        <h5>Algorithms</h5>
+        <p>
+          I took <a href="https://www.coursera.org/specializations/algorithms">the Coursera algorithms</a> class as a refresher and did the assignments or related topics in Rust and Elm to see both more lower-level, systems approaches as well as high-level functional ones. You can find the code on <a href="https://github.com/nambrot/algorithms">Github</a>
+        </p>
+        <footer>
+          <div class="location">
+            Boston, MA
+          </div>
+          <div class="date">
+            July 2017
+          </div>
+          <div class="timeline-entry-tags">
+            #coder
+          </div>
+        </footer>
+      </div>
+    </li>
+
+    <li class="about-timeline-entry" data-importance='2'>
+      <div class="about-timeline-entry-card">
+        <img src="<%= image_path 'streaming.png' %>" style='height:150px;' alt="">
+        <h5>Stream Processing Survey</h5>
+        <p>
+          Compared various stream processing frameworks like Spark Streaming, Akka Streams, Kafka Streams and Apache Beam against the Wellframe coding challenge. You can find the write at <a href="/posts/29-comparing-streaming-frameworks/">here</a>
+        </p>
+        <footer>
+          <div class="location">
+            Boston, MA
+          </div>
+          <div class="date">
+            April 2017
+          </div>
+          <div class="timeline-entry-tags">
+            #coder
+          </div>
+        </footer>
+      </div>
+    </li>
+
+    <li class="about-timeline-entry" data-importance='3'>
+      <div class="about-timeline-entry-card">
+        <img src="<%= image_path 'ml.png' %>" style='height:150px;' alt="">
+        <h5>Machine Learning</h5>
+        <p>
+          Took the <a href="https://www.coursera.org/learn/machine-learning">the Andrew Ng Machine Learning</a> class as well as dived into the <a href="http://course.fast.ai">fast.ai deeplearning class</a>. The former's assignments I did in Tensorflow which code you can find on <a href="https://github.com/nambrot/coursera_machine_learning">Github</a>
+        </p>
+        <footer>
+          <div class="location">
+            Boston, MA
+          </div>
+          <div class="date">
+            January 2017
+          </div>
+          <div class="timeline-entry-tags">
+            #coder
+          </div>
+        </footer>
+      </div>
+    </li>
+
+    <li class="about-timeline-entry" data-importance='3'>
+      <div class="about-timeline-entry-card">
+        <img src="<%= image_path 'functional.png' %>" style='height:150px;' alt="">
+        <h5>Functional Programming</h5>
+        <p>
+          I took the <a href="https://www.coursera.org/specializations/algorithms">Functional Programming in Scala</a> specialization on Coursera. It was my first exposure with Scala and you can find the code on Github <a href="https://github.com/nambrot/functional_programming">here</a> and <a href="https://github.com/nambrot/spark_class">here.</a>
+        </p>
+        <footer>
+          <div class="location">
+            Boston, MA
+          </div>
+          <div class="date">
+            December 2016
+          </div>
+          <div class="timeline-entry-tags">
+            #coder
+          </div>
+        </footer>
+      </div>
+    </li>
+
+    <li class="about-timeline-entry" data-importance='3'>
+      <div class="about-timeline-entry-card">
+        <img src="<%= image_path 'apidocs.png' %>" style='height:150px;' alt="">
+        <h5>Auto-generated API documentation</h5>
+        <p>
+          With a very small team, documentation oftentimes takes a backseat. Since we already had extensive API tests, I created a custom RSpec formatter that would spit out workable documentation for the clients. Read the write up <a href="/posts/26-auto-generated-api-documentation/">here</a>
+        </p>
+        <footer>
+          <div class="location">
+            Boston, MA
+          </div>
+          <div class="date">
+            February 2016
+          </div>
+          <div class="timeline-entry-tags">
+            #coder
+          </div>
+        </footer>
+      </div>
+    </li>
+
     <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'portugal.jpg' %>" style='height:150px;' alt="">
@@ -116,7 +241,7 @@
     </li>
 
     <!-- #Holygrail-->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='2'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'rails-react.png' %>" style='height:150px;' alt="">
         <h5>Server-side Rendering in Rails with React</h5>
@@ -138,7 +263,7 @@
     </li>
 
     <!-- #Vietnam2-->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'vietnam2.jpg' %>" style='height:150px;' alt="">
         <h5>Vietnam</h5>
@@ -160,7 +285,7 @@
     </li>
 
     <!-- #Virgin Islands-->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'virginislands.jpg' %>" style='height:150px;' alt="" data-gallery-decorate=true data-gallery-id='6105861894453346257-google'>
         <h5>US Virgin Islands</h5>
@@ -200,7 +325,7 @@
             August 2014
           </div>
           <div class="timeline-entry-tags">
-            #coder #geek #worker
+            #coder #geek
           </div>
         </footer>
       </div>
@@ -229,12 +354,12 @@
     </li>
 
     <!-- #Wellframe-->
-    <li class="about-timeline-entry" data-importance='3'>
+    <li class="about-timeline-entry flippable" data-importance='2'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'wellframe.png' %>" style='height:150px;' alt="">
         <h5>Wellframe</h5>
         <p>
-          Consulting for <a href="http://www.welframe.com">Wellframe</a>, who builds intelligent systems to re-engineer care delivery and advance care management.
+          Software Engineering @ <a href="https://www.wellframe.com">Wellframe</a>, delivering personalized care when patients need it.
         </p>
         <footer>
           <div class="location">
@@ -244,14 +369,24 @@
              June 2014
           </div>
           <div class="timeline-entry-tags">
-            #worker #coder
+            #job #coder
           </div>
         </footer>
+      </div>
+      <div class="about-timeline-entry-detail" style='width: 500%;'>
+        <div class="margin-5">
+          <h2><a href="https://www.wellframe.com">Wellframe</a></h2>
+          <p>I met Wellframe during Summer@Highland, stayed in touch and then joined them after college. I have learned loads, both technically and culturally about how to find product market-fit and grow in a massive and heavily regulated industry such as healthcare.</p>
+
+          <p>I was an early software engineer taking Wellframe as a proof of concept in pilots with local hospitals to full enterprise readiness with Fortune 100 clients. Wellframe is delivering targeted interventions to patients through a mobile app, by offering a intelligent platform that personalizes care with clinically proven models and workflows.</p>
+
+          <p>I was reponsible for everything from the Ruby on Rails backend, to a React-based frontend as well as general engineering practices and operation concerns such as CI and deploys.</p>
+        </div>
       </div>
     </li>
 
     <!-- #Costa Rica-->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'costarica.jpg' %>" style='height:150px;' alt="" data-gallery-decorate=true data-gallery-id='6026847260051795137-google'>
         <h5>Costa Rica</h5>
@@ -273,7 +408,7 @@
     </li>
 
     <!-- Madagascar -->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'madagascar.png' %>" style='height:150px;' alt="">
         <h5>Madagascar Project</h5>
@@ -288,14 +423,14 @@
             April 2014
           </div>
           <div class="timeline-entry-tags">
-            #student #coder
+            #coder
           </div>
         </footer>
       </div>
     </li>
 
     <!-- Miami -->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'miami.jpg' %>" style='height:150px;' alt="">
         <h5>Miami</h5>
@@ -317,7 +452,7 @@
     </li>
 
     <!-- ifttt webhooks-->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'github.png' %>" style='height:150px;' alt="">
         <h5>IFTTT Webhooks</h5>
@@ -339,7 +474,7 @@
     </li>
 
     <!-- ar-find-in-batches-with-order -->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'github.png' %>" style='height:150px;' alt="">
         <h5>Find_each in Rails with custom ordering</h5>
@@ -384,7 +519,7 @@
 
 
     <!-- LA -->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'la.jpg' %>" style='height:150px;' alt="" data-gallery-decorate=true data-gallery-id='5984552177299342433-google'>
         <h5>Los Angeles</h5>
@@ -428,7 +563,7 @@
     </li>
 
     <!-- Paternalism paper tutorial -->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'paternalism.gif' %>" style='height:150px;' alt="">
         <h5>Paternalism Final Paper</h5>
@@ -443,14 +578,14 @@
             December 2013
           </div>
           <div class="timeline-entry-tags">
-            #geek #student
+            #coder (code of life?!?)
           </div>
         </footer>
       </div>
     </li>
 
     <!-- St. Louis -->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'stlouis.jpg' %>" style='height:150px;' alt="" data-gallery-decorate=true data-gallery-id='5971502819732045681-google'>
         <h5>St. Louis</h5>
@@ -472,7 +607,7 @@
     </li>
 
     <!-- Rails tutorial -->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'rails.jpg' %>" style='height:150px;' alt="">
         <h5>Ruby on Rails Tutorial</h5>
@@ -487,14 +622,14 @@
             October 2013
           </div>
           <div class="timeline-entry-tags">
-            #coder #geek #student
+            #coder
           </div>
         </footer>
       </div>
     </li>
 
     <!-- About -->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'about.jpg' %>" style='height:150px;' alt="">
         <h5>About Page Redesign</h5>
@@ -516,7 +651,7 @@
     </li>
 
     <!-- Harz -->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'harz.jpg' %>" style='height:150px;' alt="" data-gallery-decorate=true data-gallery-id='5912292901019973937-google'>
         <h5>Harz</h5>
@@ -707,7 +842,7 @@
             March 2013
           </div>
           <div class="timeline-entry-tags">
-            #traveler #geek
+            #traveler
           </div>
         </footer>
       </div>
@@ -749,7 +884,7 @@
             Since 2012
           </div>
           <div class="timeline-entry-tags">
-            #geek #worker #coder
+            #job #coder
           </div>
         </footer>
       </div>
@@ -771,7 +906,7 @@
     </li>
 
     <!-- Las Vegas No.1 -->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'vegas.jpg' %>" style='height:150px;' alt="">
         <h5>Las Vegas No. 1</h5>
@@ -784,14 +919,14 @@
             Summer 2012
           </div>
           <div class="timeline-entry-tags">
-            #traveler #geek
+            #traveler
           </div>
         </footer>
       </div>
     </li>
 
     <!-- Rome -->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'rome.jpg' %>" style='height:150px;' alt="">
         <h5>Rome</h5>
@@ -811,7 +946,7 @@
     </li>
 
     <!-- NFL Machine Learning -->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'nfl.jpg' %>" style='height:150px;' alt="">
         <h5>Machine Learning NFL Project</h5>
@@ -826,14 +961,14 @@
             May 2012
           </div>
           <div class="timeline-entry-tags">
-            #coder #geek #student
+            #coder
           </div>
         </footer>
       </div>
     </li>
 
     <!-- FB Photo Browser -->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'fbphotobrowser.jpg' %>" style='height:150px;' alt="">
         <h5>FBPhotoBrowser</h5>
@@ -866,7 +1001,7 @@
             Summer 2011
           </div>
           <div class="timeline-entry-tags">
-            #geek #worker #coder
+            #job #coder
           </div>
         </footer>
       </div>
@@ -896,7 +1031,7 @@
     </li>
 
     <!-- Puerto Vallerta -->
-    <li class="about-timeline-entry" data-importance='4'>
+    <li class="about-timeline-entry" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'mehico.jpg' %>" style='height:150px;' alt="">
         <h5>Puerto Vallerta</h5>
@@ -931,7 +1066,7 @@
             Since 2010
           </div>
           <div class="timeline-entry-tags">
-            #student
+            #job
           </div>
         </footer>
       </div>
@@ -976,7 +1111,7 @@
             2003 - 2010
           </div>
           <div class="timeline-entry-tags">
-            #student
+            #job
           </div>
         </footer>
       </div>
@@ -1009,7 +1144,7 @@
             2009 - 2010
           </div>
           <div class="timeline-entry-tags">
-            #geek #creative #worker
+            #coder #job
           </div>
         </footer>
       </div>
@@ -1031,7 +1166,7 @@
     </li>
 
     <!-- Mach Dein X -->
-    <li class="about-timeline-entry flippable" data-importance='4'>
+    <li class="about-timeline-entry flippable" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'machdeinx.png' %>" style='height:150px;' alt="">
         <h5>First short</h5>
@@ -1044,7 +1179,7 @@
             2009
           </div>
           <div class="timeline-entry-tags">
-            #geek #creative
+            #coder
           </div>
         </footer>
       </div>
@@ -1064,7 +1199,7 @@
     </li>
 
     <!-- Neuerdings -->
-    <li class="about-timeline-entry flippable" data-importance='4'>
+    <li class="about-timeline-entry flippable" data-importance='3'>
       <div class="about-timeline-entry-card">
         <img src="<%= image_path 'neuerdings.png' %>" style='height:150px;' alt="">
         <h5>Tech Blogger</h5>
@@ -1077,7 +1212,7 @@
             2009
           </div>
           <div class="timeline-entry-tags">
-            #geek #worker
+            #job
           </div>
         </footer>
       </div>
@@ -1106,7 +1241,7 @@
             Spring 2009
           </div>
           <div class="timeline-entry-tags">
-            #coder #geek #worker
+            #coder #job
           </div>
         </footer>
       </div>
@@ -1193,7 +1328,7 @@
             2007 - 2010
           </div>
           <div class="timeline-entry-tags">
-            #student
+            #job
           </div>
         </footer>
       </div>
