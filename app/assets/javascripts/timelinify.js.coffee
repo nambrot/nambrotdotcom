@@ -1,4 +1,3 @@
-#= require foundation/foundation.reveal
 # Reference jQuery
 $ = jQuery
 
@@ -22,7 +21,7 @@ class TimelineEntry
     this
 
   card_height: ->
-    @$card_height ?= @$element.find(@settings.timeline_entry_card_selector).height()
+    @$card_height = @$element.find(@settings.timeline_entry_card_selector).height()
 
   click: (evt) ->
     if $(window).width() < 500
@@ -205,6 +204,8 @@ class TimelineEntryManager
     # assign each entry a column
     @column_mapping = ( [] for i in [0..number_of_columns-1])
 
+    leftPadding = (document.getElementById("about-timeline").offsetWidth - number_of_columns * @settings.columnWidth) / 2 - 20
+
     for entry in entries_to_show
 
       minimum_height = get_column_height @column_mapping[0]
@@ -226,7 +227,7 @@ class TimelineEntryManager
         top = minimum_height + @settings.columnMargin
 
       if number_of_columns != 1
-        left = minimal_column * (@settings.columnWidth + @settings.columnMargin)
+        left = minimal_column * (@settings.columnWidth + @settings.columnMargin) + leftPadding
       else
         left = ($(@settings.timeline_selector).width() - @settings.columnWidth - 2 * @settings.columnMargin) / 2
 
