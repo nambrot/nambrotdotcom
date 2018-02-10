@@ -4,14 +4,11 @@ metadata:
   name: nginx
   namespace: nginx-ingress
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
   - port: 80
     name: http
   - port: 443
     name: https
-  externalIPs:
-  - 10.128.0.3
-  - 10.128.0.4
   selector:
     app: nginx

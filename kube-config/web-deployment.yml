@@ -27,6 +27,8 @@ spec:
       labels:
         name: web
     spec:
+      nodeSelector:
+        cloud.google.com/gke-preemptible: "true"
       containers:
       - env:
         - name: SKYLIGHT_AUTHENTICATION
