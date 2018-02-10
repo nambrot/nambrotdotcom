@@ -249,3 +249,9 @@
   tags:
   - Development
   created_at: '2017-12-01T04:10:02.054Z'
+- id: 30
+  title: "Application monitoring on GKE"
+  summary: A quick overview post on how to do simple monitoring on GCP with Google Kubernetes Engine and Stackdriver via the Prometheus format
+  tags:
+  - Development
+  created_at: '2018-02-01T04:10:02.054Z'
