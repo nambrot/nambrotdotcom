@@ -69,11 +69,14 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
   hideVideo = (id) ->
     $("#cachedVideo#{id}").addClass('hidden')
     state.preloadCache[id].ytPlayer.pauseVideo()
+    # try removing the object for performance
+    delete state.preloadCache[id]
+    $("#cachedVideo#{id}").remove()
   showVideo = (id, play = true) ->
     if state.preloadCache[id].ytPlayer.seekTo
       if play
-        state.preloadCache[id].ytPlayer.seekTo(0)
         state.preloadCache[id].ytPlayer.playVideo()
+        state.preloadCache[id].ytPlayer.seekTo(0)
         document.getElementById('song').play()
       $("#cachedVideo#{id}").removeClass('hidden')
       preloadVideos(id)
@@ -159,12 +162,14 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
         else
           state.preloadCache[id].ytPlayer.pauseVideo()
           state.preloadCache[id].ytPlayer.setPlaybackQuality('hd720')
+          state.preloadCache[id].ytPlayer.seekTo(0)
+          state.preloadCache[id].ytPlayer.setPlaybackQuality('hd720')
           state
     when 'PLAY_ENDED'
       clearTimeout(state.nextPlayTimeout)
-      hideVideo action.id
       newId = nextId(action.id)
       showVideo(newId)
+      hideVideo action.id
       ahoy.track('AROUND_THE_WORLD_SHOW_NEXT_VIDEO', id: newId)
       timeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: newId), 3000
       Object.assign {}, state, currentActive: indexOf(newId), nextPlayTimeout: timeout, playerState: 'play'
@@ -340,7 +345,7 @@ $(document).ready ->
 GEO_JSON = {
     "type": "FeatureCollection",
     "features": [
-        {
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -354,8 +359,8 @@ GEO_JSON = {
                 "name": "Amsterdam, Netherlands",
                 "description": "https://youtu.be/M0EIbx7K6Rk"
             }
-        },
-        {
+        }, %>
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -369,8 +374,8 @@ GEO_JSON = {
                 "name": "Singapore",
                 "description": "https://youtu.be/rAeQaapa3N0"
             }
-        },
-        {
+        }, %>
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -384,8 +389,8 @@ GEO_JSON = {
                 "name": "Ba Na, Vietnam",
                 "description": "https://youtu.be/qDGERPkVMUo"
             }
-        },
-        {
+        }, %>
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -399,7 +404,7 @@ GEO_JSON = {
                 "name": "Hue, Vietnam",
                 "description": "https://youtu.be/AGTnzZyZKy8"
             }
-        },
+        }, %>
         {
             "type": "Feature",
             "geometry": {
@@ -430,7 +435,7 @@ GEO_JSON = {
                 "description": "https://youtu.be/K7nFKJwbAwA"
             }
         },
-        {
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -444,8 +449,8 @@ GEO_JSON = {
                 "name": "Brocken, Germany",
                 "description": "https://youtu.be/8Vb9NFKK1cI"
             }
-        },
-        {
+        }, %>
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -459,8 +464,8 @@ GEO_JSON = {
                 "name": "Warsaw, Poland",
                 "description": "https://youtu.be/nf9pAraanoQ"
             }
-        },
-        {
+        }, %>
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -474,8 +479,8 @@ GEO_JSON = {
                 "name": "St. Louis, Missouri",
                 "description": "https://youtu.be/mZK_csgGy8o"
             }
-        },
-        {
+        }, %>
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -489,8 +494,8 @@ GEO_JSON = {
                 "name": "Atlantic City, New Jersey",
                 "description": "https://youtu.be/xQHlraHVcts"
             }
-        },
-        {
+        }, %>
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -504,7 +509,7 @@ GEO_JSON = {
                 "name": "Philadelphia, Pennsylvania",
                 "description": "https://youtu.be/H3rIuxtBpzQ"
             }
-        },
+        }, %>
         {
             "type": "Feature",
             "geometry": {
@@ -535,7 +540,7 @@ GEO_JSON = {
                 "description": "https://youtu.be/nhI4vH_7XtM"
             }
         },
-        {
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -549,8 +554,8 @@ GEO_JSON = {
                 "name": "Zurich, Switzerland",
                 "description": "https://youtu.be/7C3X5sS_918"
             }
-        },
-        {
+        }, %>
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -564,7 +569,7 @@ GEO_JSON = {
                 "name": "Miami, Florida",
                 "description": "https://youtu.be/w5WO-ydC7QY"
             }
-        },
+        }, %>
         {
             "type": "Feature",
             "geometry": {
@@ -580,7 +585,7 @@ GEO_JSON = {
                 "description": "https://youtu.be/E7VttV2k_58"
             }
         },
-        {
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -594,8 +599,8 @@ GEO_JSON = {
                 "name": "Wall Street, New York City",
                 "description": "https://youtu.be/f4EvTyaXQwY"
             }
-        },
-        {
+        }, %>
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -609,8 +614,8 @@ GEO_JSON = {
                 "name": "Washington, DC",
                 "description": "https://youtu.be/xOuKeqxlcPA"
             }
-        },
-        {
+        }, %>
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -624,7 +629,7 @@ GEO_JSON = {
                 "name": "White House, Washington D.C.",
                 "description": "https://youtu.be/lVU7nd8rBi0"
             }
-        },
+        }, %>
         {
             "type": "Feature",
             "geometry": {
@@ -685,7 +690,7 @@ GEO_JSON = {
                 "description": "https://youtu.be/fLlsV_s4nLU"
             }
         },
-        {
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -699,7 +704,7 @@ GEO_JSON = {
                 "name": "Thon Bac, Vietnam",
                 "description": "https://youtu.be/9fp6ODUt4SM"
             }
-        },
+        }, %>
         {
             "type": "Feature",
             "geometry": {
@@ -715,7 +720,7 @@ GEO_JSON = {
                 "description": "https://youtu.be/V2TtdFD70N8"
             }
         },
-        {
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -729,7 +734,7 @@ GEO_JSON = {
                 "name": "Hang Sang, Vietnam",
                 "description": "https://youtu.be/-9X4v_9smm8"
             }
-        },
+        }, %>
         {
             "type": "Feature",
             "geometry": {
@@ -790,7 +795,7 @@ GEO_JSON = {
                 "description": "https://youtu.be/KTIk7scgpKs"
             }
         },
-        {
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -804,7 +809,7 @@ GEO_JSON = {
                 "name": "Harvard, Massachussetts",
                 "description": "https://youtu.be/JfMR2_xxXZk"
             }
-        },
+        }, %>
         {
             "type": "Feature",
             "geometry": {
@@ -1030,7 +1035,7 @@ GEO_JSON = {
                 "description": "https://youtu.be/7_bjl8yh5HE"
             }
         },
-        {
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -1044,8 +1049,8 @@ GEO_JSON = {
                 "name": "Skaftafell, Iceland",
                 "description": "https://youtu.be/0h0Mb1XKZLE"
             }
-        },
-        {
+        }, %>
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -1059,7 +1064,7 @@ GEO_JSON = {
                 "name": "Gulfoss, Iceland",
                 "description": "https://youtu.be/saLOxSw2L2Y"
             }
-        },
+        }, %>
         {
             "type": "Feature",
             "geometry": {
@@ -1150,7 +1155,7 @@ GEO_JSON = {
                 "description": "https://youtu.be/zPeWiVbFVn4"
             }
         },
-        {
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -1164,7 +1169,7 @@ GEO_JSON = {
                 "name": "Ashfield, Massachusetts",
                 "description": "https://youtu.be/SU_KemdiG_0"
             }
-        },
+        }, %>
         {
             "type": "Feature",
             "geometry": {
@@ -1195,7 +1200,7 @@ GEO_JSON = {
                 "description": "https://youtu.be/JoTYxDyelbw"
             }
         },
-        {
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -1209,7 +1214,7 @@ GEO_JSON = {
                 "name": "Holyoke, Massachusetts",
                 "description": "https://youtu.be/Hvz_M1wGobY"
             }
-        },
+        }, %>
         {
             "type": "Feature",
             "geometry": {
@@ -1360,7 +1365,7 @@ GEO_JSON = {
                 "description": "https://youtu.be/mJLvUf7hbGE"
             }
         },
-        {
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -1374,7 +1379,7 @@ GEO_JSON = {
                 "name": "Algar Seco, Portugal",
                 "description": "https://youtu.be/wisVWS64ptU"
             }
-        },
+        }, %>
         {
             "type": "Feature",
             "geometry": {
@@ -1450,7 +1455,7 @@ GEO_JSON = {
                 "description": "https://youtu.be/oxosn-7rqoE"
             }
         },
-        {
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -1464,8 +1469,8 @@ GEO_JSON = {
                 "name": "Grenada, Spain",
                 "description": "https://youtu.be/pCQQQJIbhJ0"
             }
-        },
-        {
+        }, %>
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -1479,7 +1484,7 @@ GEO_JSON = {
                 "name": "Grenada, Spain",
                 "description": "https://youtu.be/dzHxDIakxW4"
             }
-        },
+        }, %>
         {
             "type": "Feature",
             "geometry": {
@@ -1510,7 +1515,7 @@ GEO_JSON = {
                 "description": "https://youtu.be/5kOHzmf5raw"
             }
         },
-        {
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -1524,8 +1529,8 @@ GEO_JSON = {
                 "name": "Sevilla, Spain",
                 "description": "https://youtu.be/CgHugN0ndQ8"
             }
-        },
-        {
+        }, %>
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -1539,7 +1544,7 @@ GEO_JSON = {
                 "name": "Mallorca, Spain",
                 "description": "https://youtu.be/MXa7ghghzdc"
             }
-        },
+        }, %>
         {
             "type": "Feature",
             "geometry": {
@@ -1570,7 +1575,7 @@ GEO_JSON = {
                 "description": "https://youtu.be/7MloU5AFkmU"
             }
         },
-        {
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -1584,8 +1589,8 @@ GEO_JSON = {
                 "name": "Hanoi, Vietnam",
                 "description": "https://youtu.be/nvlmdHmzZNY"
             }
-        },
-        {
+        }, %>
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -1599,7 +1604,7 @@ GEO_JSON = {
                 "name": "Ha Nam, Vietnam",
                 "description": "https://youtu.be/-12jntUEkiw"
             }
-        },
+        }, %>
         {
             "type": "Feature",
             "geometry": {
@@ -1645,7 +1650,7 @@ GEO_JSON = {
                 "description": "https://youtu.be/Tnw07MXzIqQ"
             }
         },
-        {
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -1659,7 +1664,7 @@ GEO_JSON = {
                 "name": "Ho Tay, Hanoi, Vietnam",
                 "description": "https://youtu.be/Dzly4PmGlyM"
             }
-        },
+        }, %>
         {
             "type": "Feature",
             "geometry": {
@@ -1705,7 +1710,7 @@ GEO_JSON = {
                 "description": "https://youtu.be/StfV6zyvMwU"
             }
         },
-        {
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -1719,7 +1724,7 @@ GEO_JSON = {
                 "name": "Bangkok, Thailand",
                 "description": "https://youtu.be/VzW_LL5H5pI"
             }
-        },
+        }, %>
         {
             "type": "Feature",
             "geometry": {
@@ -1735,7 +1740,7 @@ GEO_JSON = {
                 "description": "https://youtu.be/n_8UgOXI3Sc"
             }
         },
-        {
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -1749,8 +1754,8 @@ GEO_JSON = {
                 "name": "Savannah, Georgia",
                 "description": "https://youtu.be/3x8pVwT6pkU"
             }
-        },
-        {
+        }, %>
+        <%# {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -1764,7 +1769,7 @@ GEO_JSON = {
                 "name": "Atlanta, Georgia",
                 "description": "https://youtu.be/ozOAeXFPe1E"
             }
-        },
+        }, %>
         {
             "type": "Feature",
             "geometry": {
@@ -1910,7 +1915,7 @@ GEO_JSON = {
                 ]
             },
             "properties": {
-                "id": "W"
+                "id": "W-VWQ4hv0gw"
                 "name": "Split, Croatia",
                 "description": "https://youtu.be/W-VWQ4hv0gw"
             }
@@ -1970,7 +1975,7 @@ GEO_JSON = {
                 ]
             },
             "properties": {
-                "id": "IHpq92"
+                "id": "IHpq92-p344"
                 "name": "Portland, Maine",
                 "description": "https://youtu.be/IHpq92-p344"
             }
@@ -2015,7 +2020,7 @@ GEO_JSON = {
                 ]
             },
             "properties": {
-                "id": "qHkrGWx9V"
+                "id": "qHkrGWx9V-Y"
                 "name": "Dead Horse Point, Utah",
                 "description": "https://youtu.be/qHkrGWx9V-Y"
             }
