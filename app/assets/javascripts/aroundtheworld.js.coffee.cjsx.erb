@@ -47,7 +47,8 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
         modestbranding: 1
       },
       events:
-        onReady: (event) -> event.target.playVideo() if autoplay
+        onReady: (event) ->
+            event.target.playVideo() if autoplay
         onStateChange: (event) ->
           store.dispatch type: 'INITIAL_AUTO_PLAY_STARTED', id: id if event.data == 1
           store.dispatch type: 'PLAY_ENDED', id: id if event.data == 0
@@ -2038,6 +2039,398 @@ GEO_JSON = {
                 "id": "kBP6gKuaC6U"
                 "name": "Delicate Arch, Utah",
                 "description": "https://youtu.be/kBP6gKuaC6U"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -78.455833, -0.002222
+                ]
+            },
+            "properties": {
+                "id": "qgkjlE6rhyc"
+                "name": "Ciudad Mitad del Mundo, Ecuador",
+                "description": "https://youtu.be/qgkjlE6rhyc"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.163583, -0.069674
+                ]
+            },
+            "properties": {
+                "id": "f3be_y9IL34"
+                "name": "Cuyabeno Reserve, Ecuador",
+                "description": "https://youtu.be/f3be_y9IL34"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    128.8952264, 37.7735931
+                ]
+            },
+            "properties": {
+                "id": "GgN5rvy4X4I"
+                "name": "Pyeongchang, South Korea",
+                "description": "https://youtu.be/GgN5rvy4X4I"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    126.8539319, 37.4793755
+                ]
+            },
+            "properties": {
+                "id": "-09KcfXR9To"
+                "name": "Seoul, South Korea",
+                "description": "https://youtu.be/-09KcfXR9To"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.8892663, 13.4347497
+                ]
+            },
+            "properties": {
+                "id": "_-JcWcbhTO8"
+                "name": "Angkor Wat, Cambodia",
+                "description": "https://youtu.be/_-JcWcbhTO8"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.9339531, 20.2295613
+                ]
+            },
+            "properties": {
+                "id": "-xz0XAwE-U8"
+                "name": "Hang Mua, Vietnam",
+                "description": "https://youtu.be/-xz0XAwE-U8"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    81.0500474, 6.8557169
+                ]
+            },
+            "properties": {
+                "id": "gyBXDHcSKA8"
+                "name": "Ella, Sri Lanka",
+                "description": "https://youtu.be/gyBXDHcSKA8"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    57.4271677, 29.5927112
+                ]
+            },
+            "properties": {
+                "id": "YIn7_LI6Ue8"
+                "name": "Rayen, Iran",
+                "description": "https://youtu.be/YIn7_LI6Ue8"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    56.4587604, 31.0678141
+                ]
+            },
+            "properties": {
+                "id": "UmN2IXJH-TY"
+                "name": "Dasht-e Khak, Iran",
+                "description": "https://youtu.be/UmN2IXJH-TY"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    54.3628755, 31.8910236
+                ]
+            },
+            "properties": {
+                "id": "9FMkZHlffHo"
+                "name": "Yazd, Iran",
+                "description": "https://youtu.be/9FMkZHlffHo"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    51.677072, 32.6555799
+                ]
+            },
+            "properties": {
+                "id": "biysq8wRpHM"
+                "name": "Isfahan, Iran",
+                "description": "https://youtu.be/biysq8wRpHM"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    51.5903544, 33.5825659
+                ]
+            },
+            "properties": {
+                "id": "6jYqFYtAysI"
+                "name": "Abyaneh, Iran",
+                "description": "https://youtu.be/6jYqFYtAysI"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    51.4480714, 33.9849145
+                ]
+            },
+            "properties": {
+                "id": "j6_aPtS3W8w"
+                "name": "Kashan, Iran",
+                "description": "https://youtu.be/j6_aPtS3W8w"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.6636208, 45.7002975
+                ]
+            },
+            "properties": {
+                "id": "cZjQgIeI_us"
+                "name": "Bergamo, Italy",
+                "description": "https://youtu.be/cZjQgIeI_us"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.4190044, 52.5232608
+                ]
+            },
+            "properties": {
+                "id": "QiNIuuW5gek"
+                "name": "Berlin, Germany",
+                "description": "https://youtu.be/QiNIuuW5gek"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    34.8045991, 38.629646
+                ]
+            },
+            "properties": {
+                "id": "qzGCxiDHMW8"
+                "name": "Cappadocia, Turkey",
+                "description": "https://youtu.be/qzGCxiDHMW8"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    28.9783978, 41.0068963
+                ]
+            },
+            "properties": {
+                "id": "94OEKKCcbtk"
+                "name": "Istanbul, Turkey",
+                "description": "https://youtu.be/94OEKKCcbtk"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -105.2061, 39.6651
+                ]
+            },
+            "properties": {
+                "id": "R88Cmmp9ts8"
+                "name": "Red Rocks Amphitheater, Colorado",
+                "description": "https://youtu.be/R88Cmmp9ts8"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -110.4752632, 38.9315677
+                ]
+            },
+            "properties": {
+                "id": "a3QfyS-pT0g"
+                "name": "Rest Area, Utah",
+                "description": "https://youtu.be/a3QfyS-pT0g"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -110.807494, 38.594324
+                ]
+            },
+            "properties": {
+                "id": "uVIVAvO8ecM"
+                "name": "Little Wild Horse Canyon, Utah",
+                "description": "https://youtu.be/uVIVAvO8ecM"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -110.695506, 38.563926
+                ]
+            },
+            "properties": {
+                "id": "4HgP2ODD-Og"
+                "name": "Goblin Valley, Utah",
+                "description": "https://youtu.be/4HgP2ODD-Og"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -109.558500, 38.596400
+                ]
+            },
+            "properties": {
+                "id": "KQQc2os25PU"
+                "name": "Slickrock Trail, Utah",
+                "description": "https://youtu.be/KQQc2os25PU"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -108.7231615, 39.0905951
+                ]
+            },
+            "properties": {
+                "id": "-wchRkLapdA"
+                "name": "Colorado National Monument, Colorado",
+                "description": "https://youtu.be/-wchRkLapdA"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -90.643787, -0.613991
+                ]
+            },
+            "properties": {
+                "id": "LHVC7cHMvO4"
+                "name": "Galapagos, Ecuador",
+                "description": "https://youtu.be/LHVC7cHMvO4"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.177535, -0.011729
+                ]
+            },
+            "properties": {
+                "id": "3XPye7ehBZA"
+                "name": "Napo River, Ecuador",
+                "description": "https://youtu.be/3XPye7ehBZA"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -122.3502564, 47.6204851
+                ]
+            },
+            "properties": {
+                "id": "XPcuBNFzxIo"
+                "name": "Seattle, Washington",
+                "description": "https://youtu.be/XPcuBNFzxIo"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -121.0968799, 48.7101
+                ]
+            },
+            "properties": {
+                "id": "Bdp2vuxsPlM"
+                "name": "North Cascades, Washington",
+                "description": "https://youtu.be/Bdp2vuxsPlM"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -122.496052, 48.665855
+                ]
+            },
+            "properties": {
+                "id": "47vesYFrex8"
+                "name": "Chuckanaut, Washington",
+                "description": "https://youtu.be/47vesYFrex8"
             }
         }
     ]
