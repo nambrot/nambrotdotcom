@@ -79,7 +79,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
         state.preloadCache[id].ytPlayer.playVideo()
         state.preloadCache[id].ytPlayer.seekTo(0)
         document.getElementById('song').play()
-      $("#cachedVideo#{id}").removeClass('hidden')
+      setTimeout (=> $("#cachedVideo#{id}").removeClass('hidden')), 100
       preloadVideos(id)
     else
       setTimeout (-> showVideo(id, play)), 100
@@ -170,7 +170,7 @@ queueReducer = (state = { queue: [], preloadCache: {}, currentActive: -1, nextPl
       clearTimeout(state.nextPlayTimeout)
       newId = nextId(action.id)
       showVideo(newId)
-      hideVideo action.id
+      setTimeout (-> hideVideo action.id), 100
       ahoy.track('AROUND_THE_WORLD_SHOW_NEXT_VIDEO', id: newId)
       timeout = setTimeout (-> store.dispatch type: 'PLAY_ENDED', id: newId), 3000
       Object.assign {}, state, currentActive: indexOf(newId), nextPlayTimeout: timeout, playerState: 'play'
