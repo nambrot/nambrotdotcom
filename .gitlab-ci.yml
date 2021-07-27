@@ -50,8 +50,8 @@ deploy_to_prod:
   script:
     - echo "$GOOGLE_SERVICE_KEY" > key.json
     - gcloud auth activate-service-account --key-file key.json
-    - gcloud config set compute/zone us-central1-f
     - gcloud config set project nambrotdotcom
+    - gcloud config set compute/zone us-central1-f
     - gcloud config set container/use_client_certificate True
     - gcloud container clusters get-credentials nambrotdotcom
     - kubectl set image deployment/web-deployment web=$CONTAINER_RELEASE_IMAGE
